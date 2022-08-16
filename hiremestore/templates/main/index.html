@@ -1,0 +1,376 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% static "img" as baseUrl %}
+
+{% block content %}
+
+
+
+
+
+
+
+<!--Banner Start-->
+  <section id="banner" class="home-two">
+    <div class="container text-center home_two_banner">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="panel-heading">{{data.website_title}}</h1>
+          <p class="caption">Book Expert Helper at a moment's notice. just pick a<br/>
+            Category and Get connected</p>
+          <form class="form-inline book-now-home">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="dropdown category-dropdown text-left"> <a data-toggle="dropdown" href="#"><i class="fa fa-map-o" aria-hidden="true"></i> <span class="change-text">Select Category</span> <i class="fa fa-caret-down pull-right" aria-hidden="true"></i> </a>
+                  <ul class="dropdown-menu category-change">
+                    <li><a href="#">Maid</a></li>
+                    <li><a href="#">Baby sitter</a></li>
+                    <li><a href="#">Cook</a></li>
+                    <li><a href="#">Driver</a></li>
+                    <li><a href="#">Home Tution Teacher</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group location-code">
+                <input type="text" class="form-control zipcode" id="zipcode" placeholder="Pincode" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="dropdown category-dropdown text-left"> <a data-toggle="dropdown" href="#"><span class="change-text">Select City</span> <i class="fa fa-caret-down pull-right" aria-hidden="true"></i> </a>
+                  <ul class="dropdown-menu category-change">
+                    <li><a href="#">Dabra</a></li>
+                    <li><a href="#">Datia</a></li>
+                    <li><a href="#">Gwalior</a></li>
+                    <li><a href="#">Bhind</a></li>
+                    <li><a href="#">Murena</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="book-now-home-btn">
+            <button class="btn btn-primary btn-outline active" type="button"> Search </button>
+            <button class="btn btn-primary btn-outline" type="button"> Request a quote </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--/Banner End-->
+
+  <!--How it works Section Satrt-->
+  <section id="howitwork">
+    <div class="container text-center">
+      <h1 class="panel-heading">How it works</h1>
+      <div class="row">
+        <div class="col-md-3 col-xs-offset-0 step-one"><img src="{% static 'images/02home/book2.png' %}" alt="works" />
+          <h4>Book</h4>
+          <p>Select the Category like<br />
+            your perofessional to show up</p>
+        </div>
+        <div class="col-md-1 hidden-xs hidden-sm"> </div>
+        <div class="col-md-3 step-two"> <img  src="{% static 'images/02home/Schedule2.png' %}" alt="Book" />
+          <h4>Schedule</h4>
+          <p>Certified Taskers comes over<br/>
+            and done your task</p>
+        </div>
+        <div class="col-md-1 hidden-xs hidden-sm"> </div>
+        <div class="col-md-3"> <img  src="{% static 'images/02home/Relax2.png' %}" alt="Schedule" />
+          <h4>Relax</h4>
+          <p>your task is completed to your<br/>
+            satisfaction - guranteed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--How it works Section End-->
+
+
+  <!--Our services Section Satrt-->
+  <section id="services">
+    <div class="container text-center services_back">
+      <div class="col-md-12">
+        <h1 class="panel-heading">FIND & HIRE POPULAR DIGITAL WORK CATEGORY STAFF</h1>
+        <ul class="services-list">
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/cleaning.png' %}" alt="Cleaning" /><br />
+            Desginer</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/electrical.png' %}" alt="Electrical" /><br />
+           Developer</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/plumbing.png' %}" alt="Plumbing" /><br />
+            Freelancer</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/appliances.png' %}" alt="Appliances" /><br />
+            Digital Marketer</a></li>
+          <li><a href="service.html"><img src="{% static 'images/02home/services-icons/more.png' %}" alt="View More" /><br />
+            View More</a></li>
+        </ul>
+        <h1 class="panel-heading">Browse Helpers by category</h1>
+        <ul class="services-list">
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/cleaning.png' %}" alt="Cleaning" /><br />
+            Domestic Worker</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/electrical.png' %}" alt="Electrical" /><br />
+            Office Worker</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/plumbing.png' %}" alt="Plumbing" /><br />
+            Expert Worker</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/appliances.png' %}" alt="Appliances" /><br />
+            Permanent Driver</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/carpentry.png' %}" alt="Carpentry" /><br />
+            HealthCare Worker</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/geyser.png' %}" alt="Geyser Service" /><br />
+            Store Worker</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/vehicle.png' %}" alt="Vehicle Care" /><br />
+            Restaurant Worker</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/pest.png' %}" alt="Pest Control" /><br />
+            School Worker</a></li>
+          <li><a href="service_detail.html"><img src="{% static 'images/02home/services-icons/painting.png' %}" alt="Painting" /><br />
+            Factory Worker</a></li>
+          <li><a href="service.html"><img src="{% static 'images/02home/services-icons/more.png' %}" alt="View More" /><br />
+            View More</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+  <!--Our services Section End-->
+
+  <!--Trust Security Section Satrt-->
+  <section id="trust-security">
+    <div class="container text-center">
+      <h1 class="panel-heading">Your Trust and Security</h1>
+      <div class="row text-left">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="icon_box_one">
+            <div class="icons"><img src="{% static 'images/02home/time2.png' %}" alt="SAVES" /></div>
+            <div class="box_content">
+              <h4>SAVES YOU TIME</h4>
+              <p>We helps you live smarter, giving you time to focus on whats most important.</p>
+              <a href="#" class="read-more">Read More <span class="glyphicon glyphicon-menu-right"></span></a> </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="icon_box_one">
+            <div class="icons"><img src="{% static 'images/02home/Safety2.png' %}" alt="Safety" /></div>
+            <div class="box_content">
+              <h4>For Your Safety</h4>
+              <p>All of our Helpers undergo rigorous identity checks and personal interviews. Your safety is even our concern too.</p>
+              <a href="#" class="read-more">Read More <span class="glyphicon glyphicon-menu-right"></span></a> </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="icon_box_one">
+            <div class="icons"><img src="{% static 'images/02home/best2.png' %}" alt="Best"  /></div>
+            <div class="box_content">
+              <h4>Best-Rated Professionals</h4>
+              <p>Our experienced taskers perform their tasks with dedication and perfection. We appreciate your reviews about the service.</p>
+              <a href="#" class="read-more">Read More <span class="glyphicon glyphicon-menu-right"></span></a> </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="icon_box_one">
+            <div class="icons"><img src="{% static 'images/02home/Equipped2.png' %}" alt="Equipped" /></div>
+            <div class="box_content">
+              <h4>We Are Well Equipped</h4>
+              <p>Let us know if you have any specific equirement, otherwise our guys carry their own supplies.</p>
+              <a href="#" class="read-more">Read More <span class="glyphicon glyphicon-menu-right"></span></a> </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="icon_box_one">
+            <div class="icons"><img src="{% static 'images/02home/touch2.png' %}" alt="Always" /></div>
+            <div class="box_content">
+              <h4>Always In Touch</h4>
+              <p>Book your service online on one tap, keep a track of your service status and also keep in touch with your Helper.</p>
+              <a href="#" class="read-more">Read More <span class="glyphicon glyphicon-menu-right"></span></a> </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="icon_box_one">
+            <div class="icons"><img src="{% static 'images/02home/cash2.png' %}" alt="Cash" /></div>
+            <div class="box_content">
+              <h4>Cash-Free Facility</h4>
+              <p>Pay through secure online mode only after your job is done.</p>
+              <a href="#" class="read-more">Read More <span class="glyphicon glyphicon-menu-right"></span></a> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Trust Security Section End-->
+
+  <!--Our Numbers Satrt-->
+  <section id="numbers">
+    <div class="container text-center">
+      <h1 class="panel-heading">Why Choose Us</h1>
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-6">
+          <!--counter box-->
+          <div class="counter_box text-center">
+            <div class="counter_icon"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></div>
+            <div class="counter_number_right">
+              <div class="counter_number counter"><span class="stat-count">100</span>%</div>
+              <h4 class="counter_name">Quality</h4>
+            </div>
+          </div>
+          <!--counter box end-->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6">
+          <!--counter box-->
+          <div class="counter_box text-center">
+            <div class="counter_icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+            <div class="counter_number_right">
+              <div class="counter_number counter"><span class="stat-count">2500</span>+</div>
+              <h4 class="counter_name">People Working</h4>
+            </div>
+          </div>
+          <!--counter box end-->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6">
+          <!--counter box-->
+          <div class="counter_box text-center">
+            <div class="counter_icon"><i class="fa fa-calendar-o" aria-hidden="true"></i></div>
+            <div class="counter_number_right">
+              <div class="counter_number counter"><span class="stat-count">8</span>+</div>
+              <h4 class="counter_name">Years Experience</h4>
+            </div>
+          </div>
+          <!--counter box end-->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6">
+          <!--counter box-->
+          <div class="counter_box text-center">
+            <div class="counter_icon"><i class="fa fa-smile-o" aria-hidden="true"></i></div>
+            <div class="counter_number_right">
+              <div class="counter_number counter"><span class="stat-count">900</span>+</div>
+              <h4 class="counter_name">Happy Smiles</h4>
+            </div>
+          </div>
+          <!--counter box end-->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/Our Numbers Satrt End-->
+
+  <!--Testimonails Section Satrt-->
+  <section id="testimonails">
+    <div class="container text-center">
+      <h1 class="panel-heading">Testimonails</h1>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="cmsmasters_quotes cmsmasters_quotes_grid quote_two">
+            <div class="cmsmasters_quotes_list">
+              <div class="cmsmasters_quote">
+                <article class="cmsmasters_quote_inner">
+                  <div class="cmsmasters_quote_img_info_wrap">
+                    <div class="cmsmasters_quote_image"><img src="{% static 'images/02home/clinte4.png' %}" alt="clinte4" /></div>
+                    <div class="cmsmasters_quote_info_wrap">
+                      <h3 class="cmsmasters_quote_title">Padma Kushwah</h3>
+                      <h5 class="cmsmasters_quote_subtitle">Branch Manager In dabra SBI</h5>
+                    </div>
+                  </div>
+                  <div class="cmsmasters_quote_content">
+                    <p> I really liked the experience. The person who called me was very friendly and happy to help me. He did his job really quickly. Liked the quick service! </p>
+                  </div>
+                </article>
+              </div>
+              <div class="cmsmasters_quote">
+                <article class="cmsmasters_quote_inner">
+                  <div class="cmsmasters_quote_img_info_wrap">
+                    <div class="cmsmasters_quote_image"><img src="{% static 'images/clinte1.png' %}" alt="clinte4" /></div>
+                    <div class="cmsmasters_quote_info_wrap">
+                      <h3 class="cmsmasters_quote_title">Kisunlal Pal</h3>
+                      <h5 class="cmsmasters_quote_subtitle">Thekedar</h5>
+                    </div>
+                  </div>
+                  <div class="cmsmasters_quote_content">
+                    <p> We had got the verification done for a help we hired for our parents in Dabra. The entire experience was quite seemless. The reports were sent to us post verification in a timely manner. I would be happy to recommend U. </p>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="cmsmasters_quotes_list">
+              <div class="cmsmasters_quote">
+                <article class="cmsmasters_quote_inner">
+                  <div class="cmsmasters_quote_img_info_wrap">
+                    <div class="cmsmasters_quote_image"><img src="{% static 'images/02home/clinte3.png' %}" alt="Kevin" /></div>
+                    <div class="cmsmasters_quote_info_wrap">
+                      <h3 class="cmsmasters_quote_title">Kevin Austin</h3>
+                      <h5 class="cmsmasters_quote_subtitle">Lorem Ipsum</h5>
+                    </div>
+                  </div>
+                  <div class="cmsmasters_quote_content">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's typesetting industry. is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's typesetting industry.</p>
+                  </div>
+                </article>
+              </div>
+              <div class="cmsmasters_quote">
+                <article class="cmsmasters_quote_inner">
+                  <div class="cmsmasters_quote_img_info_wrap">
+                    <div class="cmsmasters_quote_image"><img src="{% static 'images/02home/clinte4.png' %}" alt="Kevin" /></div>
+                    <div class="cmsmasters_quote_info_wrap">
+                      <h3 class="cmsmasters_quote_title">Kevin Austin</h3>
+                      <h5 class="cmsmasters_quote_subtitle">Lorem Ipsum</h5>
+                    </div>
+                  </div>
+                  <div class="cmsmasters_quote_content">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's typesetting industry. is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's typesetting industry.</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="view_all"><a href="#">View All Testimonails <i class="fa fa-angle-right" aria-hidden="true"></i> </a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Testimonails Section End-->
+
+  <!--Call To Action Start-->
+  <section id="call-to-action">
+    <div class="container free_consultation">
+      <div class="row">
+        <div class="col-md-8 col-sm-8 col-xs-12 text-left">
+          <h2>Wanted a Free Consultation?</h2>
+          <p>we are always ready to welcome you!</p>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12 m-text-center text-right"> <a class="btn btn-primary btn-outline">Consultation? </a> </div>
+      </div>
+    </div>
+  </section>
+  <!--Call To Action End-->
+
+  <!--Trusted Section Satrt-->
+  <section id="trusted">
+    <div class="container text-center">
+      <div class="row text-left">
+        <div class="col-md-2 col-sm-3 col-xs-12">
+          <h3 class="panel-heading">TRUSTED BY</h3>
+        </div>
+        <div class="col-md-10 col-sm-12 col-xs-12">
+          <ul class="trusted_logo owl-carousel" id="trusted-slider">
+            <li><a href="#"><img src="{% static 'images/Trusted_logo1.png' %}" alt="logo1" /></a></li>
+            <li><a href="#"><img src="{% static 'images/Trusted_logo2.png' %}" alt="logo2" /></a></li>
+            <li><a href="#"><img src="{% static 'images/Trusted_logo3.png' %}" alt="logo3" /></a></li>
+            <li><a href="#"><img src="{% static 'images/Trusted_logo1.png' %}" alt="logo4" /></a></li>
+            <li><a href="#"><img src="{% static 'images/Trusted_logo2.png' %}" alt="logo5" /></a></li>
+            <li><a href="#"><img src="{% static 'images/Trusted_logo2.png' %}" alt="logo6" /></a></li>
+            <li><a href="#"><img src="{% static 'images/Trusted_logo3.png' %}" alt="logo7" /></a></li>
+            <li><a href="#"><img src="{% static 'images/Trusted_logo1.png' %}" alt="logo8" /></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Trusted Section End-->
+
+
+{% endblock %}
+</body>
+
+</html>
