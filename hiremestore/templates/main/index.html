@@ -263,67 +263,30 @@
         <div class="col-md-12">
           <div class="cmsmasters_quotes cmsmasters_quotes_grid quote_two">
             <div class="cmsmasters_quotes_list">
+               {% for test in testimonial %}
               <div class="cmsmasters_quote">
+
+
                 <article class="cmsmasters_quote_inner">
                   <div class="cmsmasters_quote_img_info_wrap">
-                    <div class="cmsmasters_quote_image"><img src="{% static 'images/02home/clinte4.png' %}" alt="clinte4" /></div>
+                    <div class="cmsmasters_quote_image"><img src="{{ test.profile.url }}" alt="clinte4" /></div>
                     <div class="cmsmasters_quote_info_wrap">
-                      <h3 class="cmsmasters_quote_title">Padma Kushwah</h3>
-                      <h5 class="cmsmasters_quote_subtitle">Branch Manager In dabra SBI</h5>
+                      <h3 class="cmsmasters_quote_title">{{test.name}}</h3>
+                      <h5 class="cmsmasters_quote_subtitle">{{test.about}}</h5>
                     </div>
                   </div>
                   <div class="cmsmasters_quote_content">
-                    <p> I really liked the experience. The person who called me was very friendly and happy to help me. He did his job really quickly. Liked the quick service! </p>
+                    <p> {{test.review}} </p>
                   </div>
                 </article>
+
+
+
               </div>
-              <div class="cmsmasters_quote">
-                <article class="cmsmasters_quote_inner">
-                  <div class="cmsmasters_quote_img_info_wrap">
-                    <div class="cmsmasters_quote_image"><img src="{% static 'images/clinte1.png' %}" alt="clinte4" /></div>
-                    <div class="cmsmasters_quote_info_wrap">
-                      <h3 class="cmsmasters_quote_title">Kisunlal Pal</h3>
-                      <h5 class="cmsmasters_quote_subtitle">Thekedar</h5>
-                    </div>
-                  </div>
-                  <div class="cmsmasters_quote_content">
-                    <p> We had got the verification done for a help we hired for our parents in Dabra. The entire experience was quite seemless. The reports were sent to us post verification in a timely manner. I would be happy to recommend U. </p>
-                  </div>
-                </article>
-              </div>
-            </div>
-            <div class="cmsmasters_quotes_list">
-              <div class="cmsmasters_quote">
-                <article class="cmsmasters_quote_inner">
-                  <div class="cmsmasters_quote_img_info_wrap">
-                    <div class="cmsmasters_quote_image"><img src="{% static 'images/02home/clinte3.png' %}" alt="Kevin" /></div>
-                    <div class="cmsmasters_quote_info_wrap">
-                      <h3 class="cmsmasters_quote_title">Kevin Austin</h3>
-                      <h5 class="cmsmasters_quote_subtitle">Lorem Ipsum</h5>
-                    </div>
-                  </div>
-                  <div class="cmsmasters_quote_content">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's typesetting industry. is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's typesetting industry.</p>
-                  </div>
-                </article>
-              </div>
-              <div class="cmsmasters_quote">
-                <article class="cmsmasters_quote_inner">
-                  <div class="cmsmasters_quote_img_info_wrap">
-                    <div class="cmsmasters_quote_image"><img src="{% static 'images/02home/clinte4.png' %}" alt="Kevin" /></div>
-                    <div class="cmsmasters_quote_info_wrap">
-                      <h3 class="cmsmasters_quote_title">Kevin Austin</h3>
-                      <h5 class="cmsmasters_quote_subtitle">Lorem Ipsum</h5>
-                    </div>
-                  </div>
-                  <div class="cmsmasters_quote_content">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's typesetting industry. is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's typesetting industry.</p>
-                  </div>
-                </article>
-              </div>
-            </div>
+{% endfor %}
+
             <div class="clearfix"></div>
-            <div class="view_all"><a href="#">View All Testimonails <i class="fa fa-angle-right" aria-hidden="true"></i> </a></div>
+<!--            <div class="view_all"><a href="#">View All Testimonails <i class="fa fa-angle-right" aria-hidden="true"></i> </a></div>-->
           </div>
         </div>
       </div>
@@ -354,14 +317,8 @@
         </div>
         <div class="col-md-10 col-sm-12 col-xs-12">
           <ul class="trusted_logo owl-carousel" id="trusted-slider">
-            <li><a href="#"><img src="{% static 'images/Trusted_logo1.png' %}" alt="logo1" /></a></li>
-            <li><a href="#"><img src="{% static 'images/Trusted_logo2.png' %}" alt="logo2" /></a></li>
-            <li><a href="#"><img src="{% static 'images/Trusted_logo3.png' %}" alt="logo3" /></a></li>
-            <li><a href="#"><img src="{% static 'images/Trusted_logo1.png' %}" alt="logo4" /></a></li>
-            <li><a href="#"><img src="{% static 'images/Trusted_logo2.png' %}" alt="logo5" /></a></li>
-            <li><a href="#"><img src="{% static 'images/Trusted_logo2.png' %}" alt="logo6" /></a></li>
-            <li><a href="#"><img src="{% static 'images/Trusted_logo3.png' %}" alt="logo7" /></a></li>
-            <li><a href="#"><img src="{% static 'images/Trusted_logo1.png' %}" alt="logo8" /></a></li>
+            <li><a href="#"><img src="{{ data.trusted_by.url }}" alt="logo1" /></a></li>
+
           </ul>
         </div>
       </div>

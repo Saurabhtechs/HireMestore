@@ -22,3 +22,14 @@ class website_profile(models.Model):
 
     def __str__(self):
         return self.website_title
+
+
+class Testimonails(models.Model):
+    profile = models.ImageField(upload_to='img', max_length=250)
+    name = models.CharField(max_length=30)
+    about = models.CharField(max_length=50)
+    review = models.CharField(max_length=200)
+
+
+    def __str__(self):
+        return self.name
