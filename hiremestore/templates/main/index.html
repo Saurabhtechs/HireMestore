@@ -4,7 +4,7 @@
 {% static "img" as baseUrl %}
 
 {% block content %}
-
+{% for data in result %}
 
 
 
@@ -16,9 +16,9 @@
     <div class="container text-center home_two_banner">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="panel-heading">{{data.website_title}}</h1>
-          <p class="caption">Book Expert Helper at a moment's notice. just pick a<br/>
-            Category and Get connected</p>
+          <h1 class="panel-heading">{{ data.website_title }}</h1>
+          <p class="caption">{{ data.website_subtitle }}<br/>
+            </p>
           <form class="form-inline book-now-home">
             <div class="form-group">
               <div class="input-group">
@@ -369,7 +369,7 @@
   </section>
   <!--Trusted Section End-->
 
-
+{% endfor%}
 {% endblock %}
 </body>
 
