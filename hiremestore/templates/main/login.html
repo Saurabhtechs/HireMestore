@@ -1,9 +1,10 @@
-{% extends 'main/base.html' %}
 
+
+{% extends 'main/base.html' %}
 {% load static %}
 {% static "img" as baseUrl %}
 
-{% block content %}
+{% block body %}
 
 <!--Banner Start-->
   <section id="service_banner">
@@ -318,7 +319,9 @@
       </ul>
     </div>
   </section>
-{% endblock %}
+
+  {% endblock %}
+
 </body>
 
 </html>

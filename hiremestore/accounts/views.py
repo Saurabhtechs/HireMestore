@@ -4,9 +4,10 @@ from .models import *
 from rest_framework.decorators import api_view
 # Create your views here.
 
-def Index(request):
-    return render(request,'index.html')
 
+def login(request):
+
+    return render(request, 'main/index.html')
 
 # def UserRegistration(request):
 #     if request.method=='POST':
