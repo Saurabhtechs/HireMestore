@@ -20,8 +20,10 @@ def index(request):
 
 def contact(request):
 
-    return render(request, 'main/index.html')
+    data = website_profile.objects.all()
+    return render(request, 'main/contact.html', {'result': data},)
 
 def about(request):
 
-    return render(request, 'main/about.html' )
+    data = website_profile.objects.all()
+    return render(request, 'main/about.html',{'result': data}, )

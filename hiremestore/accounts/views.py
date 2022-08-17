@@ -1,13 +1,15 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from .models import *
+from django.apps import apps
+website_profile = apps.get_model('core', 'website_profile')
+
 from rest_framework.decorators import api_view
 # Create your views here.
 
 
 def login(request):
-
-    return render(request, 'main/index.html')
+    data = website_profile.objects.all()
+    return render(request, 'main/login.html', {'result': data},)
 
 # def UserRegistration(request):
 #     if request.method=='POST':
