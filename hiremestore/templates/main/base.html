@@ -60,8 +60,12 @@
         <div class="col-md-4  col-sm-12 col-xs-12 col-sm-12 hidden-xs">
           <ul class="right-contact">
             <li><i class="fa fa-phone" aria-hidden="true"></i> +91 {{data.mobile_number}}</li>
-            <li><a href="#" class="btn btn-primary btn-skin">Login</a></li>
+<!-- <<<<<<< HEAD -->
+            <li><a href="{% url 'login' %}" class="btn btn-primary btn-skin" target="_blank">Login</a></li>
+<!-- ======= -->
+            <!-- <li><a href="#" class="btn btn-primary btn-skin">Login</a></li> -->
             {% endfor %}
+<!-- >>>>>>> 76128e1f3ebeaaef18f7dc534f84a94c504fb8fd -->
           </ul>
         </div>
       </div>
