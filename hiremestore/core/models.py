@@ -25,47 +25,79 @@ class website_profile(models.Model):
         return self.website_title
 
 
+
+
+
 class Category(models.Model):
     image = models.ImageField(upload_to='img', max_length=250)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30 , unique=True)
     title = models.CharField(max_length=50)
     type = models.IntegerField()
     feature = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
 
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #     img = Image.open(self.image.path)
+    #
+    #     if img.height > 60 or img.weight > 60:
+    #         output_size = (60, 60)
+    #         img.thumbnail(output_size)
+    #         img.save(self.image.path)
+
+
+
     def __str__(self):
         return self.name
+
+
+
 
 
 class SubCategory(models.Model):
     cat_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='img', max_length=250)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30 , unique=True)
     description = models.CharField(max_length=100)
     feature = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
 
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #     img = Image.open(self.image.path)
+    #
+    #     if img.height > 60 or img.weight > 60:
+    #         output_size = (60, 60)
+    #         img.thumbnail(output_size)
+    #         img.save(self.image.path)
+
+
     def __str__(self):
         return self.name
+
+
 
 
 class Testimonails(models.Model):
     profile = models.ImageField(upload_to='img', max_length=250)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30 , unique=True)
     about = models.CharField(max_length=50)
     review = models.CharField(max_length=200)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        img = Image.open(self.profile.path)
-
-        if img.height > 100 or img.weight > 100:
-            output_size = (100, 100)
-            img.thumbnail(output_size)
-            img.save(self.profile.path)
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #     img = Image.open(self.profile.path)
+    #
+    #     if img.height > 100 or img.weight > 100:
+    #         output_size = (100, 100)
+    #         img.thumbnail(output_size)
+    #         img.save(self.profile.path)
 
     def __str__(self):
         return self.name
+
+
+
 
 
 class About(models.Model):
@@ -84,12 +116,15 @@ class About(models.Model):
         return self.member_name
 
 
+
+
+
 class Contact(models.Model):
 
     name = models.CharField(max_length=30)
     email = models.EmailField()
     subject = models.CharField(max_length=75)
-    mobile = models.IntegerField()
+    mobile = models.IntegerField(unique=True)
     message = models.TextField()
 
     def __str__(self):

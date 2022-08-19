@@ -4,15 +4,12 @@ from . import views
 
 urlpatterns = [
 
-    path('', views.Coreindex, name='index'),
+    path('', views.index, name='index'),
     path('contact', views.contact, name='contact'),
     path('about', views.about, name='about'),
+    path('servies', views.servies, name='servies'),
 
-    # The home page
-    # path('', views.index, name='home'),
 
-    # Matches any html file
-    # re_path(r'^.*\.*', views.pages, name='pages'),
 ]
 
 
