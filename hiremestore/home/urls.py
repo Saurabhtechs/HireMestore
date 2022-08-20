@@ -10,9 +10,9 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
-    path('categorydisplay',views.Categorydisplay,name="categorydisplay"),
-    path('subcategorydisplay',views.Subategorydisplay,name="subcategorydisplay"),
-
+    path('categorydisplay', views.Categorydisplay,name="categorydisplay"),
+    path('subcategorydisplay', views.Subategorydisplay,name="subcategorydisplay"),
+    path('category_form', views.category_form,name="category_form"),
 
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
