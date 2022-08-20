@@ -55,3 +55,6 @@ def Subategorydisplay(request):
     data= subcategory.objects.all()
     return render(request, 'home/subcategory.html', {'subcategoryresult': data})
 
+def category_form(request):
+    # data= subcategory.objects.all()
+    return render(request, 'home/category_form.html', )
