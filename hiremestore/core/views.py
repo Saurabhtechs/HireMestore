@@ -12,7 +12,6 @@ def index(request):
     data = website_profile.objects.all()
     testimonial = Testimonails.objects.all()
     content = {'result': data, 'testimonial': testimonial, 'category': category, 'subcategory': subcategory,}
-    messages.success(request,"Welcome...")
     return render(request, 'main/index.html', content)
 
 
