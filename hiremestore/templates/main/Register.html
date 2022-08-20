@@ -1,0 +1,90 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% static "img" as baseUrl %}
+
+{% block body %}
+
+<div id="page_title">
+    <div class="container text-center">
+        <div class="panel-heading">contact us</div>
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active">Contact us</li>
+        </ol>
+    </div>
+</div>
+<!--page_title Section End-->
+<!--Banner Start-->
+<section id="service_banner">
+    <div class="container text-center service_banner_layer">
+        <div class="banner_content">
+            <div class="row text-left">
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <h1 class="service-heading">Hire A Helper Today</h1>
+                    <p>Forget the old rules. You can have the best people.
+                        Right now. Right here.</p>
+                    <h2>Why choose Helpr?</h2>
+                    <ul class="featurs_list">
+                        <li><i class="fa fa-check-square-o" aria-hidden="true"></i> High end cleaning machinery</li>
+                        <li><i class="fa fa-check-square-o" aria-hidden="true"></i> High end cleaning machinery</li>
+                        <li><i class="fa fa-check-square-o" aria-hidden="true"></i> High end cleaning machinery</li>
+                        <li><i class="fa fa-check-square-o" aria-hidden="true"></i> High end cleaning machinery</li>
+                    </ul>
+                    <a class="btn btn-warning btn-booknow" href="{% url 'login' %}"> Login Yourself </a>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="quick_contact">
+                        <p>Register Yourself <br />
+                            You!!!</p>
+                        <form class="form-horizontal" action="{% url 'register_submit' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                    <input type="text" class="form-control" id="exampleName" placeholder="Name"
+                                        name="name" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                    </div>
+                                    <input type="email" class="form-control" id="exampleemail" placeholder="Email"
+                                        name="email" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></div>
+                                    <input type="text" class="form-control" id="examplePhone" placeholder="Phone"
+                                        name="phone_number" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
+                                    <input type="password" class="form-control" id="examplePhone" placeholder="PassWord"
+                                        name="password" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="quick_btn">
+                                    <button type="submit" class="btn btn-default btn-skin">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--/Banner End-->
+
+
+
+
+{% endblock %}
