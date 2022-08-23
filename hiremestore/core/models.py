@@ -30,10 +30,10 @@ class website_profile(models.Model):
 
 class Category(models.Model):
     image = models.ImageField(upload_to='img', max_length=250)
-    name = models.CharField(max_length=30 , unique=True)
+    name = models.CharField(max_length=30)
     title = models.CharField(max_length=50)
-    type = models.IntegerField()
-    feature = models.IntegerField()
+    type = models.IntegerField(default=1)
+    feature = models.IntegerField(default=1)
     created = models.DateTimeField(auto_now_add=True)
 
     # def save(self, *args, **kwargs):
@@ -53,13 +53,12 @@ class Category(models.Model):
 
 
 
-
 class SubCategory(models.Model):
-    cat_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    # cat_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='img', max_length=250)
     name = models.CharField(max_length=30 , unique=True)
     description = models.CharField(max_length=100)
-    feature = models.IntegerField()
+    feature = models.IntegerField(default=1)
     created = models.DateTimeField(auto_now_add=True)
 
     # def save(self, *args, **kwargs):

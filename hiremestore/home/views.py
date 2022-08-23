@@ -9,7 +9,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from django.apps import apps
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from core.models import *
 category = apps.get_model('core', 'Category')
 subcategory = apps.get_model('core', 'SubCategory')
 
@@ -55,6 +56,83 @@ def Subategorydisplay(request):
     data= subcategory.objects.all()
     return render(request, 'home/subcategory.html', {'subcategoryresult': data})
 
-def category_form(request):
-    # data= subcategory.objects.all()
-    return render(request, 'home/category_form.html', )
+# Category Crud Operation Start Here......................................................
+def CategoryAdd(request):
+    return render(request,'home/category_add.html')
+
+def CategorySave(request):
+    if request.method=="POST":
+        name = request.POST['name']
+        title = request.POST['title']
+        image = request.FILES['image']
+        category_done = Category.objects.create(name=name,title=title,image=image)
+        category_done.save()
+        return redirect('categorydisplay')
+
+    else:
+        return redirect('category_add')
+
+def CategoryEdit(request,id):
+    data = Category.objects.get(id=id)
+    print(data)
+    return render(request,'home/category_add.html',{'category':data})
+
+def CategoryUpdate(request,id):
+    category_done = Category.objects.get(id=id)
+    if request.POST['name']:    
+        category_done.name = request.POST['name']
+    if request.POST['title']:
+            category_done.title = request.POST['title']
+    if request.FILES['image']:
+        category_done.image = request.FILES['image']
+        
+    category_done.save()
+    return redirect('categorydisplay')
+
+def Category_Delete(request,id):
+    data = Category.objects.get(id=id)
+    data.delete()
+    return redirect('categorydisplay')
+
+# Category Crud Operation End Here......................................................
+
+# Subcategory Crud Operation Start Here......................................................
+
+def SubCategoryAdd(request):
+    return render(request,'home/subcategory_add.html')
+
+def SubCategorySave(request):
+    if request.method=="POST":
+        name = request.POST['name']
+        description = request.POST['description']
+        image = request.FILES['image']
+        category_done = SubCategory.objects.create(name=name,description=description,image=image)
+        category_done.save()
+        return redirect('subcategorydisplay')
+
+    else:
+        return redirect('subcategory_add')
+
+def SubCategoryEdit(request,id):
+    data = SubCategory.objects.get(id=id)
+    print(data)
+    return render(request,'home/subcategory_add.html',{'subcategory':data})
+
+def SubCategoryUpdate(request,id):
+    subcategory_done = SubCategory.objects.get(id=id)
+    if request.POST['name']:    
+        subcategory_done.name = request.POST['name']
+    if request.POST['description']:
+        subcategory_done.description = request.POST['description']
+    if request.FILES['image']:
+        subcategory_done.image = request.FILES['image']
+        
+    subcategory_done.save()
+    return redirect('subcategorydisplay')
+
+def SubCategory_Delete(request,id):
+    data = SubCategory.objects.get(id=id)
+    data.delete()
+    return redirect('subcategorydisplay')
+
+# Category Crud Operation End Here......................................................
