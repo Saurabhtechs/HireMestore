@@ -82,7 +82,7 @@ def CategoryUpdate(request,id):
     if request.POST['name']:    
         category_done.name = request.POST['name']
     if request.POST['title']:
-            category_done.title = request.POST['title']
+        category_done.title = request.POST['title']
     if request.FILES['image']:
         category_done.image = request.FILES['image']
         
