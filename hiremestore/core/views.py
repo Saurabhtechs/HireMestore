@@ -24,7 +24,11 @@ def about(request):
     return render(request, 'main/about.html', {'result': data}, )
 
 def servies(request):
+    if request.GET['category']:
+        subcategory = SubCategory.objects.filter(id=request.GET['category']).order_by('-created')[:9]
+    else:
+        subcategory = SubCategory.objects.all().order_by('-created')[:9]
     data = website_profile.objects.all()
-    return render(request, 'main/servies.html', {'result': data}, )
+    return render(request, 'main/sub_category.html', {'result': data, 'subcategory': subcategory}, )
 
 
