@@ -99,11 +99,14 @@ def Category_Delete(request,id):
 # Subcategory Crud Operation Start Here......................................................
 
 def SubCategoryAdd(request):
-    return render(request,'home/subcategory_add.html')
+    category = Category.objects.all().order_by('-created')[:4]
+    content = {'category': category}
+    return render(request,'home/subcategory_add.html',content)
 
 def SubCategorySave(request):
     if request.method=="POST":
         name = request.POST['name']
+        category = request.POST['category']
         description = request.POST['description']
         image = request.FILES['image']
         category_done = SubCategory.objects.create(name=name,description=description,image=image)
