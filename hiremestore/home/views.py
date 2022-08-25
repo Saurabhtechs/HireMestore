@@ -11,6 +11,8 @@ from django.urls import reverse
 from django.apps import apps
 from django.shortcuts import render,redirect
 from core.models import *
+from .form import *
+from django.contrib import messages
 category = apps.get_model('core', 'Category')
 subcategory = apps.get_model('core', 'SubCategory')
 
@@ -109,7 +111,7 @@ def SubCategorySave(request):
         category = request.POST['category']
         description = request.POST['description']
         image = request.FILES['image']
-        category_done = SubCategory.objects.create(name=name,description=description,image=image)
+        category_done = SubCategory.objects.create(cat=category,name=name,description=description,image=image)
         category_done.save()
         return redirect('subcategorydisplay')
 
@@ -123,6 +125,8 @@ def SubCategoryEdit(request,id):
 
 def SubCategoryUpdate(request,id):
     subcategory_done = SubCategory.objects.get(id=id)
+    if request.POST['category']:    
+        subcategory_done.name = request.POST['category']
     if request.POST['name']:    
         subcategory_done.name = request.POST['name']
     if request.POST['description']:
@@ -139,3 +143,32 @@ def SubCategory_Delete(request,id):
     return redirect('subcategorydisplay')
 
 # Category Crud Operation End Here......................................................
+
+def AddCat(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES )
+        if form.is_valid():
+
+            form.save()
+            return redirect('categorydisplay')
+        else:
+            messages.info(request, 'fill valid data')
+            print('Data Not Upload')
+    form = CategoryForm()
+    context = {'form': form}
+
+    return render(request, 'home/addcat.html', context)
+
+def category_update(request, id):
+    data = Category.objects.get(id=id)
+    print(data)
+    if request.method == 'POST':
+
+        form = CategoryForm(request.POST, request.FILES, instance=data)
+        if form.is_valid():
+            form.save()
+            return redirect('categorydisplay')
+
+    else:
+        form = CategoryForm(instance=data)
+    return render(request, 'home/addcat.html', {'form': form})
