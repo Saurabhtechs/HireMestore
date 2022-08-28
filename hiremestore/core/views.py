@@ -2,19 +2,15 @@
 from traceback import print_tb
 from .models import *
 # Create your views here.
-<<<<<<< HEAD
 from django.shortcuts import render, redirect,HttpResponse
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import *
-=======
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import User
->>>>>>> 1d7f2b5dfd717bb51fbccb2212ec8d5e330daff7
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:4]
     helper = Category.objects.filter(type=2).order_by('-created')[:4]
@@ -36,20 +32,22 @@ def about(request):
 
 def servies(request):
     if request.GET['category']:
-        subcategory = SubCategory.objects.filter(id=request.GET['category']).order_by('-created')[:9]
+        subcategory = SubCategory.objects.filter(cat=request.GET['category']).order_by('-created')[:9]
     elif request.GET['category']=="":
         subcategory = SubCategory.objects.all().order_by('-created')[:9]
+    else:
+        subcategory = SubCategory.objects.all().order_by('-created')[:9]
+
     data = website_profile.objects.all()
     return render(request, 'main/sub_category.html', {'result': data, 'subcategory': subcategory}, )
 
 
-<<<<<<< HEAD
+
 def Category_data(request):
     data = User.objects.all()
     return data
    
 print(Category_data)
-=======
 def worker(request):
     data = website_profile.objects.all()
     return render(request, 'main/worker.html', {'result': data}, )
@@ -93,4 +91,4 @@ def update_profile_update(request,id):
 
     else:
         return redirect('update_profile')
->>>>>>> 1d7f2b5dfd717bb51fbccb2212ec8d5e330daff7
+

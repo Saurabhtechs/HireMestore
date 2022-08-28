@@ -6,42 +6,47 @@
 {% block body %}
 {% for data in result %}
 
- <style>
+<style>
   .home_two #banner {
     background:url({{ data.background_img1.url }}) repeat scroll center 0/cover;
     padding: 155px 0 250px;
   }
 
-  
-/* Scroller styling */
-.scroller {
-  height: 1.2em;
-  line-height: 1.2em;
-  position: relative;
-  overflow: hidden;
-  /* width: 17em; */
-}
-.scroller > span {
-  position: absolute;
-  top: 0;
-  animation: slide 5s infinite;
-  font-weight: bold;
-  
-}
-@keyframes slide {
-  0% {
+
+  /* Scroller styling */
+  .scroller {
+    height: 1.2em;
+    line-height: 1.2em;
+    position: relative;
+    overflow: hidden;
+    /* width: 17em; */
+  }
+
+  .scroller>span {
+    position: absolute;
     top: 0;
+    animation: slide 5s infinite;
+    font-weight: bold;
+
   }
-  25% {
-    top: -1.2em;
+
+  @keyframes slide {
+    0% {
+      top: 0;
+    }
+
+    25% {
+      top: -1.2em;
+    }
+
+    50% {
+      top: -2.4em;
+    }
+
+    75% {
+      top: -3.6em;
+    }
   }
-  50% {
-    top: -2.4em;
-  }
-  75% {
-    top: -3.6em;
-  }
-}
 </style>
 
 
@@ -53,42 +58,44 @@
 
       <div class="col-md-12">
         <h1 class="panel-heading">
-          
-              {{ data.website_title }}
-           
+
+          {{ data.website_title }}
+
         </h1>
-              
+
         <div class="scroller">
-          <span><p class="caption">{{ data.website_subtitle }}<br />
-        </p> </span>
-      </div>
+          <span>
+            <p class="caption">{{ data.website_subtitle }}<br />
+            </p>
+          </span>
+        </div>
         <form class="form-inline book-now-home" method="get" action="{% url 'servies' %}">
           <div class="form-group">
             <div class="input-group">
-              <select class="form-control zipcode" name="category1" >
+              <select class="form-control zipcode" name="category1">
                 <option value=""><i class="fa fa-map-o" aria-hidden="true"></i> Select Category</option>
                 {% for data in category %}
                 <option value="{{data.id}}">{{data.name}}</option>
                 {% endfor %}
               </select>
-          
+
             </div>
           </div>
           <div class="form-group">
             <div class="input-group location-code">
-              <input type="text" class="form-control zipcode" id="zipcode" placeholder="Pincode"  name="categor"/>
+              <input type="text" class="form-control zipcode" id="zipcode" placeholder="Pincode" name="categor" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
-              <select class="form-control zipcode" name="city" >
+              <select class="form-control zipcode" name="city">
                 <option value=""><i class="fa fa-map-o" aria-hidden="true"></i> Select City</option>
                 <option value="1">Dabra</option>
                 <option value="1">Gwalior</option>
                 <option value="1">Maid</option>
                 <option value="1">Maid</option>
               </select>
-             
+
             </div>
           </div>
           <div class="book-now-home-btn">
@@ -96,7 +103,7 @@
             <!-- <button class="btn btn-primary btn-outline" type="button"> Request a quote </button> -->
           </div>
         </form>
-        
+
       </div>
     </div>
   </div>
@@ -143,7 +150,8 @@
         <li><a href="{% url 'servies' %}?category={{cat.id}}"><img src="{{ cat.image.url }}" alt="Cleaning" /><br />
             {{cat.name}}</a></li>
         {% endfor %}
-        <li><a href="{% url 'servies' %}?category={{cat.id}}"><img src="{% static 'images/02home/services-icons/more.png' %}" alt="View More" /><br />
+        <li><a href="{% url 'servies' %}?category={{cat.id}}"><img
+              src="{% static 'images/02home/services-icons/more.png' %}" alt="View More" /><br />
             View More</a></li>
       </ul>
 
@@ -151,12 +159,14 @@
       <h1 class="panel-heading">Browse Helpers by category</h1>
       <ul class="services-list">
         {% for subcat in helper %}
-        <li><a href="{% url 'servies' %}?category={{subcat.id}}"><img src="{{ subcat.image.url }}" alt="Cleaning" /><br />
+        <li><a href="{% url 'servies' %}?category={{subcat.id}}"><img src="{{ subcat.image.url }}"
+              alt="Cleaning" /><br />
             {{subcat.name}}</a></li>
         {% endfor %}
 
 
-        <li><a href="{% url 'servies' %}?category={{subcat.id}}"><img src="{% static 'images/02home/services-icons/more.png' %}" alt="View More" /><br />
+        <li><a href="{% url 'servies' %}?category={{subcat.id}}"><img
+              src="{% static 'images/02home/services-icons/more.png' %}" alt="View More" /><br />
             View More</a></li>
       </ul>
 
@@ -376,7 +386,7 @@
 {% endfor%}
 <script src="sweetalert2.all.min.js"></script>
 {% for message in messages %}
-<script>Swal.fire('Thank you for visiting!','{{ message }}!','success');</script>
+<script>Swal.fire('Thank you for visiting!', '{{ message }}!', 'success');</script>
 {% endfor %}
 {% endblock %}
 
