@@ -1,5 +1,3 @@
-
-from traceback import print_tb
 from .models import *
 # Create your views here.
 from django.shortcuts import render, redirect,HttpResponse
@@ -41,13 +39,6 @@ def servies(request):
     data = website_profile.objects.all()
     return render(request, 'main/sub_category.html', {'result': data, 'subcategory': subcategory}, )
 
-
-
-def Category_data(request):
-    data = User.objects.all()
-    return data
-   
-print(Category_data)
 def worker(request):
     data = website_profile.objects.all()
     return render(request, 'main/worker.html', {'result': data}, )
@@ -58,7 +49,8 @@ def worker_detail(request):
 
 def update_profile(request,id):
     user = User.objects.get(id=id)
-    userdata = User_Detail.objects.get(user_id=id)
+    print('filter',user)
+    userdata = User_Detail.objects.filter(user_id=user).first()
     category = Category.objects.filter().order_by('-created')
     subcategory = SubCategory.objects.filter().order_by('-created')
     data = website_profile.objects.all()
@@ -68,7 +60,7 @@ def update_profile_update(request,id):
     user = User.objects.get(id=id)
     if request.method=="POST":
         workerdata = User_Detail()
-        workerdata.user_id = id
+        workerdata.user_id = user
         workerdata.name = request.POST['name']
         workerdata.email = request.POST['email']
         workerdata.dob = request.POST['dob']
@@ -79,11 +71,10 @@ def update_profile_update(request,id):
         workerdata.state = request.POST['state']
         workerdata.country = request.POST['country']
         workerdata.mobile = request.POST['mobile']
-        # workerdata.profile = request.POST['profile']
         workerdata.rate = request.POST['rate']
-        workerdata.exp = request.POST['exp']
+        workerdata.experiance = request.POST['exp']
         workerdata.bio = request.POST['bio']
-        workerdata.desc = request.POST['desc']
+        workerdata.discription = request.POST['desc']
         workerdata.image = request.FILES['image']
         workerdata.save()
         messages.success(request,'Data Updated...')

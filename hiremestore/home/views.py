@@ -185,7 +185,7 @@ def category_update(request, id):
 
 def UserDisplay(request):
     data= User.objects.all()
-    print(data)
+    # data2 = User_Detail.objects.get(user_id=data)
     return render(request, 'home/user.html', {'userresult': data} )
 
 
