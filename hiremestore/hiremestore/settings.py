@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'core',
     'home',
+    'widget_tweaks',
 
 ]
 
@@ -88,6 +89,15 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+# 'default': {
+#     'ENGINE': 'django.db.backends.mysql',
+#     'NAME': 'hiremestore',
+#     'USER': 'root',
+#     'PASSWORD': '',
+#     'HOST': 'localhost',
+# }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

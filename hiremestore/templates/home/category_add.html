@@ -66,8 +66,12 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
+                    {% if category.image %}
+
+                    {% else %}
                     <label class="form-control-label" for="input-country">Image</label>
-                    <input type="file" id="input-country" name="image" class="form-control" placeholder="Country" value="{{ category.image.name }}">
+                    <input type="file" id="input-country" name="image" class="form-control" placeholder="Country" >
+                  {% endif %}
                   </div>
                 </div>
      

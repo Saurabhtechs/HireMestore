@@ -33,6 +33,11 @@ urlpatterns = [
 
 # Subcategory Urls End Here......................................................
 
+    path('addcat',views.AddCat,name="addcat"),
+    path('addcat/<int:id>',views.category_update,name="addcat"),
+
+    
+
 
 
     # Matches any html file

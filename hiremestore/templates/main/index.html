@@ -102,7 +102,7 @@
         <li><a href="{% url 'servies' %}?category={{cat.id}}"><img src="{{ cat.image.url }}" alt="Cleaning" /><br />
             {{cat.name}}</a></li>
         {% endfor %}
-        <li><a href="{% url 'servies' %}"><img src="{% static 'images/02home/services-icons/more.png' %}" alt="View More" /><br />
+        <li><a href="{% url 'servies' %}?category={{cat.id}}"><img src="{% static 'images/02home/services-icons/more.png' %}" alt="View More" /><br />
             View More</a></li>
       </ul>
 
@@ -110,12 +110,12 @@
       <h1 class="panel-heading">Browse Helpers by category</h1>
       <ul class="services-list">
         {% for subcat in category %}
-        <li><a href="{% url 'servies' %}"><img src="{{ subcat.image.url }}" alt="Cleaning" /><br />
+        <li><a href="{% url 'servies' %}?category={{subcat.id}}"><img src="{{ subcat.image.url }}" alt="Cleaning" /><br />
             {{subcat.name}}</a></li>
         {% endfor %}
 
 
-        <li><a href="#"><img src="{% static 'images/02home/services-icons/more.png' %}" alt="View More" /><br />
+        <li><a href="{% url 'servies' %}?category={{subcat.id}}"><img src="{% static 'images/02home/services-icons/more.png' %}" alt="View More" /><br />
             View More</a></li>
       </ul>
 
