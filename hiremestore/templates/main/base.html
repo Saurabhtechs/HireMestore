@@ -37,8 +37,8 @@
                   data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle
                     navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span> </button>
-                <a class="navbar-brand" href="#"><img class="logo-dark hidden-xs" src="{{ data.logo.url }}" alt="" />
-                  <img class="logo-dark hidden-lg hidden-md hidden-sm" src="{% static 'images/mobile_logo.png' %}"
+                <a class="navbar-brand" href="#"><img class="logo-dark hidden-xs" style="height: inherit;"  src="{{ data.logo.url }}" alt="" />
+                  <img class="logo-dark hidden-lg hidden-md hidden-sm" style="height: inherit;" src="{{ data.logo.url }}"
                     alt="" /></a>
               </div>
 
@@ -71,8 +71,13 @@
 
               {% if user.is_authenticated and user.is_superuser %}
               <li><a href="{% url 'logout' %}" class="btn btn-primary btn-skin">Logout</a></li>
+              <li>{{user.username}}</li>
+              
               {% elif user.is_authenticated  %}
-              <li><a href="{% url 'logout' %}" class="btn btn-primary btn-skin">Logout</a></li>
+
+              <li><a href="{% url 'logout' %}" class="btn btn-primary btn-skin">Logout </a></li>
+              
+              <li><a href="{% url 'update_profile' user.id %}" class="btn btn-primary btn-skin">update </a></li>
               {% else %}
               <li><a href="{% url 'login' %}" class="btn btn-primary btn-skin">Login</a></li>
               {% endif %}
