@@ -67,7 +67,8 @@ def CategorySave(request):
         name = request.POST['name']
         title = request.POST['title']
         image = request.FILES['image']
-        category_done = Category.objects.create(name=name,title=title,image=image)
+        type = request.POST['type']
+        category_done = Category.objects.create(name=name,title=title,image=image,type=type)
         category_done.save()
         return redirect('categorydisplay')
 

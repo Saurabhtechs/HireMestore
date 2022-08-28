@@ -6,11 +6,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import User
 def index(request):
+    digital = Category.objects.filter(type=1).order_by('-created')[:4]
+    helper = Category.objects.filter(type=2).order_by('-created')[:4]
     category = Category.objects.filter().order_by('-created')[:4]
     subcategory = SubCategory.objects.filter().order_by('-created')[:9]
     data = website_profile.objects.all()
     testimonial = Testimonails.objects.all()
-    content = {'result': data, 'testimonial': testimonial, 'category': category, 'subcategory': subcategory,}
+    content = {'result': data, 'testimonial': testimonial, 'category': category, 'subcategory': subcategory,'digital': digital,'helper': helper,}
     return render(request, 'main/index.html', content)
 
 
