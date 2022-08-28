@@ -1,11 +1,13 @@
 
+from traceback import print_tb
 from .models import *
 # Create your views here.
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from accounts.models import *
 def index(request):
     category = Category.objects.filter().order_by('-created')[:4]
     subcategory = SubCategory.objects.filter().order_by('-created')[:9]
@@ -32,3 +34,8 @@ def servies(request):
     return render(request, 'main/sub_category.html', {'result': data, 'subcategory': subcategory}, )
 
 
+def Category_data(request):
+    data = User.objects.all()
+    return data
+   
+print(Category_data)
