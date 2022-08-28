@@ -25,8 +25,8 @@
     <div class="container text-center">
       <div class="row">
         {% for data in subcategory%}
-        <div class="col-md-3 col-sm-6 col-xs-12 srevice_img"> <a href="service_detail.html"><img src="{{data.image.url}}" class="img-circle htw" alt="cleaning" /></a>
-            <h4><a href="service_detail.html">{{ data.name}}</a></h4>
+        <div class="col-md-3 col-sm-6 col-xs-12 srevice_img"> <a href="{% url 'worker' %}"><img src="{{data.image.url}}" class="img-circle htw" alt="cleaning" /></a>
+            <h4><a href="{% url 'worker' %}">{{ data.name}}</a></h4>
             <p><b>{{ data.description}}</b> average rating</p>
           </div>
         {% endfor %}

@@ -1,6 +1,5 @@
 from django.db import models
-from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import User
 from django.template.defaultfilters import slugify
 from PIL import Image
 
@@ -124,6 +123,26 @@ class Contact(models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=75)
     mobile = models.IntegerField(unique=True)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class User_Detail(models.Model):
+
+    user_id = models.IntegerField()
+    category = models.CharField(max_length=30)
+    sub_category = models.CharField(max_length=30)
+    dob = models.CharField(max_length=30)
+    area = models.CharField(max_length=30)
+    city = models.CharField(max_length=30)
+    zip = models.CharField(max_length=30)
+    district = models.CharField(max_length=30)
+    state = models.CharField(max_length=30)
+    country = models.CharField(max_length=30)
+    experiance = models.TextField()
+    bio = models.TextField()
+    discription = models.TextField()
     message = models.TextField()
 
     def __str__(self):
