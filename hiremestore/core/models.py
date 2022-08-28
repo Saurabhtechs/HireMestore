@@ -50,12 +50,11 @@ class Category(models.Model):
         return self.name
 
 
-
-
 class SubCategory(models.Model):
-    # cat_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    # cat = models.ForeignKey(Category, on_delete=models.CASCADE)
+    cat = models.IntegerField()
     image = models.ImageField(upload_to='img', max_length=250)
-    name = models.CharField(max_length=30 , unique=True)
+    name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     feature = models.IntegerField(default=1)
     created = models.DateTimeField(auto_now_add=True)
