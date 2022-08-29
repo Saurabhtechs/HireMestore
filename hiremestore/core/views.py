@@ -8,8 +8,8 @@ from accounts.models import User
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:4]
     helper = Category.objects.filter(type=2).order_by('-created')[:4]
-    category = Category.objects.filter().order_by('-created')[:4]
-    subcategory = SubCategory.objects.filter().order_by('-created')[:9]
+    category = Category.objects.filter().order_by('-created')
+    subcategory = SubCategory.objects.filter().order_by('-created')
     data = website_profile.objects.all()
     testimonial = Testimonails.objects.all()
     content = {'result': data, 'testimonial': testimonial, 'category': category, 'subcategory': subcategory,'digital': digital,'helper': helper,}

@@ -102,7 +102,7 @@ def Category_Delete(request,id):
 # Subcategory Crud Operation Start Here......................................................
 
 def SubCategoryAdd(request):
-    category = Category.objects.all().order_by('-created')[:4]
+    category = Category.objects.all().order_by('-created')
     content = {'category': category}
     return render(request,'home/subcategory_add.html',content)
 
