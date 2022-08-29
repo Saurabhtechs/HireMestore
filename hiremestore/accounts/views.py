@@ -14,7 +14,7 @@ def AdminLogin(request):
 
 def Login(request):
     data = website_profile.objects.all()
-    return render(request, 'main/login.html',{'result':data})
+    return render(request, 'main/login.html', {'result': data})
 
 def AdminLogincheck(request):
     if request.method == 'POST':

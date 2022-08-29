@@ -33,6 +33,13 @@ urlpatterns = [
 
 # Subcategory Urls End Here......................................................
 
+# User Urls Start Here......................................................
+
+    path('userdisplay', views.UserDisplay,name="userdisplay"),
+    path('user_delete/<int:id>',views.User_Delete,name="user_delete"),
+
+# User Urls End Here......................................................
+
     path('addcat',views.AddCat,name="addcat"),
     path('addcat/<int:id>',views.category_update,name="addcat"),
 
