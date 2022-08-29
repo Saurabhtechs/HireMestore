@@ -8,23 +8,64 @@
 
  <style>
   .home_two #banner {
-    background:url({{ data.background_img.url }}) repeat scroll center 0/cover;
+    background:url({{ data.background_img1.url }}) repeat scroll center 0/cover;
     padding: 155px 0 250px;
   }
+
+  
+/* Scroller styling */
+.scroller {
+  height: 1.2em;
+  line-height: 1.2em;
+  position: relative;
+  overflow: hidden;
+  /* width: 17em; */
+}
+.scroller > span {
+  position: absolute;
+  top: 0;
+  animation: slide 5s infinite;
+  font-weight: bold;
+  
+}
+@keyframes slide {
+  0% {
+    top: 0;
+  }
+  25% {
+    top: -1.2em;
+  }
+  50% {
+    top: -2.4em;
+  }
+  75% {
+    top: -3.6em;
+  }
+}
 </style>
+
+
+
 <!--Banner Start-->
 <section id="banner" class="home-two">
   <div class="container text-center home_two_banner">
     <div class="row text-center">
 
       <div class="col-md-12">
-        <h1 class="panel-heading">{{ data.website_title }}</h1>
-        <p class="caption">{{ data.website_subtitle }}<br />
-        </p>
+        <h1 class="panel-heading">
+          
+              {{ data.website_title }}
+           
+        </h1>
+              
+        <div class="scroller">
+          <span><p class="caption">{{ data.website_subtitle }}<br />
+        </p> </span>
+      </div>
         <form class="form-inline book-now-home" method="get" action="{% url 'servies' %}">
           <div class="form-group">
             <div class="input-group">
-              <select class="form-control" name="category1" >
+              <select class="form-control zipcode" name="category1" >
                 <option value=""><i class="fa fa-map-o" aria-hidden="true"></i> Select Category</option>
                 {% for data in category %}
                 <option value="{{data.id}}">{{data.name}}</option>
@@ -40,7 +81,7 @@
           </div>
           <div class="form-group">
             <div class="input-group">
-              <select class="form-control" name="city" >
+              <select class="form-control zipcode" name="city" >
                 <option value=""><i class="fa fa-map-o" aria-hidden="true"></i> Select City</option>
                 <option value="1">Dabra</option>
                 <option value="1">Gwalior</option>
@@ -51,8 +92,8 @@
             </div>
           </div>
           <div class="book-now-home-btn">
-            <button class="btn btn-primary btn-outline active" type="submit"> Search </button>
-            <button class="btn btn-primary btn-outline" type="button"> Request a quote </button>
+            <button class="btn btn-primary btn-outline" type="submit"> Search </button>
+            <!-- <button class="btn btn-primary btn-outline" type="button"> Request a quote </button> -->
           </div>
         </form>
         
@@ -98,7 +139,7 @@
 
       <h1 class="panel-heading">FIND & HIRE POPULAR DIGITAL WORK CATEGORY STAFF</h1>
       <ul class="services-list">
-        {% for cat in category %}
+        {% for cat in digital %}
         <li><a href="{% url 'servies' %}?category={{cat.id}}"><img src="{{ cat.image.url }}" alt="Cleaning" /><br />
             {{cat.name}}</a></li>
         {% endfor %}
@@ -109,7 +150,7 @@
 
       <h1 class="panel-heading">Browse Helpers by category</h1>
       <ul class="services-list">
-        {% for subcat in category %}
+        {% for subcat in helper %}
         <li><a href="{% url 'servies' %}?category={{subcat.id}}"><img src="{{ subcat.image.url }}" alt="Cleaning" /><br />
             {{subcat.name}}</a></li>
         {% endfor %}

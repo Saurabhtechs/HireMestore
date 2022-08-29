@@ -2,7 +2,7 @@
 h1, h2, h3, h4, h5, h5{font-family:'Open Sans', sans-serif;}
 p{font-size:14px;line-height:24px;margin-bottom:0px;}
 section{padding:75px 0 0;}
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');@import url('https://fonts.googleapis.com/css?family=Roboto:500');.btn-skin{background-color:#47810d;border-color:#47810d;}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');@import url('https://fonts.googleapis.com/css?family=Roboto:500');.btn-skin{background-color:#ee7d9d;border-color:#ee7d9d;}
 .btn-skin:hover{background-color:#3ea4d6;border-color:#3ea4d6;}
 .inner_page footer{margin-top:75px;}
 .inner_page img{max-width:100%;}
@@ -36,10 +36,10 @@ section{padding:75px 0 0;}
 #banner{padding:90px 0 200px;color:#FFF;background:url(../images/banner1.jpg) repeat scroll center 0/cover;position:relative;}
 #banner .panel-heading{margin-top:15px !important;}
 #banner .panel-heading::before{background:none;}
-.book-now-home{background-color:#fff;border-radius:5px;margin:25px auto 0;max-width:900px;min-height:60px;padding:4px;width:auto;}
+.book-now-home{background-color:#ffffff63;border-radius:5px;margin:25px auto 0;padding:4px;width:auto;}
 .book-now-home .form-group{width:37%;}
 .book-now-home .services{max-width:145px;}
-.book-now-home .zipcode{max-width:100%;height:52px;padding-left:35px;}
+.book-now-home .zipcode{max-width:100%;height:40px;padding-left:35px;}
 .location-code::before{content:"\f041";position:absolute;left:0;font-family:"FontAwesome";color:#47810d;font-size:25px;left:5px;z-index:9999;top:9px;}
 .book-now-home .booknow{font-size:21px;font-weight:600;height:52px;width:165px;font-family:'Open Sans', sans-serif;}
 .book-now-home .input-group-addon{color:#49afd9;background-color:#FFF;border:none;font-size:24px;}
@@ -169,7 +169,7 @@ footer .form-control::-moz-placeholder{color:#fff;}
 .container-fluid.footerbg{position:relative;}
 .home_two #banner{background:url(https://www.beroeinc.com/assets/images/uploads/Talent-migration-can-help-solve-labor_800x450px.jpg) repeat scroll center 0/cover;padding:155px 0 250px;}
 #banner .panel-heading::before{background:none;}
-.home_two_banner::before{background:rgba(69,174,231,1);background:-moz-linear-gradient(left, rgba(69,174,231,1) 0%, rgba(69,174,231,0.7) 0%, rgba(0,96,27,0.7) 100%);background:-webkit-gradient(left top, right top, color-stop(0%, rgba(69,174,231,1)), color-stop(0%, rgba(69,174,231,0.7)), color-stop(100%, rgba(0,96,27,0.7)));background:-webkit-linear-gradient(left, rgba(69,174,231,1) 0%, rgba(69,174,231,0.7) 0%, rgba(0,96,27,0.7) 100%);background:-o-linear-gradient(left, rgba(69,174,231,1) 0%, rgba(69,174,231,0.7) 0%, rgba(0,96,27,0.7) 100%);background:-ms-linear-gradient(left, rgba(69,174,231,1) 0%, rgba(69,174,231,0.7) 0%, rgba(0,96,27,0.7) 100%);background:linear-gradient(to right, rgba(69,174,231,1) 0%, rgba(69,174,231,0.7) 0%, rgba(0,96,27,0.7) 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#45aee7', endColorstr='#00601b', GradientType=1);content:"";display:block;height:100%;left:0;min-height:264px;position:absolute;top:0;width:100%;}
+.home_two_banner::before{background:rgba(69,174,231,1);background:-moz-linear-gradient(left, rgba(69,174,231,1) 0%, rgba(69,174,231,0.7) 0%, rgba(0,96,27,0.7) 100%);background:-webkit-gradient(left top, right top, color-stop(0%, rgba(69,174,231,1)), color-stop(0%, rgba(69,174,231,0.7)), color-stop(100%, rgba(0,96,27,0.7)));background:-webkit-linear-gradient(left, rgba(69,174,231,1) 0%, rgba(69,174,231,0.7) 0%, rgba(0,96,27,0.7) 100%);background:-o-linear-gradient(left, rgba(69,174,231,1) 0%, rgba(69,174,231,0.7) 0%, rgba(0,96,27,0.7) 100%);background:-ms-linear-gradient(left, rgba(69,174,231,1) 0%, rgba(69,174,231,0.7) 0%, rgba(0,96,27,0.7) 100%);background:linear-gradient(to right, rgb(239 197 217) 0%, rgb(231 69 115 / 70%) 0%, rgba(0,96,27,0.7) 100%);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#45aee7', endColorstr='#00601b', GradientType=1);content:"";display:block;height:100%;left:0;min-height:264px;position:absolute;top:0;width:100%;}
 .home_two .book-now-home .form-group{width:32%;}
 .home_two .book-now-home .change-text{width:170px;}
 .home_two .book-now-home .form-group{border-left:1px solid #aaa;}
@@ -178,8 +178,8 @@ footer .form-control::-moz-placeholder{color:#fff;}
 .home_two .location-code::before{left:10px;}
 .home_two .book-now-home .fa-caret-down{color:#aaaaaa;}
 .book-now-home-btn .btn-primary{background-color:inherit;border:2px solid #fff;border-radius:10px;color:#fff;font-size:20px;font-weight:600;margin:0 25px;padding:10px 10px;text-transform:none;width:230px;}
-.home_two .book-now-home-btn{margin-top:35px;}
-.book-now-home-btn .btn-primary.active, .book-now-home-btn .btn-primary:hover{background-color:#f17a0d;border:2px solid #f17a0d;box-shadow:none;}
+.home_two .book-now-home-btn{margin-top:10px;}
+.book-now-home-btn .btn-primary.active, .book-now-home-btn .btn-primary:hover{background-color:#ee7d9d;border:2px solid #f17a0d;box-shadow:none;}
 .home_two .step-one::before{top:85px;}
 .home_two .step-two::before{top:15px;}
 .home_two #howitwork{padding-bottom:75px;}
