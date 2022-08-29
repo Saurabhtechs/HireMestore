@@ -5,15 +5,15 @@
 
 {% block body %}
 
-<div id="page_title">
-    <div class="container text-center">
-        <div class="panel-heading">contact us</div>
-        <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li class="active">Contact us</li>
-        </ol>
-    </div>
-</div>
+<!--<div id="page_title">-->
+<!--    <div class="container text-center">-->
+<!--        <div class="panel-heading">contact us</div>-->
+<!--        <ol class="breadcrumb">-->
+<!--            <li><a href="#">Home</a></li>-->
+<!--            <li class="active">Contact us</li>-->
+<!--        </ol>-->
+<!--    </div>-->
+<!--</div>-->
 <!--page_title Section End-->
 <!--Banner Start-->
 <section id="service_banner">
@@ -37,7 +37,7 @@
                     <div class="quick_contact">
                         <p>Register Yourself <br />
                             You!!!</p>
-                        <form class="form-horizontal" action="{% url 'register_submit' %}" method="post"
+                        <form class="form-horizontal"  method="post"
                             enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-group">
