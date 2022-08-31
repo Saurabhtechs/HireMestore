@@ -26,24 +26,27 @@
           <div class="booking_form">
             <div class="container-fluid">
               <div class="row">
+                <br>
                 <form method="post">
+                  {% csrf_token %}
                   <h2>Contact Form</h2>
+
                   <div class="form-group col-md-6 col-sm-6 col-xs-12">
                     <input class="form-control" id="name" name="name" placeholder="Full Name" type="text" />
                   </div>
                   <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control" id="Email" name="Email" placeholder="Email" type="text" />
+                    <input class="form-control" id="Email" name="email" placeholder="Email" type="text" />
                   </div>
                   <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control" id="Subject" name="Subject" placeholder="Subject*" type="text" />
+                    <input class="form-control" id="Subject" name="subject" placeholder="Subject*" type="text" />
                   </div>
                   <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                    <input class="form-control" id="Phone_number" name="Phone_number" placeholder="Phone Number"
+                    <input class="form-control" id="Phone_number" name="mobile" placeholder="Phone Number"
                       type="text" />
                   </div>
                   <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <div class="input-group">
-                      <textarea class="form-control" rows="6" placeholder="Message"></textarea>
+                      <textarea class="form-control"  name="message" rows="6" placeholder="Message"></textarea>
                     </div>
                   </div>
                   <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -66,7 +69,9 @@
     </div>
   </section>
   <!--Contact Form End-->
-
+{% for message in messages %}
+<script>Swal.fire('Thanks for message!', '{{ message }}!', 'success');</script>
+{% endfor %}
   {% endblock %}
   </body>
 

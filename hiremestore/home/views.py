@@ -69,7 +69,7 @@ def CategorySave(request):
         title = request.POST['title']
         image = request.FILES['image']
         type = request.POST['type']
-        category_done = Category.objects.create(name=name,title=title,image=image,type=type)
+        category_done = Category.objects.create(name=name, title=title, image=image, type=type)
         category_done.save()
         return redirect('categorydisplay')
 
@@ -193,3 +193,9 @@ def User_Delete(request,id):
     data = User.objects.get(id=id)
     data.delete()
     return redirect('userdisplay')
+
+
+def contact_list(request):
+    data= Contact.objects.all().order_by('-created')
+
+    return render(request, 'home/user.html', {'contact_list': data})
