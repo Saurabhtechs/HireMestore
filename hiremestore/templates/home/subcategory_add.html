@@ -1,22 +1,23 @@
 {% extends 'layouts/base.html' %}
 
 {% block title %} Profile {% endblock title %}
-
+{% load static %}
 {% block content %}
 
-{% comment %} <div class="header pb-6 d-flex align-items-center" 
-     style="min-height: 500px; background-image: url(/static/assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+{% comment %} <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(" {%
+  static 'adminstatic/assetsimg/theme/profile-cover.jpg' %}); background-size: cover; background-position: center top;">
   <!-- Mask -->
   <span class="mask bg-gradient-default opacity-8"></span>
   <!-- Header container -->
-  
+
   <div class="container-fluid d-flex align-items-center">
     <div class="row">
       <div class="col-lg-7 col-md-10">
-        <h1 class="display-2 text-white"> 
+        <h1 class="display-2 text-white">
           Hello {{ request.user.username }}
         </h1>
-        <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+        <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work
+          and manage your projects or assigned tasks</p>
         <a href="#!" class="btn btn-neutral">Edit profile</a>
       </div>
     </div>
@@ -38,68 +39,71 @@
           </div>
         </div>
         <div class="card-body">
-            <h1></h1>
-            {% if not subcategory %}
+          <h1></h1>
+          {% if not subcategory %}
           <form action="{% url 'subcategory_save' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% else %}
-          <form action="{% url 'subcategory_update' subcategory.id %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% endif %}
+            <form action="{% url 'subcategory_update' subcategory.id %}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {% endif %}
 
-            <!-- Address -->
-            <h6 class="heading-small text-muted mb-4">SubCategory Form</h6>
-            <div class="pl-lg-4">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-address">Category Name</label>
-                    <!-- <input id="input-address" name="name" class="form-control" placeholder="subcategory Name"  type="text" value="{{ subcategory.name }}"> -->
-                    <select name="category" class="form-control">
-                      <option value="">Select Category</option>
-                      {% for cat in category %}
-                      <option value="{{cat.id}}">{{cat.name}}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-address">Subcategory Name</label>
-                    <input id="input-address" name="name" class="form-control" placeholder="subcategory Name"  type="text" value="{{ subcategory.name }}">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-city">Description</label>
-                    <input type="text" id="input-city" name="description" class="form-control" placeholder="Description" value="{{ subcategory.description }}">
-                  </div>
-                </div>
-
-                <div class="col-md-12">
-                  <div class="form-group">
-                    
-                    {% if subcategory.image %}
-
-                    {% else %}
-                    <label class="form-control-label" for="input-country">Country</label>
-                    <input type="file" id="input-country" name="image" class="form-control" placeholder="Country" value="{{ subcategory.image.name }}">
-                    {% endif %}
-                  </div>
-                </div>
-     
-                <div class="col-lg-4">
+              <!-- Address -->
+              <h6 class="heading-small text-muted mb-4">SubCategory Form</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-md-12">
                     <div class="form-group">
-                    <button class="btn btn-neutral">Add</button>  
+                      <label class="form-control-label" for="input-address">Category Name</label>
+                      <!-- <input id="input-address" name="name" class="form-control" placeholder="subcategory Name"  type="text" value="{{ subcategory.name }}"> -->
+                      <select name="category" class="form-control">
+                        <option value="">Select Category</option>
+                        {% for cat in category %}
+                        <option value="{{cat.id}}">{{cat.name}}</option>
+                        {% endfor %}
+                      </select>
                     </div>
                   </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-address">Subcategory Name</label>
+                      <input id="input-address" name="name" class="form-control" placeholder="subcategory Name"
+                        type="text" value="{{ subcategory.name }}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-city">Description</label>
+                      <input type="text" id="input-city" name="description" class="form-control"
+                        placeholder="Description" value="{{ subcategory.description }}">
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+
+                      {% if subcategory.image %}
+
+                      {% else %}
+                      <label class="form-control-label" for="input-country">Country</label>
+                      <input type="file" id="input-country" name="image" class="form-control" placeholder="Country"
+                        value="{{ subcategory.image.name }}">
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <button class="btn btn-neutral">Add</button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
         </div>
       </div>
     </div>
@@ -111,5 +115,5 @@
 
 {% endblock content %}
 
-<!-- Specific JS goes HERE --> 
+<!-- Specific JS goes HERE -->
 {% block javascripts %}{% endblock javascripts %}
