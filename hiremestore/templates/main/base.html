@@ -68,9 +68,9 @@
             <ul class="right-contact">
               <li><i class="fa fa-phone" aria-hidden="true"></i> +91 {{data.mobile_number}}</li>
 
-              {% if user.is_authenticated and user.is_superuser %}
+              {% if user.is_superuser and user.is_authenticated %}
               <li><a href="{% url 'logout' %}" class="btn btn-primary btn-skin">Logout</a></li>
-              <li><a href="{% url 'update_profile' user.id %}" class="btn btn-primary btn-skin">update </a></li>
+              <li><a href="/admins" target="_blank" class="btn btn-primary btn-skin">Dashboard </a></li>
 
               <!-- <li>{{user.username}}</li> -->
               

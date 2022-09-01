@@ -188,6 +188,14 @@ def UserDisplay(request):
     # data2 = User_Detail.objects.get(user_id=data)
     return render(request, 'home/user.html', {'userresult': data} )
 
+def User_Detail_Data(request,id):
+    data= User.objects.get(id=id)
+    if User_Detail.objects.filter(user_id=data).exists():
+        detail_data=User_Detail.objects.get(user_id=data)
+        print('detatils',detail_data)
+        return render(request,'home/user_profile.html',{'user_detail_result':detail_data,'userdata':data})
+    else:
+        return redirect('userdisplay')
 
 def User_Delete(request,id):
     data = User.objects.get(id=id)
@@ -197,5 +205,4 @@ def User_Delete(request,id):
 
 def contact_list(request):
     data= Contact.objects.all().order_by('-created')
-
     return render(request, 'home/user.html', {'contact_list': data})

@@ -71,7 +71,6 @@ def worker_detail(request):
 
 
 
-
 def update_profile(request,id):
     user = User.objects.get(id=id)
     print('filter',user)

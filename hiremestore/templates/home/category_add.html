@@ -39,7 +39,6 @@
           </div>
         </div>
         <div class="card-body">
-<<<<<<< HEAD
           <h1></h1>
           {% if not category %}
           <form action="{% url 'category_save' %}" method="post" enctype="multipart/form-data">
@@ -48,14 +47,12 @@
             <form action="{% url 'category_update' category.id %}" method="post" enctype="multipart/form-data">
               {% csrf_token %}
               {% endif %}
-=======
             <h1></h1>
 
           <form action="{% url 'category_save' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
 
->>>>>>> 0cf71bf9b4c4b28cab6e3b5484df6795976257a4
 
               <!-- Address -->
               <h6 class="heading-small text-muted mb-4">Category Form</h6>
