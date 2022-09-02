@@ -9,6 +9,8 @@ urlpatterns = [
 
     path('register', views.UserRegister, name="register"),
 
+    path('otp', views.otp, name="otp"),
+
 
     
 
