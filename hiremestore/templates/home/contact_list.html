@@ -33,7 +33,7 @@
       <div class="card">
         <!-- Card header -->
         <div class="card-header border-0">
-          <h3 class="mb-0">User</h3>
+          <h3 class="mb-0">Contact list</h3>
         </div>
         <!-- Light table -->
         <div class="table-responsive">
@@ -53,7 +53,7 @@
               </tr>
             </thead>
             <tbody class="list">
-              {% for userdata in userresult %}
+              {% for data in contact_list %}
               <tr>
                 <!-- <th scope="row">
                   <div class="media align-items-center">
@@ -66,17 +66,17 @@
                   </div>
                 </th> -->
                 <td class="type">
-                  {{ userdata.username }}
+                  {{ data.name }}
                 </td>
                 <td class="title">
-                  +91 {{ userdata.phone_number }}
+                  +91 {{ data.email }}
                 </td>
 
                 <td class="title">
-                  {{ userdata.email }}
+                  {{ data.subject }}
                 </td>
                 <td class="completion">
-                  {{ userdata.date_joined }}
+                  {{ data.mobile }}
                 </td>
                 <td><a href="{% url 'user_delete' userdata.id %}" type="submit" class="btn btn-outline-danger">Delete</a></td>
   

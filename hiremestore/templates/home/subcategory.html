@@ -41,7 +41,8 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col" class="sort" data-sort="cimage">Subcategory Image</th>
+                <th scope="col" class="sort" data-sort="cimage">Image</th>
+                <th scope="col" class="sort" data-sort="cimage">Category</th>
                 <th scope="col" class="sort" data-sort="name">Name</th>
                 <th scope="col" class="sort" data-sort="title">Title</th>
                 <!-- <th scope="col">created</th> -->
@@ -64,6 +65,10 @@
                     </div>
                   </div>
                 </th>
+
+                <td class="name">
+                  {{ subcategorydata.cat }}
+                </td>
 
                 <td class="name">
                   {{ subcategorydata.name }}

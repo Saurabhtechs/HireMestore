@@ -14,7 +14,7 @@ def AdminLogin(request):
 
 def Login(request):
     data = website_profile.objects.all()
-    return render(request, 'main/login.html',{'result':data})
+    return render(request, 'main/login.html', {'result': data})
 
 def AdminLogincheck(request):
     if request.method == 'POST':
@@ -56,13 +56,21 @@ def Register(request):
     return render(request,'main/Register.html',{'result':data})
 
 def UserRegister(request):
-    if request.method=="POST":
-        username=request.POST['name']
-        email=request.POST['email']
-        phone_number=request.POST['phone_number']
-        password=request.POST['password']
+
+    if request.method == "POST":
+        username = request.POST['name']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number']
+        password = request.POST['password']
         user = User.objects.create(username=username,email=email,phone_number=phone_number)
         user.set_password(password)
         user.save()
-        messages.success(request,"Registration Successfull...")
-        return redirect('index')
+        messages.success(request, "Registration Successfull...")
+        return redirect('login')
+
+    else:
+
+
+        data = website_profile.objects.all()
+        return render(request, 'main/Register.html', {'result': data})
+

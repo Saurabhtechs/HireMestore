@@ -12,10 +12,10 @@ section{padding:75px 0 0;}
 .skin-border{border-color:#24e4eb;color:#45ade7;font-size:15px;text-transform:uppercase;}
 .skin-border:hover{border-color:#24e4eb;color:#FFF;background-color:#24e4eb;}
 .social-links li{display:inline-block;margin:0 3px;}
-#header{padding:10px 0;background-color:#fff;width:100% !important;z-index:9999999;}
+#header{padding:10px 0;background-color:#46768c8a;width:100% !important;z-index:9999999;}
 #header.navbar-small{position:fixed;background:#FFF;border-bottom:none;box-shadow:0 5px 50px rgba(0, 0, 0, 0.1);}
 #header .navbar-brand{padding:5px 30px 5px 0;margin-right:80px;}
-#header .nav li a{color:#3a3a3a;font-size:15px;text-transform:uppercase;font-family:'Open Sans', sans-serif;font-weight:400;padding:0px;}
+#header .nav li a{color:#3a3a3a;font-size:18px;font-family: Calibri;font-weight:600;padding:0px;}
 #header .nav li{position:relative;margin:20px 15px;}
 .nav > li > a:hover{background:none;}
 .nav > li > a:hover::before,

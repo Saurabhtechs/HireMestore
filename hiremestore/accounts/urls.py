@@ -7,8 +7,8 @@ urlpatterns = [
     path('logincheck', views.Logincheck, name="logincheck"),
     path('logout', views.Logout, name="logout"),
 
-    path('register', views.Register, name="register"),
-    path('register_submit', views.UserRegister, name="register_submit"),
+    path('register', views.UserRegister, name="register"),
+
 
     
 

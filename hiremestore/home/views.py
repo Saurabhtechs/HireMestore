@@ -13,6 +13,7 @@ from django.shortcuts import render,redirect
 from core.models import *
 from .form import *
 from django.contrib import messages
+from accounts.models import *
 category = apps.get_model('core', 'Category')
 subcategory = apps.get_model('core', 'SubCategory')
 
@@ -68,7 +69,7 @@ def CategorySave(request):
         title = request.POST['title']
         image = request.FILES['image']
         type = request.POST['type']
-        category_done = Category.objects.create(name=name,title=title,image=image,type=type)
+        category_done = Category.objects.create(name=name, title=title, image=image, type=type)
         category_done.save()
         return redirect('categorydisplay')
 
@@ -109,10 +110,12 @@ def SubCategoryAdd(request):
 def SubCategorySave(request):
     if request.method=="POST":
         name = request.POST['name']
-        category = request.POST['category']
+        category_id = request.POST['category']
+        category = Category.objects.get(id=category_id)
+        print(category)
         description = request.POST['description']
         image = request.FILES['image']
-        category_done = SubCategory.objects.create(cat=category,name=name,description=description,image=image)
+        category_done = SubCategory.objects.create(name=name,description=description,image=image,cat=category)
         category_done.save()
         return redirect('subcategorydisplay')
 
@@ -121,19 +124,23 @@ def SubCategorySave(request):
 
 def SubCategoryEdit(request,id):
     data = SubCategory.objects.get(id=id)
-    print(data)
-    return render(request,'home/subcategory_add.html',{'subcategory':data})
+    # print(data.cat)
+    category = Category.objects.filter(name=data.cat)
+    return render(request,'home/subcategory_add.html',{'subcategory':data,'category':category})
 
 def SubCategoryUpdate(request,id):
     subcategory_done = SubCategory.objects.get(id=id)
     if request.POST['category']:    
-        subcategory_done.name = request.POST['category']
+        cat_id = request.POST['category']
+        print(cat_id)
+        category = Category.objects.get(id=cat_id)
+        subcategory_done.cat = category
     if request.POST['name']:    
         subcategory_done.name = request.POST['name']
     if request.POST['description']:
         subcategory_done.description = request.POST['description']
-    if request.FILES['image']:
-        subcategory_done.image = request.FILES['image']
+    # if request.FILES['image']:
+    #     subcategory_done.image = request.FILES['image']
         
     subcategory_done.save()
     return redirect('subcategorydisplay')
@@ -161,6 +168,7 @@ def AddCat(request):
     return render(request, 'home/addcat.html', context)
 
 def category_update(request, id):
+
     data = Category.objects.get(id=id)
     print(data)
     if request.method == 'POST':
@@ -173,3 +181,21 @@ def category_update(request, id):
     else:
         form = CategoryForm(instance=data)
     return render(request, 'home/addcat.html', {'form': form})
+
+
+def UserDisplay(request):
+    data= User.objects.all()
+    # data2 = User_Detail.objects.get(user_id=data)
+    return render(request, 'home/user.html', {'userresult': data} )
+
+
+def User_Delete(request,id):
+    data = User.objects.get(id=id)
+    data.delete()
+    return redirect('userdisplay')
+
+
+def contact_list(request):
+    data= Contact.objects.all().order_by('-created')
+
+    return render(request, 'home/user.html', {'contact_list': data})

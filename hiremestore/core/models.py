@@ -52,7 +52,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     cat = models.ForeignKey(Category, on_delete=models.CASCADE)
-    
+
     image = models.ImageField(upload_to='img', max_length=250)
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
@@ -129,7 +129,8 @@ class Contact(models.Model):
 
 class User_Detail(models.Model):
 
-    user_id = models.IntegerField()
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)
     category = models.CharField(max_length=30)
     sub_category = models.CharField(max_length=30)
     dob = models.CharField(max_length=30)
@@ -139,7 +140,7 @@ class User_Detail(models.Model):
     district = models.CharField(max_length=30)
     state = models.CharField(max_length=30)
     country = models.CharField(max_length=30)
-    experiance = models.TextField()
+    experiance = models.CharField(max_length=30)
     bio = models.TextField()
     discription = models.TextField()
     message = models.TextField()
