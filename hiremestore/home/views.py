@@ -103,8 +103,13 @@ def Category_Delete(request,id):
 # Subcategory Crud Operation Start Here......................................................
 
 def SubCategoryAdd(request):
+<<<<<<< HEAD
+    category = Category.objects.all().order_by('-created')
+    content = {'category': category}
+=======
     category_dropdown = Category.objects.all().order_by('-created')[:4]
     content = {'category_dropdown': category_dropdown}
+>>>>>>> 42b85491dd7e70f07f58c1638c93988ad8749c27
     return render(request,'home/subcategory_add.html',content)
 
 def SubCategorySave(request):
