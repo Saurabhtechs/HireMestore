@@ -103,8 +103,8 @@ def Category_Delete(request,id):
 # Subcategory Crud Operation Start Here......................................................
 
 def SubCategoryAdd(request):
-    category = Category.objects.all().order_by('-created')[:4]
-    content = {'category': category}
+    category_dropdown = Category.objects.all().order_by('-created')[:4]
+    content = {'category_dropdown': category_dropdown}
     return render(request,'home/subcategory_add.html',content)
 
 def SubCategorySave(request):
@@ -126,7 +126,8 @@ def SubCategoryEdit(request,id):
     data = SubCategory.objects.get(id=id)
     # print(data.cat)
     category = Category.objects.filter(name=data.cat)
-    return render(request,'home/subcategory_add.html',{'subcategory':data,'category':category})
+    category_dropdown = Category.objects.all().order_by('-created')[:4]
+    return render(request,'home/subcategory_add.html',{'subcategory':data,'category':category,'category_dropdown':category_dropdown})
 
 def SubCategoryUpdate(request,id):
     subcategory_done = SubCategory.objects.get(id=id)
@@ -185,7 +186,6 @@ def category_update(request, id):
 
 def UserDisplay(request):
     data= User.objects.all()
-    # data2 = User_Detail.objects.get(user_id=data)
     return render(request, 'home/user.html', {'userresult': data} )
 
 def User_Detail_Data(request,id):
@@ -199,7 +199,9 @@ def User_Detail_Data(request,id):
 
 def User_Delete(request,id):
     data = User.objects.get(id=id)
-    data.delete()
+    
+    print(User.is_active)
+    data.update()
     return redirect('userdisplay')
 
 
