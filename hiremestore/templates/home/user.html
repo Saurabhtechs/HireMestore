@@ -48,7 +48,7 @@
                 <!-- <th scope="col" class="sort" data-sort="completion">created</th> -->
                 <!-- <th scope="col"></th> -->
                 <th scope="col">Action</th>
-                <!-- <th scope="col"></th> -->
+                <th scope="col"></th>
 
               </tr>
             </thead>
@@ -78,6 +78,8 @@
                 <td class="completion">
                   {{ userdata.date_joined }}
                 </td>
+                <td><a href="{% url 'user_details' userdata.id %}" type="submit" class="btn btn-outline-primary">View</a></td>
+
                 <td><a href="{% url 'user_delete' userdata.id %}" type="submit" class="btn btn-outline-danger">Delete</a></td>
   
                 <!-- <td></td> -->

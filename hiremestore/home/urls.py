@@ -37,6 +37,8 @@ urlpatterns = [
 
     path('userdisplay', views.UserDisplay,name="userdisplay"),
     path('user_delete/<int:id>',views.User_Delete,name="user_delete"),
+    path('user_details/<int:id>',views.User_Detail_Data,name="user_details"),
+
 
 # User Urls End Here......................................................
 

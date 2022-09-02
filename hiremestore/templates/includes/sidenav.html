@@ -1,9 +1,11 @@
+{% load static %}
 <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
   <div class="scrollbar-inner">
     <!-- Brand -->
     <div class="sidenav-header  align-items-center">
       <a class="navbar-brand" href="/" target="_blank">
-        <img src="/static/adminstatic/assets/img/brand/blue.png" class="navbar-brand-img" alt="Argon Design - Jinja Template Logo.">
+        <img src="{% static 'adminstatic/assets/img/brand/blue.png' %}" class="navbar-brand-img"
+          alt="Argon Design - Jinja Template Logo.">
       </a>
     </div>
     <div class="navbar-inner">
@@ -12,7 +14,7 @@
         <!-- Nav items -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link {% if 'home' in segment %} active {% endif %}"  href="/admins">
+            <a class="nav-link {% if 'home' in segment %} active {% endif %}" href="/admins">
               <i class="ni ni-tv-2 text-primary"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
