@@ -103,8 +103,13 @@ def Category_Delete(request,id):
 # Subcategory Crud Operation Start Here......................................................
 
 def SubCategoryAdd(request):
+<<<<<<< HEAD
     category = Category.objects.all().order_by('-created')
     content = {'category': category}
+=======
+    category_dropdown = Category.objects.all().order_by('-created')[:4]
+    content = {'category_dropdown': category_dropdown}
+>>>>>>> 42b85491dd7e70f07f58c1638c93988ad8749c27
     return render(request,'home/subcategory_add.html',content)
 
 def SubCategorySave(request):
@@ -126,7 +131,8 @@ def SubCategoryEdit(request,id):
     data = SubCategory.objects.get(id=id)
     # print(data.cat)
     category = Category.objects.filter(name=data.cat)
-    return render(request,'home/subcategory_add.html',{'subcategory':data,'category':category})
+    category_dropdown = Category.objects.all().order_by('-created')[:4]
+    return render(request,'home/subcategory_add.html',{'subcategory':data,'category':category,'category_dropdown':category_dropdown})
 
 def SubCategoryUpdate(request,id):
     subcategory_done = SubCategory.objects.get(id=id)
@@ -185,17 +191,25 @@ def category_update(request, id):
 
 def UserDisplay(request):
     data= User.objects.all()
-    # data2 = User_Detail.objects.get(user_id=data)
     return render(request, 'home/user.html', {'userresult': data} )
 
+def User_Detail_Data(request,id):
+    data= User.objects.get(id=id)
+    if User_Detail.objects.filter(user_id=data).exists():
+        detail_data=User_Detail.objects.get(user_id=data)
+        print('detatils',detail_data)
+        return render(request,'home/user_profile.html',{'user_detail_result':detail_data,'userdata':data})
+    else:
+        return redirect('userdisplay')
 
 def User_Delete(request,id):
     data = User.objects.get(id=id)
-    data.delete()
+    
+    print(User.is_active)
+    data.update()
     return redirect('userdisplay')
 
 
 def contact_list(request):
     data= Contact.objects.all().order_by('-created')
-
     return render(request, 'home/user.html', {'contact_list': data})

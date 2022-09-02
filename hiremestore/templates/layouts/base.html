@@ -15,6 +15,7 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 
 <head>
   <meta charset="utf-8" />
@@ -22,16 +23,16 @@
   <link rel="canonical" href="https://appseed.us/admin-dashboards/django-dashboard-argon">
 
   <!-- Favicon - loaded as static -->
-  <link rel="icon" href="/static/adminstatic/assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="{% static 'adminstatic/assets/img/brand/favicon.png' %}" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
-  <link rel="stylesheet" href="/static/adminstatic/assets/vendor/nucleo/css/nucleo.css" type="text/css">
-  <link rel="stylesheet" href="/static/adminstatic/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+  <link rel="stylesheet" href="{% static 'adminstatic/assets/vendor/nucleo/css/nucleo.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'adminstatic/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}"
     type="text/css">
   <!-- Page plugins -->
   <!-- Argon CSS -->
-  <link rel="stylesheet" href="/static/adminstatic/assets/css/argon.css?v=1.2.0" typ e="text/css">
+  <link rel="stylesheet" href="{% static 'adminstatic/assets/css/argon.css' %}" type="text/css">
   <title>
     {% block title %} Open-Source Admin Panel {% endblock %} |
 
@@ -39,17 +40,17 @@
 
 
   <!-- Favicon - loaded as static -->
-  <link rel="icon" href="/static/adminstatic/assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="{% static 'adminstatic/assets/img/brand/favicon.png' %}" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
-  <link rel="stylesheet" href="/static/adminstatic/assets/vendor/nucleo/css/nucleo.css" type="text/css">
-  <link rel="stylesheet" href="/static/adminstatic/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+  <link rel="stylesheet" href="{% static 'adminstatic/assets/vendor/nucleo/css/nucleo.cs' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'adminstatic/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}"
     type="text/css">
   <!-- Page plugins -->
   <!-- Arg SS -->
-  <link rel="stylesheet" href="/static/adminstatic/assets/css/argon.css?v=1.2.0" type=" xt/css">
-  <link rel="stylesheet" href="/static/adminstatic/assets/css/argon.css?v=1.2.0" type="text/css">
+
+
 
 
   <!-- Specific CSS goes HERE -->
@@ -76,7 +77,4 @@
 
 
 
-  <script src="/static/adminstatic/assets/js/argon.js?v=1.2.0"></script>
-
-
-
+  <script src="{% static 'adminstatic/assets/js/argon.js' %}"></script>

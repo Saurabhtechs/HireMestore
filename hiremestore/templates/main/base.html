@@ -70,9 +70,19 @@
           <!-- <div class="col-md-4  col-sm-12 col-xs-12 col-sm-12 hidden-xs">
             <ul class="right-contact">
               <li><i class="fa fa-phone" aria-hidden="true"></i> +91 {{data.mobile_number}}</li>
+<<<<<<< HEAD
               {% if user.is_authenticated and user.is_superuser %}
               <li><a href="{% url 'logout' %}" class="btn btn-primary btn-skin">Logout</a></li>
               <li><a href="{% url 'update_profile' user.id %}" class="btn btn-primary btn-skin">update </a></li>              
+=======
+
+              {% if user.is_superuser and user.is_authenticated %}
+              <li><a href="{% url 'logout' %}" class="btn btn-primary btn-skin">Logout</a></li>
+              <li><a href="/admins" target="_blank" class="btn btn-primary btn-skin">Dashboard </a></li>
+
+              <!-- <li>{{user.username}}</li> -->
+              
+>>>>>>> 42b85491dd7e70f07f58c1638c93988ad8749c27
               {% elif user.is_authenticated  %}
 
               <li><a href="{% url 'logout' %}" class="btn btn-primary btn-skin">Logout </a></li>
