@@ -17,13 +17,18 @@
                 <img src="https://media.istockphoto.com/photos/portrait-of-a-smiling-woman-in-a-blue-shirt-picture-id515630181?k=20&m=515630181&s=612x612&w=0&h=XJnIoZkvMJiL__5OOJikWzgi18u7KklNPl2HfK4KeRg=" style="width:157px;height: 200px;" alt="Photo">
               </div>
             </div>
+           
             <div class="col-md-8 col-sm-8 col-xs-12">
-              <h1 class="service-heading">Kavita Bai</h1>
+              {% for work in worker %}
+              <h1 class="service-heading">{{username}}</h1>
+              {% endfor %}
               <p>I’m currently attending CSU for Family and Human Development and am planning on going into social work after I graduate next year.</p>
-              <h2>Why choose Helpr?</h2>
+              {%for i in worker%}
+              <h2>{{i.phone_number}}</h2>
+              
               <ul class="featurs_list">
-                <li><i class="fa fa-check-square-o" aria-hidden="true"></i> I have experience with twins and children with special needs.
-                </li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i> {{ i.User_Detail.bio}}
+                </li>{% endfor%}
                 <li><i class="fa fa-check-square-o" aria-hidden="true"></i> I am CPR certified and recertify every year.</li>
                 <li><i class="fa fa-check-square-o" aria-hidden="true"></i> verification approved By admin</li>
                 <li><i class="fa fa-check-square-o" aria-hidden="true"></i> High Class Bai</li>

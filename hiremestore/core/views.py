@@ -46,28 +46,50 @@ def about(request):
 
 
 
+# def servies(request):
+#     if request.GET['category']:
+#         subcategory = SubCategory.objects.filter(cat=request.GET['category']).order_by('-created')[:9]
+#     elif request.GET['category']=="":
+#         subcategory = SubCategory.objects.all().order_by('-created')[:9]
+#     else:
+#         subcategory = SubCategory.objects.all().order_by('-created')[:9]
+#
+#     data = website_profile.objects.all()
+#     return render(request, 'main/sub_category.html', {'result': data, 'subcategory': subcategory}, )
+
 def servies(request):
-    if request.GET['category']:
-        subcategory = SubCategory.objects.filter(cat=request.GET['category']).order_by('-created')[:9]
-    elif request.GET['category']=="":
-        subcategory = SubCategory.objects.all().order_by('-created')[:9]
-    else:
-        subcategory = SubCategory.objects.all().order_by('-created')[:9]
-
     data = website_profile.objects.all()
-    return render(request, 'main/sub_category.html', {'result': data, 'subcategory': subcategory}, )
+    Category_data = Category.objects.filter().order_by('-created')
+    return render(request, 'main/category.html', {'category': Category_data ,'result': data} )
 
 
+def subcategory(request, id):
+    data = website_profile.objects.all()
+    Category_data = Category.objects.filter(slug=id)
+
+    cat = Category.objects.filter(slug=id).values_list('id', flat=True)
+
+    cate = list(cat)
+    get = cate[0]
+
+    subcategory = SubCategory.objects.filter(cat_id=get).order_by('-created')[:10]
+
+
+
+    context = {'subcategory': subcategory ,'result': data , 'Category_data': Category_data,}
+    return render(request, 'main/sub_category.html', context)
 
 def worker(request):
     data = website_profile.objects.all()
+
     return render(request, 'main/worker.html', {'result': data}, )
 
 
 
-def worker_detail(request):
+def worker_detail(request, id):
     data = website_profile.objects.all()
-    return render(request, 'main/worker_detail.html', {'result': data}, )
+    worker = User.objects.filter(id=id)
+    return render(request, 'main/worker_detail.html', {'result': data , 'worker': worker,}, )
 
 
 
@@ -104,9 +126,29 @@ def update_profile_update(request,id):
         workerdata.discription = request.POST['desc']
         workerdata.image = request.FILES['image']
         workerdata.save()
-        messages.success(request,'Data Updated...')
+        messages.success(request, 'Data Updated...')
         return redirect('index')
 
     else:
         return redirect('update_profile')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
