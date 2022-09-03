@@ -14,7 +14,7 @@ class website_profile(models.Model):
     website_subtitle = models.CharField(max_length=100)
     background_img = models.ImageField(upload_to='img', max_length=250)
     favicon = models.ImageField(upload_to='img', max_length=250)
-    trusted_by = models.ImageField(upload_to='img', max_length=250)
+    trusted_by = models.FileField(upload_to='img')
     fb_link = models.CharField(max_length=250)
     twitter_link = models.CharField(max_length=250)
     instagram_link = models.CharField(max_length=250)
@@ -23,6 +23,12 @@ class website_profile(models.Model):
     def __str__(self):
         return self.website_title
 
+# class PostImage(models.Model):
+#     post = models.ForeignKey(website_profile, default=None, on_delete=models.CASCADE)
+#     images = models.FileField(upload_to = 'images/')
+ 
+#     def __str__(self):
+#         return self.post.title
 
 
 
