@@ -80,16 +80,31 @@ def Register(request):
 #     return None
 
 def send_otp(phone_number , otp):
-    print("FUNCTION CALLED")
-    conn = http.client.HTTPSConnection("api.msg91.com")
-    authkey = settings.AUTH_KEY
-    headers = { 'content-type': "application/json" }
-    url = "http://control.msg91.com/api/sendotp.php?otp="+otp+"&message="+"Your otp is "+otp +"&phone_number="+phone_number+"&authkey="+authkey+"&country=91"
-    conn.request("GET", url , headers=headers)
-    res = conn.getresponse()
-    data = res.read()
-    print(data)
-    return None
+    # print("FUNCTION CALLED")
+    # conn = http.client.HTTPSConnection("api.msg91.com")
+    # authkey = settings.AUTH_KEY
+    # headers = { 'content-type': "application/json" }
+    # url = "http://control.msg91.com/api/sendotp.php?otp="+otp+"&message="+"Your otp is "+otp +"&phone_number="+phone_number+"&authkey="+authkey+"&country=91"
+    # conn.request("GET", url , headers=headers)
+    # res = conn.getresponse()
+    # data = res.read()
+    # print(data)
+    # return None
+
+    import requests
+
+    url = "https://www.fast2sms.com/dev/bulkV2"
+
+    payload = "sender_id=FSTSMS&message=GoodMorning&language=english&route=p&numbers=7879543263,"
+    headers = {
+        'authorization': "dDeBKh1N48tT0yE2MYGcrWIoJ39jaAUQFOHzbpisVmuxkCvwqf7Hp3QTKvtXVEb56fMcuOPjAn8W1FDs",
+        'Content-Type': "application/x-www-form-urlencoded",
+        'Cache-Control': "no-cache",
+    }
+
+    response = requests.request("POST", url, data=payload, headers=headers)
+
+    print(response.text)
 
 
 

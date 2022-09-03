@@ -2,7 +2,7 @@ from django.db import models
 from accounts.models import User
 from django.template.defaultfilters import slugify
 from PIL import Image
-
+from django.template.defaultfilters import slugify
 # Create your models here.
 
 
@@ -35,20 +35,19 @@ class website_profile(models.Model):
 
 class Category(models.Model):
     image = models.ImageField(upload_to='img', max_length=250)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30 ,unique=True)
     title = models.CharField(max_length=50)
     type = models.IntegerField(default=1)
     feature = models.IntegerField(default=1)
+    slug = models.SlugField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
 
-    # def save(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
-    #     img = Image.open(self.image.path)
-    #
-    #     if img.height > 60 or img.weight > 60:
-    #         output_size = (60, 60)
-    #         img.thumbnail(output_size)
-    #         img.save(self.image.path)
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Newly created object, so set slug
+            self.slug = slugify(self.name)
+
+            super(Category, self).save(*args, **kwargs)
 
 
 
@@ -63,16 +62,15 @@ class SubCategory(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     feature = models.IntegerField(default=1)
+    slug = models.SlugField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
 
-    # def save(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
-    #     img = Image.open(self.image.path)
-    #
-    #     if img.height > 60 or img.weight > 60:
-    #         output_size = (60, 60)
-    #         img.thumbnail(output_size)
-    #         img.save(self.image.path)
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Newly created object, so set slug
+            self.slug = slugify(self.name)
+
+            super(SubCategory, self).save(*args, **kwargs)
 
 
     def __str__(self):
