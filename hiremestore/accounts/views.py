@@ -67,6 +67,18 @@ def Register(request):
 
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
+# def send_otp(phone_number , otp):
+#     print("FUNCTION CALLED")
+#     conn = http.client.HTTPSConnection("api.msg91.com")
+#     authkey = settings.AUTH_KEY
+#     headers = { 'content-type': "application/json" }
+#     url = "http://control.msg91.com/api/sendotp.php?otp="+otp+"&message="+"Your otp is "+otp +"&phone_number="+phone_number+"&authkey="+authkey+"&country=91"
+#     conn.request("GET", url , headers=headers)
+#     res = conn.getresponse()
+#     data = res.read()
+#     print(data)
+#     return None
+
 def send_otp(phone_number , otp):
     # print("FUNCTION CALLED")
     # conn = http.client.HTTPSConnection("api.msg91.com")
@@ -94,6 +106,9 @@ def send_otp(phone_number , otp):
 
     print(response.text)
 
+
+
+    
 def UserRegister(request):
 
     # if request.method == "POST":

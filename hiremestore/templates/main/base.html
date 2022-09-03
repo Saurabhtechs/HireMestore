@@ -26,9 +26,9 @@
     <!--Wrapper Start-->
     <!--Header Section Start-->
     <header id="header" data-spy="affix" data-offset-top="60" data-offset-bottom="60">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-md-8  col-sm-12 col-xs-12 col-sm-12">
+          <div class="col-md-12  col-sm-12 col-xs-12 col-sm-12">
             <nav class="navbar">
               {% for data in result %}
               <!-- Brand and toggle get grouped for better mobile display -->
@@ -44,7 +44,7 @@
 
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="main-menu collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-left">
+                <ul class="nav navbar-nav navbar-right">
 
                   <li><a href="{% url 'index' %}">Home</a></li>
                   <li><a href="{% url 'about' %}">About</a></li>
@@ -58,13 +58,16 @@
                   </ul>
                 </li> -->
                   <li><a href="{% url 'contact' %}">Contact</a></li>
+                  <li style="background: #3c50d2;border-radius: 9px;padding: 20px 15px;margin: 0px;color: white!important;margin-left: 50px;"><a href="/contact" style="
+                    color: aliceblue;
+                ">Hire Staff</a></li>
                 </ul>
               </div>
 
               <!-- /.navbar-collapse -->
             </nav>
           </div>
-          <div class="col-md-4  col-sm-12 col-xs-12 col-sm-12 hidden-xs">
+          <!-- <div class="col-md-4  col-sm-12 col-xs-12 col-sm-12 hidden-xs">
             <ul class="right-contact">
               <li><i class="fa fa-phone" aria-hidden="true"></i> +91 {{data.mobile_number}}</li>
 
@@ -72,7 +75,7 @@
               <li><a href="{% url 'logout' %}" class="btn btn-primary btn-skin">Logout</a></li>
               <li><a href="/admins" target="_blank" class="btn btn-primary btn-skin">Dashboard </a></li>
 
-              <!-- <li>{{user.username}}</li> -->
+               <li>{{user.username}}</li> -->
               
               {% elif user.is_authenticated  %}
 
@@ -82,12 +85,9 @@
               {% else %}
               <li><a href="{% url 'login' %}" class="btn btn-primary btn-skin">Login</a></li>
               {% endif %}
-              <!-- ======= -->
-              <!-- <li><a href="#" class="btn btn-primary btn-skin">Login</a></li> -->
               {% endfor %}
-              <!-- >>>>>>> 76128e1f3ebeaaef18f7dc534f84a94c504fb8fd -->
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- /.container -->
