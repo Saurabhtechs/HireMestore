@@ -10,6 +10,14 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
+    path('website_view', views.Website_view,name="website_view"),
+    path('webprofile_add',views.WebprofileAdd,name="webprofile_add"),
+    path('webprofile_save',views.Webprofilesave,name="webprofile_save"),
+    path('webprofile_edit/<int:id>',views.WebProfileEdit,name="webprofile_edit"),
+    path('webprofile_update/<int:id>',views.WebprofileUpdate,name="webprofile_update"),
+
+
+
 
 # Category Urls End Here......................................................
 

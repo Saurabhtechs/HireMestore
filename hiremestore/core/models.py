@@ -1,6 +1,6 @@
+from distutils.command.upload import upload
 from django.db import models
 from accounts.models import User
-from django.template.defaultfilters import slugify
 from PIL import Image
 from django.template.defaultfilters import slugify
 # Create your models here.
@@ -133,7 +133,7 @@ class Contact(models.Model):
 
 class User_Detail(models.Model):
 
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     category = models.CharField(max_length=30)
     sub_category = models.CharField(max_length=30)
@@ -145,6 +145,8 @@ class User_Detail(models.Model):
     state = models.CharField(max_length=30)
     country = models.CharField(max_length=30)
     experiance = models.CharField(max_length=30)
+    charges = models.CharField(max_length=30)
+    image = models.ImageField(upload_to='img')
     bio = models.TextField()
     discription = models.TextField()
     message = models.TextField()
