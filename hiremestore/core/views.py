@@ -133,7 +133,12 @@ def update_profile_update(request,id):
         return redirect('update_profile')
 
 
+def search(request):
+    query = request.GET['query']
 
+    search_data = Category.objects.filter(title__icontains=query)
+    result = {'blog': search_data}
+    return render(request, 'search.html', result)
 
 
 
