@@ -1,6 +1,6 @@
 from .models import *
 # Create your views here.
-from django.shortcuts import render, redirect,HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import User
 
+
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:4]
     helper = Category.objects.filter(type=2).order_by('-created')[:4]
@@ -17,7 +18,8 @@ def index(request):
     subcategory = SubCategory.objects.filter().order_by('-created')
     data = website_profile.objects.all()
     testimonial = Testimonails.objects.all()
-    content = {'result': data, 'testimonial': testimonial, 'category': category, 'subcategory': subcategory, 'digital': digital, 'helper': helper,}
+    content = {'result': data, 'testimonial': testimonial, 'category': category,
+               'subcategory': subcategory, 'digital': digital, 'helper': helper, }
     return render(request, 'main/index.html', content)
 
 
@@ -29,7 +31,8 @@ def contact(request):
         mobile = request.POST['mobile']
         message = request.POST['message']
 
-        contact = Contact.objects.create(name=name, email=email, subject=subject, mobile=mobile, message=message,)
+        contact = Contact.objects.create(
+            name=name, email=email, subject=subject, mobile=mobile, message=message,)
         contact.save()
 
         messages.info('Message is send')
@@ -39,11 +42,9 @@ def contact(request):
     return render(request, 'main/contact.html', {'result': data},)
 
 
-
 def about(request):
     data = website_profile.objects.all()
     return render(request, 'main/about.html', {'result': data}, )
-
 
 
 # def servies(request):
@@ -60,57 +61,59 @@ def about(request):
 def servies(request):
     data = website_profile.objects.all()
     Category_data = Category.objects.filter().order_by('-created')
-    return render(request, 'main/category.html', {'category': Category_data ,'result': data} )
+    return render(request, 'main/category.html', {'category': Category_data, 'result': data})
 
 
 def subcategory(request, id):
     data = website_profile.objects.all()
     Category_data = Category.objects.filter(slug=id)
-
     cat = Category.objects.filter(slug=id).values_list('id', flat=True)
-
     cate = list(cat)
     get = cate[0]
-
-    subcategory = SubCategory.objects.filter(cat_id=get).order_by('-created')[:10]
-
-
-
-    context = {'subcategory': subcategory ,'result': data , 'Category_data': Category_data,}
+    subcategory = SubCategory.objects.filter(
+        cat_id=get).order_by('-created')[:10]
+    context = {'subcategory': subcategory,
+               'result': data, 'Category_data': Category_data, }
     return render(request, 'main/sub_category.html', context)
 
-def worker(request):
+
+def worker(request, id):
     data = website_profile.objects.all()
+
     worker = User.objects.all().prefetch_related('User_Detail')
 
     return render(request, 'main/worker.html', {'result': data , 'worker': worker}, )
+
+
+    worker = User_Detail.objects.filter(sub_category=id)
+    print(worker)
+    return render(request, 'main/worker.html', {'result': data, 'worker': worker}, )
 
 
 
 def worker_detail(request, id):
     data = website_profile.objects.all()
     worker = User.objects.filter(id=id)
-    return render(request, 'main/worker_detail.html', {'result': data , 'worker': worker,}, )
+    return render(request, 'main/worker_detail.html', {'result': data, 'worker': worker, }, )
 
 
-
-def update_profile(request,id):
+def update_profile(request, id):
     user = User.objects.get(id=id)
-    
-    userdata = User_Detail.objects.filter(user_id=user).first()
+
     category = Category.objects.filter().order_by('-created')
     subcategory = SubCategory.objects.filter().order_by('-created')
     data = website_profile.objects.all()
-    return render(request, 'main/update_profile.html', {'result': data,'data': user,'data_details': userdata,'category': category, 'subcategory': subcategory}, )
+    return render(request, 'main/update_profile.html', {'result': data, 'data': user, 'category': category, 'subcategory': subcategory}, )
 
 
-
-
-def update_profile_update(request,id):
+def update_profile_update(request, id):
     user = User.objects.get(id=id)
-    if request.method=="POST":
+    if request.method == "POST":
         workerdata = User_Detail()
         workerdata.user_id = user
+        workerdata.category = request.POST['category']
+        workerdata.sub_category = request.POST['subcategory']
+        print(request.POST['category'], request.POST['subcategory'])
         workerdata.name = request.POST['name']
         workerdata.email = request.POST['email']
         workerdata.dob = request.POST['dob']
@@ -121,11 +124,12 @@ def update_profile_update(request,id):
         workerdata.state = request.POST['state']
         workerdata.country = request.POST['country']
         workerdata.mobile = request.POST['mobile']
-        workerdata.rate = request.POST['rate']
+        workerdata.charges = request.POST['rate']
         workerdata.experiance = request.POST['exp']
         workerdata.bio = request.POST['bio']
         workerdata.discription = request.POST['desc']
         workerdata.image = request.FILES['image']
+
         workerdata.save()
         messages.success(request, 'Data Updated...')
         return redirect('index')
@@ -134,13 +138,13 @@ def update_profile_update(request,id):
         return redirect('update_profile')
 
 
+
 def search(request):
     query = request.GET['query']
 
     search_data = Category.objects.filter(title__icontains=query)
     result = {'blog': search_data}
     return render(request, 'search.html', result)
-
 
 
 

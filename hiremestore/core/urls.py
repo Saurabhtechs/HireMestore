@@ -12,7 +12,7 @@ urlpatterns = [
     path('servies/<str:id>', views.subcategory, name='subcategory'),
 
 
-    path('worker', views.worker, name='worker'),
+    path('worker/<str:id>', views.worker, name='worker'),
     path('worker-detail/<int:id>', views.worker_detail, name='worker_detail'),
     path('update_profile/<int:id>', views.update_profile, name='update_profile'),
     path('update_profile_update/<int:id>',views.update_profile_update,name="update_profile_update"),
