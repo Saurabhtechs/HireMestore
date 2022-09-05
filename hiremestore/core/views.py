@@ -81,8 +81,9 @@ def subcategory(request, id):
 
 def worker(request):
     data = website_profile.objects.all()
+    worker = User.objects.all().prefetch_related('User_Detail')
 
-    return render(request, 'main/worker.html', {'result': data}, )
+    return render(request, 'main/worker.html', {'result': data , 'worker': worker}, )
 
 
 

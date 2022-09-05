@@ -254,22 +254,29 @@ transform: rotate(-225deg);
     <div class="container text-center">
       
       <div class="row">
+        {%for  w in worker%}
+        {% for m in w.User_Detail.all %}
         <div class="col-md-6 col-sm-6 col-xs-12 srevice_img box"> 
           <div class="ribbon ribbon-top-left"><span>Verified</span></div>
           <div class="col-md-2 col-sm-6 col-xs-12"> 
           <a href="service_detail.html">
             <img src="https://media.istockphoto.com/photos/young-computer-programmer-taking-a-coffee-break-in-the-office-picture-id995603558?k=20&m=995603558&s=612x612&w=0&h=GMqkzQD1Q9fVU-zuSjrvcWxAvgGPp_Np3KkuFcS8Adc=" class="img-circle htw" alt="cleaning" /></a>
           </div>
+
+         
           <div class="col-md-10 col-sm-6 col-xs-12" style="text-align: end;">
-            <h4 style="margin: 0px;"><a href="service_detail.html">Name</a></h4>
-            <p>SubCategory</p>
-            <p>Daily Rate</p>
-            <p>(Bio)Experience more then 3 months 25 Word about Herself</p>
-            <p>Age 19yrs</p>
+            <h4 style="margin: 0px;"><a href="service_detail.html">{{w.username}}</a></h4>
+            <p>{{}}</p>
+             <p>Daily Rate</p>
+            <p>{{user.User_Detail.country}}</p>
+            <p>{{w.username}}</p> 
           <p><b>★ 4.8/5</b> average rating</p>
           </div>
+         
         </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 srevice_img"> 
+        {% endfor%}
+        {% endfor%}
+        {% comment %} <div class="col-md-6 col-sm-6 col-xs-12 srevice_img"> 
           <div class="col-md-2 col-sm-6 col-xs-12"> 
           <a href="service_detail.html">
             <img src="https://media.istockphoto.com/photos/young-computer-programmer-taking-a-coffee-break-in-the-office-picture-id995603558?k=20&m=995603558&s=612x612&w=0&h=GMqkzQD1Q9fVU-zuSjrvcWxAvgGPp_Np3KkuFcS8Adc=" class="img-circle htw" alt="cleaning" /></a>
@@ -282,22 +289,22 @@ transform: rotate(-225deg);
             <p>Age 19yrs</p>
           <p><b>★ 4.8/5</b> average rating</p>
           </div>
-        </div>
+        </div> {% endcomment %}
         
-        <div class="col-md-3 col-sm-6 col-xs-12 srevice_img"> <a href="service_detail.html"><img src="https://media.istockphoto.com/photos/young-computer-programmer-taking-a-coffee-break-in-the-office-picture-id995603558?k=20&m=995603558&s=612x612&w=0&h=GMqkzQD1Q9fVU-zuSjrvcWxAvgGPp_Np3KkuFcS8Adc=" class="img-circle htw" alt="cleaning" /></a>
+        {% comment %} <div class="col-md-3 col-sm-6 col-xs-12 srevice_img"> <a href="service_detail.html"><img src="https://media.istockphoto.com/photos/young-computer-programmer-taking-a-coffee-break-in-the-office-picture-id995603558?k=20&m=995603558&s=612x612&w=0&h=GMqkzQD1Q9fVU-zuSjrvcWxAvgGPp_Np3KkuFcS8Adc=" class="img-circle htw" alt="cleaning" /></a>
           <h4><a href="service_detail.html">Developer</a></h4>
           <p><b>★ 4.8/5</b> average rating</p>
-        </div>
+        </div> {% endcomment %}
         
-        <div class="col-md-3 col-sm-6 col-xs-12 srevice_img"> <a href="service_detail.html"><img src="https://media.istockphoto.com/photos/young-computer-programmer-taking-a-coffee-break-in-the-office-picture-id995603558?k=20&m=995603558&s=612x612&w=0&h=GMqkzQD1Q9fVU-zuSjrvcWxAvgGPp_Np3KkuFcS8Adc=" class="img-circle htw" alt="cleaning" /></a>
+        {% comment %} <div class="col-md-3 col-sm-6 col-xs-12 srevice_img"> <a href="service_detail.html"><img src="https://media.istockphoto.com/photos/young-computer-programmer-taking-a-coffee-break-in-the-office-picture-id995603558?k=20&m=995603558&s=612x612&w=0&h=GMqkzQD1Q9fVU-zuSjrvcWxAvgGPp_Np3KkuFcS8Adc=" class="img-circle htw" alt="cleaning" /></a>
           <h4><a href="service_detail.html">Developer</a></h4>
           <p><b>★ 4.8/5</b> average rating</p>
-        </div>
+        </div> {% endcomment %}
         
-        <div class="col-md-3 col-sm-6 col-xs-12 srevice_img"> <a href="service_detail.html"><img src="https://media.istockphoto.com/photos/young-computer-programmer-taking-a-coffee-break-in-the-office-picture-id995603558?k=20&m=995603558&s=612x612&w=0&h=GMqkzQD1Q9fVU-zuSjrvcWxAvgGPp_Np3KkuFcS8Adc=" class="img-circle htw" alt="cleaning" /></a>
+        {% comment %} <div class="col-md-3 col-sm-6 col-xs-12 srevice_img"> <a href="service_detail.html"><img src="https://media.istockphoto.com/photos/young-computer-programmer-taking-a-coffee-break-in-the-office-picture-id995603558?k=20&m=995603558&s=612x612&w=0&h=GMqkzQD1Q9fVU-zuSjrvcWxAvgGPp_Np3KkuFcS8Adc=" class="img-circle htw" alt="cleaning" /></a>
           <h4><a href="service_detail.html">Developer</a></h4>
           <p><b>★ 4.8/5</b> average rating</p>
-        </div>
+        </div> {% endcomment %}
         
       </div>
     </div>
