@@ -90,6 +90,7 @@
                 <div class="form-group col-md-4 col-sm-6 col-xs-12">
                   {% if data.user_detail.image %}
                   <img src="{{data.user_detail.image.url}}" alt="" style="display:block;" width="20%" height="20%">
+                  <input class="form-control" name="image" placeholder="Profile Photo" type="file" />
                   {% else %}
                   <input class="form-control" name="image" placeholder="Profile Photo" type="file" />
                   {% endif %}

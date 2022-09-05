@@ -92,7 +92,6 @@ def worker_detail(request, id):
 
 def update_profile(request, id):
     user = User.objects.get(id=id)
-
     category = Category.objects.filter().order_by('-created')
     subcategory = SubCategory.objects.filter().order_by('-created')
     data = website_profile.objects.all()
@@ -103,7 +102,7 @@ def update_profile_update(request, id):
     user = User.objects.get(id=id)
     if request.method == "POST":
         workerdata = User_Detail()
-        workerdata.user_id = user
+        workerdata.user = request.user
         workerdata.category = request.POST['category']
         workerdata.sub_category = request.POST['subcategory']
         print(request.POST['category'], request.POST['subcategory'])
