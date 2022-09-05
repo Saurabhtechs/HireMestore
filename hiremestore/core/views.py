@@ -79,9 +79,16 @@ def subcategory(request, id):
 
 def worker(request, id):
     data = website_profile.objects.all()
+
+    worker = User.objects.all().prefetch_related('User_Detail')
+
+    return render(request, 'main/worker.html', {'result': data , 'worker': worker}, )
+
+
     worker = User_Detail.objects.filter(sub_category=id)
     print(worker)
     return render(request, 'main/worker.html', {'result': data, 'worker': worker}, )
+
 
 
 def worker_detail(request, id):
@@ -128,3 +135,29 @@ def update_profile_update(request, id):
 
     else:
         return redirect('update_profile')
+
+
+
+def search(request):
+    query = request.GET['query']
+
+    search_data = Category.objects.filter(title__icontains=query)
+    result = {'blog': search_data}
+    return render(request, 'search.html', result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

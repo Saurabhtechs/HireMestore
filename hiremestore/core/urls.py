@@ -9,7 +9,7 @@ urlpatterns = [
     path('about', views.about, name='about'),
 
     path('servies', views.servies, name='servies'),
-    path('subcategory/<str:id>', views.subcategory, name='subcategory'),
+    path('servies/<str:id>', views.subcategory, name='subcategory'),
 
 
     path('worker/<str:id>', views.worker, name='worker'),
@@ -18,7 +18,7 @@ urlpatterns = [
     path('update_profile_update/<int:id>',views.update_profile_update,name="update_profile_update"),
 
 
-    path('servies', views.servies, name='servies'),
+    path('search', views.search, name='search'),
 
 
 
