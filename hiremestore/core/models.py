@@ -135,7 +135,7 @@ class User_Detail(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
+
 
     name = models.CharField(max_length=30)
     category = models.CharField(max_length=30)
