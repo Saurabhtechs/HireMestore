@@ -78,7 +78,7 @@
 							<p>Have A Good Skill In Hair <br>Cutting.</p>
 						</div>
 					</div>
-					<a href="worker_detail/{{w.slug}}" class="btn btn-popular-jobs bt-1">View Detail</a>
+					<a href="{% url 'worker_detail' w.slug %}" class="btn btn-popular-jobs bt-1">View Detail</a>
 				</div>
 			</div>
 			{% endfor %}
