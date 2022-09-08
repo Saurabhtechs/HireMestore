@@ -49,7 +49,7 @@ def Logincheck(request):
             # if user.is_active:
             login(request, user)
             messages.success(request,"Login Successfull...")
-            return redirect('/')
+            return redirect('index')
         else:
             return redirect('login')
 
@@ -60,7 +60,7 @@ def Logout(request):
 
 def Register(request):
     data = website_profile.objects.all()
-    return render(request,'main/Register.html',{'result':data})
+    return render(request,'frontend/register.html',{'result':data})
 
 
 
@@ -126,7 +126,7 @@ def UserRegister(request):
     #
     #
     #     data = website_profile.objects.all()
-    #     return render(request, 'main/Register.html', {'result': data})
+    #     return render(request, 'frontend/Register.html', {'result': data})
 
     if request.method == 'POST':
         username = request.POST['name']
@@ -139,7 +139,7 @@ def UserRegister(request):
 
         if check_user or check_profile:
             context = {'message': 'User already exists', 'class': 'danger'}
-            return render(request, 'main/register.html', context)
+            return render(request, 'frontend/register.html', context)
 
         otp = str(random.randint(1000, 9999))
         user = User(username=username, email=email, phone_number=phone_number, otp=otp)
@@ -147,10 +147,10 @@ def UserRegister(request):
 
         user.save()
 
-        send_otp(phone_number, otp)
-        request.session['phone_number'] = phone_number
-        return redirect('otp')
-    return render(request, 'main/register.html')
+        # send_otp(phone_number, otp)
+        # request.session['phone_number'] = phone_number
+        return redirect('index')
+    return render(request, 'frontend/register.html')
 
 
 def otp(request):

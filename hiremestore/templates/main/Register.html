@@ -37,14 +37,13 @@
                     <div class="quick_contact">
                         <p>Register Yourself <br />
                             You!!!</p>
-                        <form class="form-horizontal"  method="post"
-                            enctype="multipart/form-data">
+                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {% if message %}
-            <div class="alert alert-{{class}}">
-                {{message}}
-            </div>
-            {% endif %}
+                            <div class="alert alert-{{class}}">
+                                {{message}}
+                            </div>
+                            {% endif %}
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></div>

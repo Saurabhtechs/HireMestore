@@ -1,8 +1,11 @@
 from distutils.command.upload import upload
+from email.policy import default
 from django.db import models
 from accounts.models import User
 from PIL import Image
 from django.template.defaultfilters import slugify
+from autoslug import AutoSlugField
+
 # Create your models here.
 
 
@@ -39,17 +42,17 @@ class Category(models.Model):
     title = models.CharField(max_length=50)
     type = models.IntegerField(default=1)
     feature = models.IntegerField(default=1)
-    slug = models.SlugField(max_length=100)
+    # slug = models.SlugField(max_length=100)
+    slug = AutoSlugField(populate_from='name')
+
     created = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            # Newly created object, so set slug
-            self.slug = slugify(self.name)
+    # def save(self, *args, **kwargs):
+    #     if not self.id:
+    #         # Newly created object, so set slug
+    #         self.slug = slugify(self.name)
 
-            super(Category, self).save(*args, **kwargs)
-
-
+    #         super(Category, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -57,26 +60,24 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     cat = models.ForeignKey(Category, on_delete=models.CASCADE)
-
     image = models.ImageField(upload_to='img', max_length=250)
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     feature = models.IntegerField(default=1)
-    slug = models.SlugField(max_length=100)
+    # slug = models.SlugField()
+    slug = AutoSlugField(populate_from='name')
     created = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            # Newly created object, so set slug
-            self.slug = slugify(self.name)
+    # def save(self, *args, **kwargs):
+    #     if not self.id:
+    #         # Newly created object, so set slug
+    #         self.slug = slugify(self.name)
 
-            super(SubCategory, self).save(*args, **kwargs)
+    #         super(SubCategory, self).save(*args, **kwargs)
 
 
     def __str__(self):
         return self.name
-
-
 
 
 class Testimonails(models.Model):
@@ -117,9 +118,6 @@ class About(models.Model):
         return self.member_name
 
 
-
-
-
 class Contact(models.Model):
 
     name = models.CharField(max_length=30)
@@ -134,9 +132,6 @@ class Contact(models.Model):
 class User_Detail(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-
-
     name = models.CharField(max_length=30)
     category = models.CharField(max_length=30)
     sub_category = models.CharField(max_length=30)
@@ -149,10 +144,42 @@ class User_Detail(models.Model):
     country = models.CharField(max_length=30)
     experiance = models.CharField(max_length=30)
     charges = models.CharField(max_length=30)
-    image = models.ImageField(upload_to='img')
+    image = models.ImageField(upload_to='img',null=True)
     bio = models.TextField()
     discription = models.TextField()
     message = models.TextField()
+    slug = AutoSlugField(populate_from='name')
 
     def __str__(self):
         return self.name
+
+
+class Country(models.Model):
+    sortname= models.CharField(max_length=100)
+    name= models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        db_table = "tbl_countries"
+
+class States(models.Model):
+    name= models.CharField(max_length=100)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name
+    class Meta:
+        db_table = "tbl_states"
+   
+
+class Cities(models.Model):
+    name= models.CharField(max_length=100)
+    state = models.ForeignKey(States, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "tbl_cities"
+   

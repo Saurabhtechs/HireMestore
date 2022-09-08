@@ -1,0 +1,291 @@
+{% extends 'frontend/frontend_base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+<style>
+	.photo-gallery {
+		color: #313437;
+		background-color: #fff;
+	}
+
+	.photo-gallery p {
+		color: #7d8285;
+	}
+
+	.photo-gallery h2 {
+		font-weight: bold;
+		margin-bottom: 40px;
+		padding-top: 40px;
+		color: inherit;
+	}
+
+	@media (max-width:767px) {
+		.photo-gallery h2 {
+			margin-bottom: 25px;
+			padding-top: 25px;
+			font-size: 24px;
+		}
+	}
+
+	.photo-gallery .intro {
+		font-size: 16px;
+		max-width: 500px;
+		margin: 0 auto 40px;
+	}
+
+	.photo-gallery .intro p {
+		margin-bottom: 0;
+	}
+
+	.photo-gallery .photos {
+		padding-bottom: 20px;
+	}
+
+	.photo-gallery .item {
+		padding-bottom: 30px;
+	}
+</style>
+</head>
+
+
+<div class="clearfix"></div>
+
+<!-- Title Header Start -->
+<section class="inner-header-page">
+	<div class="container">
+
+		<div class="col-md-8">
+			<div class="left-side-container">
+				<div class="freelance-image"><a href="company-detail.html"><img src="{{worker.image.url}}"
+							class="img-responsive" alt=""></a></div>
+				<div class="header-details">
+					<h4>{{worker.name}}</h4>
+					<p>Barbar</p>
+					<ul>
+						<li><a href="single-company-profile.html"><i class="fa fa-user"></i>70 Clints</a></li>
+						<li>
+							<div class="star-rating" data-rating="4.2">
+								<span class="fa fa-star fill"></span>
+								<span class="fa fa-star fill"></span>
+								<span class="fa fa-star fill"></span>
+								<span class="fa fa-star fill"></span>
+								<span class="fa fa-star-half fill"></span>
+							</div>
+						</li>
+						<li><img class="flag" src="assets/img/gb.svg" alt=""> Gwalior,M.P.</li>
+						<li>
+							<div class="verified-action">Verified</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4 bl-1 br-gary">
+			<div class="right-side-detail">
+				<ul>
+					<li><span class="detail-info">Availability</span>Full Time</li>
+					<li><span class="detail-info">Experience</span>5 Year</li>
+					<li><span class="detail-info">Age</span>22+ Year</li>
+				</ul>
+				<ul class="social-info">
+					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+					<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+					<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</section>
+<div class="clearfix"></div>
+<!-- Title Header End -->
+
+<!-- Job Detail Start -->
+<section>
+	<div class="container">
+
+		<div class="col-md-8 col-sm-12">
+			<div class="container-detail-box">
+
+				<div class="apply-job-header">
+					<h4>Barbar ,Hair Styler</h4>
+					<a href="company-detail.html" class="cl-success"><span><i class="fa fa-building"></i>Rajshree
+							Saloon</span></a>
+					<span><i class="fa fa-map-marker"></i>Gwalior (M.P.)</span>
+				</div>
+
+				<div class="apply-job-detail">
+					<p>Different people get haircuts for different reasons. Talking to you about what a client
+						doesn’t
+						like about their current cut can help guide you to make any necessary corrections.
+						Likewise,
+						if you have a specific hairstyle in mind you should be upfront and detailed about your
+						expectations so that your client can make the appropriate choices. The reasoning and
+						motivation behind wanting a change in hairstyle can help inform the method and tool
+						choices. That is why it is important to be a hairstylist that can communicate openly
+						with clients. And, the best way to prepare for a career in hair cutting is to attend a
+						hair school near you. Let’s take a more in depth look at the three main reasons people
+						seek out a new haircut.</p>
+				</div>
+
+				<div class="apply-job-detail">
+					<h5>Skills</h5>
+					<ul class="skills">
+						<li>Layering</li>
+						<li>Thinning</li>
+						<li>Blunting</li>
+					</ul>
+				</div>
+
+				<div class="apply-job-detail">
+					<h5>Key Points</h5>
+					<ul class="job-requirements">
+						<li><span>Availability</span> Hourly</li>
+						<li><span>Education</span> Graduate</li>
+						<li><span>Age</span> 25+</li>
+						<li><span>Experience</span> Intermidiate (3 - 5Year)</li>
+						<li><span>Language</span> English, Hindi</li>
+					</ul>
+				</div>
+
+				<div class="apply-job-detail">
+					<h5>Gallery</h5>
+					<div class="photo-gallery">
+						<div class="container">
+							<div class="row photos">
+								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
+										href="{% static 'frontend/assets/img/com-1.jpg' %}" data-lightbox="photos"><img
+											class="img-fluid" src="{% static 'frontend/assets/img/com-1.jpg' %}"></a>
+								</div>
+								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
+										href="{% static 'frontend/assets/img/com-2.jpg' %}" data-lightbox="photos"><img
+											class="img-fluid" src="{% static 'frontend/assets/img/com-2.jpg' %}"></a>
+								</div>
+								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
+										href="{% static 'frontend/assets/img/com-3.jpg' %}" data-lightbox="photos"><img
+											class="img-fluid" src="{% static 'frontend/assets/img/com-3.jpg' %}"></a>
+								</div>
+								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
+										href="{% static 'frontend/assets/img/com-4.jpg' %}" data-lightbox="photos"><img
+											class="img-fluid" src="{% static 'frontend/assets/img/com-4.jpg' %}"></a>
+								</div>
+								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
+										href="{% static 'frontend/assets/img/com-5.jpg' %}" data-lightbox="photos"><img
+											class="img-fluid" src="{% static 'frontend/assets/img/com-5.jpg' %}"></a>
+								</div>
+								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
+										href="{% static 'frontend/assets/img/com-6.jpg' %}" data-lightbox="photos"><img
+											class="img-fluid" src="{% static 'frontend/assets/img/com-6.jpg' %}"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<a href="#" class="btn btn-success">Enquired</a>
+
+			</div>
+
+			<div class="job-detail-statistic flex-middle-sm">
+
+				<div class="statistic-item flex-middle">
+					<div class="icon text-theme">
+						<i class="ti-headphone theme-cl"></i>
+					</div>
+					<span class="text">+91 215 245 6584</span>
+				</div>
+
+				<div class="statistic-item flex-middle">
+					<div class="icon text-theme">
+						<i class="ti-email theme-cl"></i>
+					</div>
+					<span class="text">hire@gmail.com</span>
+				</div>
+
+				<div class="statistic-item flex-middle">
+					<div class="icon text-theme">
+						<i class="ti-skype theme-cl"></i>
+					</div>
+					<span class="text">Quuik</span>
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<!-- Sidebar Start-->
+		<div class="col-md-4 col-sm-12">
+
+			<!-- Job Detail -->
+			<div class="sidebar-container">
+				<div class="sidebar-box">
+					<!-- <div class="fs-left-map-box">
+									<div class="home-map fl-wrap">
+										<div class="map-container fw-map">
+											<div id="map-main"></div>
+										</div>
+									</div>
+								</div> -->
+				</div>
+				<a href="#" class="btn btn-sidebar bt-1 bg-success">Apply For This</a>
+			</div>
+
+			<!-- Share This Job -->
+			<div class="sidebar-wrapper">
+				<div class="sidebar-box-header bb-1">
+					<h4>Share This Job</h4>
+				</div>
+
+				<ul class="social-share">
+					<li><a href="#" class="fb-share"><i class="fa fa-facebook"></i></a></li>
+					<li><a href="#" class="tw-share"><i class="fa fa-twitter"></i></a></li>
+					<li><a href="#" class="gp-share"><i class="fa fa-google-plus"></i></a></li>
+					<li><a href="#" class="in-share"><i class="fa fa-instagram"></i></a></li>
+					<li><a href="#" class="li-share"><i class="fa fa-linkedin"></i></a></li>
+					<li><a href="#" class="be-share"><i class="fa fa-behance"></i></a></li>
+				</ul>
+			</div>
+
+		</div>
+		<!-- End Sidebar -->
+
+	</div>
+</section>
+<!-- Job Detail End -->
+
+<!-- ============================ Call To Action ================================== -->
+<section class="theme-bg call-to-act-wrap">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="call-to-act">
+					<div class="call-to-act-head">
+						<h3>Want to Become a Success Employers?</h3>
+						<span>We'll help you to grow your career and growth.</span>
+					</div>
+					<a href="#" class="btn btn-call-to-act">SignUp Today</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
+<!-- ============================ Call To Action End ================================== -->
+{% block javascripts %}
+<!-- Gallery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+<!-- Map -->
+<script src="http://maps.google.com/maps/api/js?key="></script>
+<script src="{% static 'frontend/assets/js/map_infobox.js' %}"></script>
+<script src="{% static 'frontend/assets/js/markerclusterer.js' %}"></script>
+<script src="{% static 'frontend/assets/js/map.js' %}"></script>
+{% endblock javascripts %}
