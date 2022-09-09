@@ -101,12 +101,16 @@ def worker_detail(request, id):
     return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker, }, )
 
 
+# def update_profile(request, id):
+#     user = User.objects.get(id=id)
+#     category = Category.objects.filter().order_by('-created')
+#     subcategory = SubCategory.objects.filter().order_by('-created')
+#     data = website_profile.objects.all()
+#     return render(request, 'main/update_profile.html', {'result': data, 'data': user, 'category': category, 'subcategory': subcategory})
+
 def update_profile(request, id):
-    user = User.objects.get(id=id)
-    category = Category.objects.filter().order_by('-created')
-    subcategory = SubCategory.objects.filter().order_by('-created')
-    data = website_profile.objects.all()
-    return render(request, 'main/update_profile.html', {'result': data, 'data': user, 'category': category, 'subcategory': subcategory})
+    user = User_Detail.objects.get(slug=id)
+    return render(request, 'frontend/myprofile.html', {'worker': user})
 
 
 def update_profile_update(request, id):
