@@ -10,6 +10,7 @@ urlpatterns = [
 
     path('servies', views.servies, name='servies'),
     path('servies/<str:id>', views.subcategory, name='subcategory'),
+    path('servies/?servies=<str:id>', views.subcategory, name='subcategory'),
 
 
     path('worker/<str:id>', views.worker, name='worker'),
