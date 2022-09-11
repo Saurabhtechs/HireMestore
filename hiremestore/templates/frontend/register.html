@@ -8,6 +8,11 @@
 <section class="inner-header-title" style="background-image:url(assets/img/bn2.jpg);">
 	<div class="container">
 		<h1>Create And Account</h1>
+		{% for m in messages%}
+		{% if m %}
+		{{m}}
+		{% endif %}
+		{% endfor %}
 	</div>
 </section>
 <div class="clearfix"></div>

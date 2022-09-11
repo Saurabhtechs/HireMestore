@@ -9,9 +9,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import User
+from django.http import JsonResponse
+from django.core import serializers
+from django.http import HttpResponse
 
-city = Cities.objects.all()
-print(city)
+
 
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
@@ -110,7 +112,10 @@ def worker_detail(request, id):
 
 def update_profile(request, id):
     user = User_Detail.objects.get(slug=id)
-    return render(request, 'frontend/myprofile.html', {'worker': user})
+    country = Country.objects.filter(id=101)
+    city = Cities.objects.all()
+    state = States.objects.all()
+    return render(request, 'frontend/myprofile.html', {'worker': user,'country': country,'city': city,'state': state})
 
 
 def update_profile_update(request, id):
@@ -150,5 +155,15 @@ def update_profile_update(request, id):
         return redirect('update_profile')
 
 def Helper_DashBoard(request):
+    data = User_Detail.objects.filter(slug='saurabh-soni').first()
+    return render(request,'frontend/helper-dashboard.html',{'helper':data})
+
+def GetCategory(request):
+    data = Category.objects.filter(type=1)
+    jsondata = serializers.serialize('json', data)
+    return HttpResponse(jsondata, content_type='application/json')
+    
+
+def GetSubCategory(request):
     data = User_Detail.objects.filter(slug='saurabh-soni').first()
     return render(request,'frontend/helper-dashboard.html',{'helper':data})

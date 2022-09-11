@@ -3,7 +3,6 @@ from email.policy import default
 from django.db import models
 from accounts.models import User
 from PIL import Image
-from django.template.defaultfilters import slugify
 from autoslug import AutoSlugField
 
 # Create your models here.

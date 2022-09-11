@@ -10,6 +10,8 @@ urlpatterns = [
     path('browsebylocation', views.Browsebylocation, name='browsebylocation'),
     path('browsebyskill', views.Browsebyskill, name='browsebyskill'),
     path('helper_dashBoard', views.Helper_DashBoard, name='helper_dashBoard'),
+    path('get-category', views.GetCategory, name='getcategory'),
+    path('get-sub-category', views.GetSubCategory, name='getsubcategory'),
 
 
 
