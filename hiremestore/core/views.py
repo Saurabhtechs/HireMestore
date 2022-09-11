@@ -10,8 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import User
 
-city = Cities.objects.all()
-print(city)
+def Global_Data(request):
+ city = Cities.objects.filter()[:4]
+ return {'city': city}
 
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
@@ -21,7 +22,7 @@ def index(request):
     data = website_profile.objects.all()
     testimonial = Testimonails.objects.all()
     content = {'result': data, 'testimonial': testimonial, 'category': category,
-               'subcategory': subcategory, 'digital': digital, 'helper': helper, }
+               'subcategory': subcategory, 'digital': digital, 'helper': helper}
     return render(request, 'frontend/index.html', content)
 
 def Browsebylocation(request):

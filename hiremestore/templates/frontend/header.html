@@ -19,7 +19,9 @@
                     <a href="browse-jobs-location.html" target="_blank" class="dropdown-toggle"
                         data-toggle="dropdown">Jobs By Location</a>
                     <ul class="dropdown-menu animated fadeOutUp">
-                        <li><a href="job-with-map.html">Datia</a></li>
+                        {% for c in city %} 
+                        <li><a href="job-with-map.html">{{ c.name }} </a></li>
+                        {% endfor %}
                         <li><a href="register.html">jhansi</a></li>
                         <li><a href="dashboard/index.html">Gwalior</a></li>
                         <li><a target="_blank" href="browse-jobs-location.html">View More</a></li>
