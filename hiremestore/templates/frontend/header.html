@@ -1,0 +1,47 @@
+{% load static %}
+<nav class="navbar navbar-default navbar-fixed navbar-light white bootsnav">
+    <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><i
+                class="fa fa-bars"></i></button>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html"><img src="{% static 'frontend/assets/img/logonew.png' %}"
+                    class="logo logo-scrolled" alt=""></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            <ul class="nav navbar-nav navbar-left" data-in="fadeInDown" data-out="fadeOutUp">
+                <!-- <li class="active">
+                        <input type="text" class="form-control" placeholder="Find Freelancer">
+                    </li> -->
+                <li class="dropdown">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="browse-jobs-location.html" target="_blank" class="dropdown-toggle"
+                        data-toggle="dropdown">Jobs By Location</a>
+                    <ul class="dropdown-menu animated fadeOutUp">
+                        <li><a href="job-with-map.html">Datia</a></li>
+                        <li><a href="register.html">jhansi</a></li>
+                        <li><a href="dashboard/index.html">Gwalior</a></li>
+                        <li><a target="_blank" href="browse-jobs-location.html">View More</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="browse-jobs-skill.html" target="_blank" class="dropdown-toggle" data-toggle="dropdown">Jobs
+                        By Skills</a>
+                    <ul class="dropdown-menu animated fadeOutUp">
+                        <li><a href="job-with-map.html">Machine Operator</a></li>
+                        <li><a href="register.html">Welder</a></li>
+                        <li><a href="dashboard/index.html">Fitter</a></li>
+                        <li><a href="dashboard/index.html">Tailor</a></li>
+                        <li><a target="_blank" href="browse-jobs-skill.html">View More</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                <li><a href="login.html"><i class="fa fa-pencil" aria-hidden="true"></i>SignUp</a></li>
+                <li class="left-br"><a href="javascript:void(0)" data-toggle="modal" data-target="#signup"
+                        class="signin">Sign In Now</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

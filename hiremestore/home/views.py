@@ -74,7 +74,7 @@ def CategorySave(request):
     if request.method == "POST":
         name = request.POST['name']
         title = request.POST['title']
-        image = request.FILES['image']
+        image = request.FILES.get('image')
         type = request.POST['type']
         category_done = Category.objects.create(
             name=name, title=title, image=image, type=type)
@@ -87,7 +87,6 @@ def CategorySave(request):
 
 def CategoryEdit(request, id):
     data = Category.objects.get(id=id)
-    print(data)
     return render(request, 'home/category_add.html', {'category': data})
 
 
@@ -97,8 +96,8 @@ def CategoryUpdate(request, id):
         category_done.name = request.POST['name']
     if request.POST['title']:
         category_done.title = request.POST['title']
-    if request.FILES['image']:
-        category_done.image = request.FILES['image']
+    if request.FILES.get('image'):
+        category_done.image = request.FILES.get('image')
 
     category_done.save()
     return redirect('categorydisplay')
@@ -117,7 +116,7 @@ def Category_Delete(request, id):
 def SubCategoryAdd(request):
     category = Category.objects.all().order_by('-created')
     content = {'category': category}
-    category_dropdown = Category.objects.all().order_by('-created')[:4]
+    category_dropdown = Category.objects.all().order_by('-created')
     content = {'category_dropdown': category_dropdown}
     return render(request, 'home/subcategory_add.html', content)
 
@@ -128,7 +127,7 @@ def SubCategorySave(request):
         category_id = request.POST['category']
         category = Category.objects.get(id=category_id)
         description = request.POST['description']
-        image = request.FILES['image']
+        image = request.FILES.get('image')
         category_done = SubCategory.objects.create(
             name=name, description=description, image=image, cat=category)
         category_done.save()
@@ -141,7 +140,7 @@ def SubCategorySave(request):
 def SubCategoryEdit(request, id):
     data = SubCategory.objects.get(id=id)
     category = Category.objects.filter(name=data.cat)
-    category_dropdown = Category.objects.all().order_by('-created')[:4]
+    category_dropdown = Category.objects.all().order_by('-created')
     return render(request, 'home/subcategory_add.html', {'subcategory': data, 'category': category, 'category_dropdown': category_dropdown})
 
 
@@ -156,8 +155,8 @@ def SubCategoryUpdate(request, id):
         subcategory_done.name = request.POST['name']
     if request.POST['description']:
         subcategory_done.description = request.POST['description']
-    # if request.FILES['image']:
-    #     subcategory_done.image = request.FILES['image']
+    if request.FILES.get('image'):
+        subcategory_done.image = request.FILES.get('image')
 
     subcategory_done.save()
     return redirect('subcategorydisplay')
@@ -248,10 +247,10 @@ def Webprofilesave(request):
         mobile_number = request.POST['mobile_number']
         website_title = request.POST['title']
         website_subtitle = request.POST['subtitle']
-        logo = request.FILES['logo']
-        background_img = request.FILES['background_img']
-        favicon = request.FILES['favicon']
-        trusted_by = request.FILES.getlist("trusted_by")
+        logo = request.FILES.get('logo')
+        background_img = request.FILES.get('background_img')
+        favicon = request.FILES.get('favicon')
+        # trusted_by = request.FILES.getlist("trusted_by")
 
         # fb_link = request.POST['fb_link']
         # instagram_link = request.POST['instagram_link']
@@ -260,11 +259,11 @@ def Webprofilesave(request):
         fb_link = 'hdgh'
         instagram_link = 'ghgfhgh'
         twitter_link = 'ggfhg'
-
-        web_profile_save = website_profile.objects.create(mobile_number=mobile_number,
-        website_title=website_title,website_subtitle=website_subtitle,logo=logo,
-        background_img=background_img,favicon=favicon,trusted_by=trusted_by,fb_link=fb_link,
-        instagram_link=instagram_link,twitter_link=twitter_link)
+        for file in request.FILES.getlist("trusted_by"):
+            web_profile_save = website_profile.objects.create(mobile_number=mobile_number,
+            website_title=website_title,website_subtitle=website_subtitle,logo=logo,
+            background_img=background_img,favicon=favicon,trusted_by=file,fb_link=fb_link,
+            instagram_link=instagram_link,twitter_link=twitter_link)
         web_profile_save.save()
 
         return redirect('website_view')
@@ -283,8 +282,14 @@ def WebprofileUpdate(request, id):
         webprofile_done.website_title = request.POST['title']
     if request.POST['subtitle']:
         webprofile_done.website_subtitle = request.POST['subtitle']
-    # if request.FILES['image']:
-    #     subcategory_done.image = request.FILES['image']
+    if request.FILES.get('logo'):
+        webprofile_done.image = request.FILES.get('logo')
+    if request.FILES.get('logo'):
+        webprofile_done.image = request.FILES.get('logo')
+    if request.FILES.get('logo'):
+        webprofile_done.image = request.FILES.get('logo')
+    if request.FILES.get('logo'):
+        webprofile_done.image = request.FILES.get('logo')
 
     webprofile_done.save()
     return redirect('website_view')

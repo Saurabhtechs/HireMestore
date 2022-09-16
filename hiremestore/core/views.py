@@ -10,9 +10,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import User
 
+city = Cities.objects.all()
+print(city)
 
 def index(request):
-    digital = Category.objects.filter(type=1).order_by('-created')[:4]
+    digital = Category.objects.filter(type=1).order_by('-created')[:8]
     helper = Category.objects.filter(type=2).order_by('-created')[:4]
     category = Category.objects.filter().order_by('-created')
     subcategory = SubCategory.objects.filter().order_by('-created')
@@ -20,9 +22,15 @@ def index(request):
     testimonial = Testimonails.objects.all()
     content = {'result': data, 'testimonial': testimonial, 'category': category,
                'subcategory': subcategory, 'digital': digital, 'helper': helper, }
-    return render(request, 'main/index.html', content)
+    return render(request, 'frontend/index.html', content)
 
+def Browsebylocation(request):
+    return render(request,'frontend/browse-jobs-location.html')
 
+def Browsebyskill(request):
+    digital = Category.objects.filter(type=1).order_by('-created')[:8]
+    return render(request,'frontend/browse-jobs-skill.html', {'digital':digital})
+    
 def contact(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -74,85 +82,82 @@ def subcategory(request, id):
         cat_id=get).order_by('-created')[:10]
     context = {'subcategory': subcategory,
                'result': data, 'Category_data': Category_data, }
-    return render(request, 'main/sub_category.html', context)
+    return render(request, 'frontend/sub-category.html', context)
 
 
 def worker(request, id):
     data = website_profile.objects.all()
+
     worker = User_Detail.objects.filter(sub_category=id)
     print(worker)
     return render(request, 'main/worker.html', {'result': data, 'worker': worker}, )
 
 
 
+    subcategory = SubCategory.objects.filter(slug=id).values_list('id', flat=True)
+    print(subcategory)
+    cate = list(subcategory)
+    get = cate[0]
+    worker = User_Detail.objects.filter(sub_category=get)
+    return render(request, 'frontend/helper.html', {'result': data, 'worker': worker}, )
+ 
+
+
 
 def worker_detail(request, id):
     data = website_profile.objects.all()
-    worker = User.objects.filter(id=id)
-    return render(request, 'main/worker_detail.html', {'result': data, 'worker': worker, }, )
+    worker = User_Detail.objects.filter(slug=id).first()
+    return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker, }, )
 
+
+# def update_profile(request, id):
+#     user = User.objects.get(id=id)
+#     category = Category.objects.filter().order_by('-created')
+#     subcategory = SubCategory.objects.filter().order_by('-created')
+#     data = website_profile.objects.all()
+#     return render(request, 'main/update_profile.html', {'result': data, 'data': user, 'category': category, 'subcategory': subcategory})
 
 def update_profile(request, id):
-    user = User.objects.get(id=id)
-    category = Category.objects.filter().order_by('-created')
-    subcategory = SubCategory.objects.filter().order_by('-created')
-    data = website_profile.objects.all()
-    return render(request, 'main/update_profile.html', {'result': data, 'data': user, 'category': category, 'subcategory': subcategory}, )
+    user = User_Detail.objects.get(slug=id)
+    return render(request, 'frontend/myprofile.html', {'worker': user})
 
 
 def update_profile_update(request, id):
-    user = User.objects.get(id=id)
     if request.method == "POST":
-        workerdata = User_Detail()
-        workerdata.user = request.user
-        workerdata.category = request.POST['category']
-        workerdata.sub_category = request.POST['subcategory']
-        print(request.POST['category'], request.POST['subcategory'])
-        workerdata.name = request.POST['name']
-        workerdata.email = request.POST['email']
-        workerdata.dob = request.POST['dob']
-        workerdata.area = request.POST['area']
-        workerdata.city = request.POST['city']
-        workerdata.district = request.POST['district']
-        workerdata.zip = request.POST['zip']
-        workerdata.state = request.POST['state']
-        workerdata.country = request.POST['country']
-        workerdata.mobile = request.POST['mobile']
-        workerdata.charges = request.POST['rate']
-        workerdata.experiance = request.POST['exp']
-        workerdata.bio = request.POST['bio']
-        workerdata.discription = request.POST['desc']
-        workerdata.image = request.FILES['image']
+        user = User.objects.get(id=id)
+        worker_data = User_Detail.objects.filter(user=user).first()
+        if worker_data:
+            worker_data = worker_data
+        else:
+            worker_data = User_Detail()
+            worker_data.user = user
+        worker_data.category = request.POST['category']
+        worker_data.sub_category = request.POST['subcategory']
+        worker_data.name = request.POST['name']
+        worker_data.email = request.POST['email']
+        worker_data.dob = request.POST['dob']
+        worker_data.area = request.POST['area']
+        worker_data.city = request.POST['city']
+        worker_data.district = request.POST['district']
+        worker_data.zip = request.POST['zip']
+        worker_data.state = request.POST['state']
+        worker_data.country = request.POST['country']
+        worker_data.mobile = request.POST['mobile']
+        worker_data.charges = request.POST['rate']
+        worker_data.experiance = request.POST['exp']
+        worker_data.bio = request.POST['bio']
+        worker_data.discription = request.POST['desc']
+        if request.FILES.get('image'):
+            worker_data.image = request.FILES.get('image')
 
-        workerdata.save()
+        worker_data.save()
+
         messages.success(request, 'Data Updated...')
         return redirect('index')
 
     else:
         return redirect('update_profile')
 
-
-
-def search(request):
-    query = request.GET['query']
-
-    search_data = Category.objects.filter(title__icontains=query)
-    result = {'blog': search_data}
-    return render(request, 'search.html', result)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def Helper_DashBoard(request):
+    data = User_Detail.objects.filter(slug='saurabh-soni').first()
+    return render(request,'frontend/helper-dashboard.html',{'helper':data})

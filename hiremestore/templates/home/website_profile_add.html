@@ -56,10 +56,13 @@
                                         <div class="form-group">
                                             {% if webprofile.logo %}
                                             {{ webprofile.logo.name }}
+                                            <label class="form-control-label" for="input-country">WebProfile
+                                                Logo</label>
+                                            <input type="file" id="input-country" name="logo" class="form-control">
                                             {% else %}
-                                            <label class="form-control-label" for="input-country">WebProfile Logo</label>
-                                            <input type="file" id="input-country" name="logo" class="form-control"
-                                                value="{{ webprofile.logo.name }}">
+                                            <label class="form-control-label" for="input-country">WebProfile
+                                                Logo</label>
+                                            <input type="file" id="input-country" name="logo" class="form-control">
                                             {% endif %}
                                         </div>
                                     </div>
@@ -101,10 +104,15 @@
                                         <div class="form-group">
                                             {% if webprofile.background_img %}
                                             {{ webprofile.background_img.name }}
+                                            <label class="form-control-label" for="input-country">Background
+                                                Image</label>
+                                            <input type="file" id="input-country" name="background_img"
+                                                class="form-control" placeholder="Country">
                                             {% else %}
-                                            <label class="form-control-label" for="input-country">Background Image</label>
-                                            <input type="file" id="input-country" name="background_img" class="form-control"
-                                                placeholder="Country" value="{{ webprofile.background_img.name }}">
+                                            <label class="form-control-label" for="input-country">Background
+                                                Image</label>
+                                            <input type="file" id="input-country" name="background_img"
+                                                class="form-control" placeholder="Country">
                                             {% endif %}
                                         </div>
                                     </div>
@@ -113,6 +121,10 @@
                                         <div class="form-group">
                                             {% if webprofile.favicon %}
                                             {{ webprofile.favicon.name }}
+                                            <label class="form-control-label" for="input-country">Favicon Image</label>
+                                            <input type="file" id="input-country" name="favicon" class="form-control"
+                                                placeholder="Country">
+
                                             {% else %}
                                             <label class="form-control-label" for="input-country">Favicon Image</label>
                                             <input type="file" id="input-country" name="favicon" class="form-control"
@@ -124,7 +136,11 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             {% if webprofile.trusted_by %}
-                                            {{ webprofile.trusted_by.name }}"
+                                            {{ webprofile.trusted_by.name }}
+                                            <label class="form-control-label" for="input-country">Trusted By</label>
+                                            <input type="file" id="input-country" name="trusted_by" class="form-control"
+                                                placeholder="Country" multiple>
+
                                             {% else %}
                                             <label class="form-control-label" for="input-country">Trusted By</label>
                                             <input type="file" id="input-country" name="trusted_by" class="form-control"

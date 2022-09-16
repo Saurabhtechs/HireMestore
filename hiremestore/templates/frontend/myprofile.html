@@ -1,0 +1,258 @@
+{% extends 'frontend/frontend_base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="clearfix"></div>
+
+<!-- General Detail Start -->
+<section class="dashboard-wrap">
+	<div class="container-fluid">
+		<div class="row">
+
+			<!-- Sidebar Wrap -->
+			<div class="col-lg-3 col-md-4">
+				<div class="side-dashboard">
+
+					<div class="dashboard-avatar">
+
+						<div class="dashboard-avatar-thumb">
+							<img src="{{ worker.image.url }}" class="img-avater" alt="" />
+						</div>
+
+						<div class="dashboard-avatar-text">
+							<h4>{{ worker.name }}</h4>
+							<span>Zivara Technoloty</span>
+						</div>
+
+					</div>
+
+					<div class="dashboard-menu">
+						<ul>
+							<li><a href="dashboard.html"><i class="ti-dashboard"></i>Dashboard</a></li>
+							<li><a href="post-new-job.html"><i class="ti-ruler-pencil"></i>Post New Page</a>
+							</li>
+							<li><a href="all-jobs.html"><i class="ti-briefcase"></i>All Jobs</a></li>
+							<li><a href="applications.html"><i class="ti-user"></i>Applications</a></li>
+							<li><a href="packages.html"><i class="ti-wallet"></i>Packages</a></li>
+							<li><a href="choose-package.html"><i class="ti-cup"></i>Choose Packages</a></li>
+							<li><a href="viewed-resume.html"><i class="ti-flag-alt-2"></i>Viewed Resume</a></li>
+							<li class="active"><a href="myprofile.html"><i class="ti-id-badge"></i>Edit
+									Profile</a></li>
+							<li><a href="login.html"><i class="ti-power-off"></i>Logout</a></li>
+						</ul>
+						<h4>For Candidate</h4>
+						<ul>
+							<li><a href="candidate-dashboard.html"><i class="ti-dashboard"></i>Candidate
+									Dashboard</a></li>
+							<li><a href="candidate-resume.html"><i class="ti-wallet"></i>My Resume</a></li>
+							<li><a href="applied-jobs.html"><i class="ti-hand-point-right"></i>Applied Jobs</a>
+							</li>
+							<li><a href="saved-jobs.html"><i class="ti-heart"></i>Saved Jobs</a></li>
+							<li><a href="alert-jobs.html"><i class="ti-bell"></i>Alert Jobs</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Content Wrap -->
+			<div class="col-lg-9 col-md-8">
+				<div class="dashboard-body">
+					<div class="dashboard-caption">
+
+						<div class="dashboard-caption-header">
+							<h4><i class="ti-id-badge"></i>My Profile</h4>
+						</div>
+
+						<div class="dashboard-caption-wrap">
+
+							<!-- row -->
+							<div class="row mrg-top-20">
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Fulle Name*</label>
+										<input type="text" class="form-control" value="{{ worker.name }}" placeholder="Enter Name">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Email</label>
+										<input type="email" class="form-control" value="{{ worker.user.email }}" placeholder="designing@themezhub.com">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Phone</label>
+										<input type="text" class="form-control" value="{{ worker.user.phone_number }}"  placeholder="91 256 254 4578">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Birthday</label>
+										<input type="text" id="birthday" data-lang="en" data-large-mode="true"
+											data-min-year="2017" data-max-year="2020"
+											data-disabled-days="08/17/2017,08/18/2017" value="{{ worker.dob}}"  data-id="datedropper-0"
+											data-theme="my-style" class="form-control" readonly="">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Headlines*</label>
+										<input type="text" class="form-control" value="{{ worker.user.email }}" placeholder="Enter Headlines">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Gender</label>
+										<select id="jb-level" class="form-control">
+											<option>Gender</option>
+											<option>Male</option>
+											<option>Female</option>
+											<option>Other</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-12 col-md-12 col-sm-12">
+									<div class="form-group">
+										<label>About Info</label>
+										<textarea class="form-control textarea" placeholder="About Company">{{ worker.discription }}</textarea>
+									</div>
+								</div>
+							</div>
+
+							<!-- row -->
+							<div class="row mrg-top-30">
+								<div class="col-md-12 col-sm-12">
+									<div class="form-group">
+										<h4>Job Loation & Map</h4>
+									</div>
+								</div>
+							</div>
+
+							<!-- row -->
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-sm-12">
+									<div class="form-group">
+										<label>Address*</label>
+										<input type="text" class="form-control"
+											placeholder="Ex. 502, Sector 20 C, Mohali">
+									</div>
+								</div>
+
+								<div class="col-lg-12 col-md-12 col-sm-12">
+									<div class="form-group">
+										<div id="singleMap" data-latitude="40.7427837"
+											data-longitude="-73.11445617675781" data-mapTitle="Our Location">
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<!-- row -->
+							<div class="row mrg-top-30">
+								<div class="col-md-12 col-sm-12">
+									<div class="form-group">
+										<h4>Social Accounts</h4>
+									</div>
+								</div>
+							</div>
+
+							<!-- row -->
+							<div class="row">
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Facebook</label>
+										<input type="text" class="form-control"
+											placeholder="Ex. 502, Sector 20 C, Mohali">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Twitter</label>
+										<input type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Google Plus</label>
+										<input type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Youtube</label>
+										<input type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Vimeo</label>
+										<input type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group">
+										<label>Linkedin</label>
+										<input type="text" class="form-control">
+									</div>
+								</div>
+							</div>
+
+
+							<button type="submit" class="btn-savepreview"><i class="ti-angle-double-right"></i>Update
+								Changes</button>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+<!-- General Detail End -->
+
+<!-- ============================ Call To Action ================================== -->
+<section class="theme-bg call-to-act-wrap">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="call-to-act">
+					<div class="call-to-act-head">
+						<h3>Want to Become a Success Employers?</h3>
+						<span>We'll help you to grow your career and growth.</span>
+					</div>
+					<a href="#" class="btn btn-call-to-act">SignUp Today</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- ============================ Call To Action End ================================== -->
+
+{% block javascripts %}
+
+<script type="text/javascript" src="{% static 'frontend/assets/plugins/js/sweetalert.html' %}"></script>
+<script src="{% static 'frontend/assets/js/dashboard-custom.js' %}"></script>
+
+<!-- Map -->
+<script src="http://maps.google.com/maps/api/js?key="></script>
+<script src="{% static 'frontend/assets/js/map_infobox.js' %}"></script>
+<script src="{% static 'frontend/assets/js/markerclusterer.js' %}"></script>
+<script src="{% static 'frontend/assets/js/map.js' %}"></script>
+
+<script>
+	$('#birthday').dateDropper();
+</script>
+{% endblock javascripts %}
+</div>
+</body>
+
+<!-- Mirrored from codeminifier.com/job-stock-5.4.1/job-stock/myprofile.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Sep 2022 13:21:30 GMT -->
+
+</html>
+{% endblock %}

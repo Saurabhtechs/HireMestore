@@ -92,11 +92,12 @@
                     <div class="form-group">
 
                       {% if subcategory.image %}
-
+                      {{ subcategory.image.name }}
+                      <label class="form-control-label" for="input-country">Country</label>
+                      <input type="file" id="input-country" name="image" class="form-control" placeholder="Country">
                       {% else %}
                       <label class="form-control-label" for="input-country">Country</label>
-                      <input type="file" id="input-country" name="image" class="form-control" placeholder="Country"
-                        value="{{ subcategory.image.name }}">
+                      <input type="file" id="input-country" name="image" class="form-control" placeholder="Country">
                       {% endif %}
                     </div>
                   </div>

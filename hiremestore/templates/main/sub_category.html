@@ -16,10 +16,10 @@
   <div class="container text-center">
     <div class="row">
       <!-- subcategory/{{d.slug}} -->
-      {% for d in subcategory%} 
+      {% for d in subcategory%}
       <div class="col-md-3 col-sm-6 col-xs-12 srevice_img">
         <a href="{% url 'worker' d.id %}"><img src="{{d.image.url}}" class="img-circle htw" alt="cleaning" /></a>
-        <h4><a href="{% url 'worker' d.id %}">{{ d.name}}</a></h4>
+        <h4><a href="{% url 'worker' d.slug %}">{{ d.name}}</a></h4>
         <p><b>{{ d.description}}</b> average rating</p>
       </div>
       {% endfor %}

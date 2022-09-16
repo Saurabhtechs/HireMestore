@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <title>HIre | Dynamic kro</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="{% static 'frontend/assets/plugins/css/plugins.css' %}">
+    <link href="{% static 'frontend/assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'frontend/assets/css/colors/dark-red-style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="Loader"></div>
+    <div class="wrapper">
+        <!-- Start Navigation -->
+        {% include 'frontend/header.html' %}
+        <!-- End Navigation -->
+        <div class="clearfix"></div>
+
+        {% block content %}
+
+        {% endblock %}
+        <!-- ============================ Before Footer ================================== -->
+        {% include 'frontend/footer.html' %}
+
+        <!-- Scripts
+    ================================================== -->
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/viewportchecker.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/bootsnav.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/select2.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/wysihtml5-0.3.0.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/bootstrap-wysihtml5.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/datedropper.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/dropzone.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/loader.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/owl.carousel.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/slick.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/gmap3.min.js' %}"></script>
+        <script type="text/javascript"
+            src="{% static 'frontend/assets/plugins/js/jquery.easy-autocomplete.min.js' %}"></script>
+        <!-- Custom Js -->
+        <script src="{% static 'js/custom.js' %}"></script>
+        <script type="text/javascript" src="{% static 'frontend/assets/plugins/js/counterup.min.js' %}"></script>
+        {% block javascripts %}
+
+        {% endblock javascripts %}
+    </div>
+</body>
+
+
+</html>
