@@ -13,36 +13,66 @@
                         <input type="text" class="form-control" placeholder="Find Freelancer">
                     </li> -->
                 <li class="dropdown">
-                    <a href="index.html">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li class="dropdown">
-                    <a href="browse-jobs-location.html" target="_blank" class="dropdown-toggle"
+                    <a href="{% url 'browsebylocation' %}" target="_blank" class="dropdown-toggle"
                         data-toggle="dropdown">Jobs By Location</a>
                     <ul class="dropdown-menu animated fadeOutUp">
-                        {% for c in city %} 
-                        <li><a href="job-with-map.html">{{ c.name }} </a></li>
+                        {% for c in headcity %}
+                        <li><a href="{{c.slug}}">{{c.name}}</a></li>
                         {% endfor %}
                         <li><a href="register.html">jhansi</a></li>
                         <li><a href="dashboard/index.html">Gwalior</a></li>
-                        <li><a target="_blank" href="browse-jobs-location.html">View More</a></li>
+                        <li><a target="_blank" href="{% url 'browsebylocation' %}">View More</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="browse-jobs-skill.html" target="_blank" class="dropdown-toggle" data-toggle="dropdown">Jobs
+                    <a href="{% url 'browsebyskill' %}" target="_blank" class="dropdown-toggle"
+                        data-toggle="dropdown">Jobs
                         By Skills</a>
                     <ul class="dropdown-menu animated fadeOutUp">
                         <li><a href="job-with-map.html">Machine Operator</a></li>
                         <li><a href="register.html">Welder</a></li>
                         <li><a href="dashboard/index.html">Fitter</a></li>
                         <li><a href="dashboard/index.html">Tailor</a></li>
-                        <li><a target="_blank" href="browse-jobs-skill.html">View More</a></li>
+                        <li><a target="_blank" href="{% url 'browsebyskill' %}">View More</a></li>
                     </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                <li><a href="login.html"><i class="fa fa-pencil" aria-hidden="true"></i>SignUp</a></li>
+                {% if user.is_superuser and user.is_authenticated %}
+                <li class="dropdown">
+                    <a href="browse-jobs-location.html" target="_blank" class="dropdown-toggle"
+                        data-toggle="dropdown"><img src="{% static 'frontend/assets/img/can-5.jpg' %}"
+                            style="width: 100%;max-height: 40px;max-width: 40px;border-radius: 50%;">{{user.username}}</a>
+                    <ul class="dropdown-menu animated fadeOutUp">
+                        <!-- update_profile/{{user.user_detail.slug}} -->
+                        <li><a href="{% url 'update_profile' user.user_detail.slug %}">My Profile</a></li>
+                        <li><a href="{% url 'helper_dashBoard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </li>
+                {% elif user.is_authenticated %}
+                <li class="dropdown">
+                    <a href="browse-jobs-location.html" target="_blank" class="dropdown-toggle"
+                        data-toggle="dropdown"><img src="{% static 'frontend/assets/img/can-5.jpg' %}"
+                            style="width: 100%;max-height: 40px;max-width: 40px;border-radius: 50%;">{{user.username}}</a>
+                    <ul class="dropdown-menu animated fadeOutUp">
+                        <!-- update_profile/{{user.user_detail.slug}} -->
+                        <li><a href="{% url 'update_profile' user.user_detail.slug %}">My Profile</a></li>
+                        <li><a href="{% url 'helper_dashBoard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </li>
+
+                {% else %}
+                <li><a href="javascript:void(0)" data-toggle="modal" data-target="#signup"><i class="fa fa-pencil"
+                            aria-hidden="true"></i>SignUp</a></li>
+                {% endif %}
                 <li class="left-br"><a href="javascript:void(0)" data-toggle="modal" data-target="#signup"
-                        class="signin">Sign In Now</a></li>
+                        class="signin">Hire Staff</a></li>
+
             </ul>
         </div>
     </div>

@@ -3,7 +3,10 @@ from django.shortcuts import render,redirect
 from .models import User
 from django.apps import apps
 from django.contrib.auth import authenticate,login, logout
-website_profile = apps.get_model('core', 'website_profile')
+website_profile = apps.get_model('core', 'website_profile','User_Detail')
+from  core.models import *
+
+
 from django.contrib import messages
 
 import random
@@ -147,9 +150,14 @@ def UserRegister(request):
 
         user.save()
 
+        worker_data = User_Detail()
+        worker_data.name = request.POST['name']
+        worker_data.user_id = user.id
+        worker_data.save()
+        messages.success(request,'Registerd Successfully')
         # send_otp(phone_number, otp)
         # request.session['phone_number'] = phone_number
-        return redirect('index')
+        # return redirect('index')
     return render(request, 'frontend/register.html')
 
 

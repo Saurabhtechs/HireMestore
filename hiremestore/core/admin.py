@@ -8,6 +8,8 @@ admin.site.register(Category)
 admin.site.register(SubCategory)
 admin.site.register(Testimonails)
 admin.site.register(User_Detail)
+admin.site.register(User_Gallery)
+admin.site.register(Website_Gallery)
 # admin.site.register(PostImage)
 
 

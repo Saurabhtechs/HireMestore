@@ -3,7 +3,6 @@ from email.policy import default
 from django.db import models
 from accounts.models import User
 from PIL import Image
-from django.template.defaultfilters import slugify
 from autoslug import AutoSlugField
 
 # Create your models here.
@@ -153,6 +152,19 @@ class User_Detail(models.Model):
     def __str__(self):
         return self.name
 
+class User_Gallery(models.Model):
+    user = models.ForeignKey(User_Detail, on_delete=models.CASCADE)
+    gallery = models.FileField(upload_to='gallery')
+
+    def __str__(self):
+        return self.user
+
+class Website_Gallery(models.Model):
+    web = models.ForeignKey(website_profile, on_delete=models.CASCADE)
+    gallery = models.FileField(upload_to='gallery')
+
+    def __str__(self):
+        return self.web
 
 class Country(models.Model):
     sortname= models.CharField(max_length=100)
