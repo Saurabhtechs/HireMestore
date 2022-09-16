@@ -9,9 +9,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import User
+from django.core import serializers
+from django.http import HttpResponse
 
-city = Cities.objects.all()
-print(city)
+
+def Global_Data(request):
+    city = Cities.objects.filter()[:4]
+    return {'headcity': city}
+
 
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
@@ -21,16 +26,16 @@ def index(request):
     data = website_profile.objects.all()
     testimonial = Testimonails.objects.all()
     content = {'result': data, 'testimonial': testimonial, 'category': category,
-               'subcategory': subcategory, 'digital': digital, 'helper': helper, }
+               'subcategory': subcategory, 'digital': digital, 'helper': helper}
     return render(request, 'frontend/index.html', content)
 
-def Browsebylocation(request):
-    return render(request,'frontend/browse-jobs-location.html')
 
-def Browsebyskill(request):
-    digital = Category.objects.filter(type=1).order_by('-created')[:8]
-    return render(request,'frontend/browse-jobs-skill.html', {'digital':digital})
-    
+
+
+
+
+
+
 def contact(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -91,16 +96,17 @@ def worker(request, id):
     worker = User_Detail.objects.filter(sub_category=id)
     print(worker)
     return render(request, 'main/worker.html', {'result': data, 'worker': worker}, )
-
-
-
     subcategory = SubCategory.objects.filter(slug=id).values_list('id', flat=True)
+
+    subcategory = SubCategory.objects.filter(
+        slug=id).values_list('id', flat=True)
+
     print(subcategory)
     cate = list(subcategory)
     get = cate[0]
     worker = User_Detail.objects.filter(sub_category=get)
     return render(request, 'frontend/helper.html', {'result': data, 'worker': worker}, )
- 
+
 
 
 
@@ -118,8 +124,11 @@ def worker_detail(request, id):
 #     return render(request, 'main/update_profile.html', {'result': data, 'data': user, 'category': category, 'subcategory': subcategory})
 
 def update_profile(request, id):
-    user = User_Detail.objects.get(slug=id)
-    return render(request, 'frontend/myprofile.html', {'worker': user})
+    user = User_Detail.objects.filter(slug=id).first()
+    country = Country.objects.filter(id=101)
+    city = Cities.objects.all()
+    state = States.objects.all()
+    return render(request, 'frontend/myprofile.html', {'worker': user, 'country': country, 'city': city, 'state': state})
 
 
 def update_profile_update(request, id):
@@ -158,6 +167,49 @@ def update_profile_update(request, id):
     else:
         return redirect('update_profile')
 
+
 def Helper_DashBoard(request):
     data = User_Detail.objects.filter(slug='saurabh-soni').first()
-    return render(request,'frontend/helper-dashboard.html',{'helper':data})
+    return render(request, 'frontend/helper-dashboard.html', {'helper': data})
+
+
+def GetCategory(request):
+    data = Category.objects.filter(type=1)
+    jsondata = serializers.serialize('json', data)
+    return HttpResponse(jsondata, content_type='application/json')
+
+
+def GetSubCategory(request):
+    data = User_Detail.objects.filter(slug='saurabh-soni').first()
+    return render(request, 'frontend/helper-dashboard.html', {'helper': data})
+
+
+
+# ==================================================================================================
+#
+def Browsebylocations(request):
+    city = Cities.objects.all()[:10]
+    contaxt = {'city': city}
+    return render(request, 'frontend/browse-jobs-location.html', contaxt)
+
+def Browsebylocation(request, id):
+
+    city_data = Cities.objects.filter(name=id)
+    cat = Cities.objects.filter(name=id).values_list('name', flat=True)
+    cate = list(cat)
+    get = cate[0]
+    print(get)
+    worker = User_Detail.objects.filter(
+        city=get)[:10]
+    context = {'worker': worker , 'city_data': city_data}
+    return render(request, 'frontend/worker.html', context)
+
+
+def Browsebyskill(request):
+    digital = Category.objects.filter(type=1).order_by('-created')[:8]
+    return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital})
+
+
+
+
+
