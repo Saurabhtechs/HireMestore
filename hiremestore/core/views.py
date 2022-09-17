@@ -44,9 +44,8 @@ def Browsebylocation(request):
     return render(request, 'frontend/browse-jobs-location.html', {'city': city})
 
 
-def Browsebyskill(request):
-    digital = Category.objects.filter(type=1).order_by('-created')[:8]
-    return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital})
+
+
 
 
 def contact(request):
@@ -94,13 +93,22 @@ def subcategory(request, id):
 
 def worker(request, id):
     data = website_profile.objects.all()
+
+    worker = User_Detail.objects.filter(sub_category=id)
+    print(worker)
+    return render(request, 'main/worker.html', {'result': data, 'worker': worker}, )
+    subcategory = SubCategory.objects.filter(slug=id).values_list('id', flat=True)
+
     subcategory = SubCategory.objects.filter(
         slug=id).values_list('id', flat=True)
+
     print(subcategory)
     cate = list(subcategory)
     get = cate[0]
     worker = User_Detail.objects.filter(sub_category=get)
     return render(request, 'frontend/helper.html', {'result': data, 'worker': worker}, )
+
+
 
 
 def worker_detail(request, id):
@@ -170,3 +178,34 @@ def GetCategory(request):
 def GetSubCategory(request):
     data = User_Detail.objects.filter(slug='saurabh-soni').first()
     return render(request, 'frontend/helper-dashboard.html', {'helper': data})
+
+
+
+# ==================================================================================================
+#
+def Browsebylocations(request):
+    city = Cities.objects.all()[:10]
+    contaxt = {'city': city}
+    return render(request, 'frontend/browse-jobs-location.html', contaxt)
+
+def Browsebylocation(request, id):
+
+    city_data = Cities.objects.filter(name=id)
+    cat = Cities.objects.filter(name=id).values_list('name', flat=True)
+    cate = list(cat)
+    get = cate[0]
+    print(get)
+    worker = User_Detail.objects.filter(
+        city=get)[:10]
+    context = {'worker': worker , 'city_data': city_data}
+    return render(request, 'frontend/worker.html', context)
+
+
+def Browsebyskill(request):
+    digital = Category.objects.filter(type=1).order_by('-created')[:8]
+    return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital})
+
+
+
+
+

@@ -16,13 +16,18 @@
                     <a href="/">Home</a>
                 </li>
                 <li class="dropdown">
-                    <a href="{% url 'browsebylocation' %}" target="_blank" class="dropdown-toggle"
+                    <a href="{% url 'browsebylocations' %}" target="_blank" class="dropdown-toggle"
                         data-toggle="dropdown">Jobs By Location</a>
                     <ul class="dropdown-menu animated fadeOutUp">
                         {% for c in headcity %}
-                        <li><a href="{{c.slug}}">{{c.name}}</a></li>
+                        <li><a href="{% url 'index' %}browsebylocation/{{c.name}}">{{c.name}}</a></li>
                         {% endfor %}
+<<<<<<< HEAD
                         <li><a target="_blank" href="{% url 'browsebylocation' %}">View More</a></li>
+=======
+                       
+                        <li><a target="_blank" href="{% url 'browsebylocations' %}">View More</a></li>
+>>>>>>> c65fe3c1112e755f7c79be5a158e8309aee3eb36
                     </ul>
                 </li>
                 <li class="dropdown">

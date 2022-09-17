@@ -69,24 +69,24 @@
             </p>
           </span>
         </div>
-        <form class="form-inline book-now-home" method="get" action="{% url 'servies' %}">
+        <form class="form-inline book-now-home" method="get" action="{% url 'servies' %}/">
           <div class="form-group">
             <div class="input-group">
-              <select class="form-control zipcode" name="category1">
+              <select class="form-control zipcode" name="servies">
                 <option value=""><i class="fa fa-map-o" aria-hidden="true"></i> Select Category</option>
                 {% for data in category %}
-                <option value="{{data.id}}">{{data.name}}</option>
+                <option type=l value="{{data.slug}}">{{data.name}}</option>
                 {% endfor %}
               </select>
 
             </div>
           </div>
-          <div class="form-group">
+          {% comment %} <div class="form-group">
             <div class="input-group location-code">
               <input type="text" class="form-control zipcode" id="zipcode" placeholder="Pincode" name="categor" />
             </div>
-          </div>
-          <div class="form-group">
+          </div> {% endcomment %}
+          {% comment %} <div class="form-group">
             <div class="input-group">
               <select class="form-control zipcode" name="city">
                 <option value=""><i class="fa fa-map-o" aria-hidden="true"></i> Select City</option>
@@ -97,7 +97,7 @@
               </select>
 
             </div>
-          </div>
+          </div> {% endcomment %}
           <div class="book-now-home-btn">
             <button class="btn btn-primary btn-outline" type="submit"> Search </button>
             <!-- <button class="btn btn-primary btn-outline" type="button"> Request a quote </button> -->
@@ -147,7 +147,7 @@
       <h1 class="panel-heading">FIND & HIRE POPULAR DIGITAL WORK CATEGORY STAFF</h1>
       <ul class="services-list">
         {% for cat in digital %}
-        <li><a href="{% url 'servies' %}?category={{cat.id}}"><img src="{{ cat.image.url }}" alt="Cleaning" /><br />
+        <li><a href="{% url 'servies' %}/{{cat.slug}}"><img src="{{ cat.image.url }}" alt="Cleaning" /><br />
             {{cat.name}}</a></li>
         {% endfor %}
         <li><a href="{% url 'servies' %}?category={{cat.id}}"><img
