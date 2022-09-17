@@ -1,0 +1,138 @@
+{% extends 'frontend/frontend_base.html' %}
+{% load static %}
+
+{% block content %}
+{% load widget_tweaks %}
+
+<!-- End Navigation -->
+<div class="clearfix"></div>
+
+<!-- Title Header Start -->
+<section class="inner-header-title" style="background-image:url(/static/frontend/assets/img/banner-10.jpg);">
+	<div class="container">
+		<h1>Browse Jobs By Skills</h1>
+	</div>
+</section>
+<div class="clearfix"></div>
+<!-- Title Header End -->
+
+<!-- ========== Begin: Brows job ===============  -->
+<section>
+	<div class="container">
+		<!-- Company Searrch Filter Start -->
+		<div class="row extra-mrg">
+			<div class="wrap-search-filter">
+				<form method="get">
+					<div class="col-md-4 col-sm-4">
+						<!-- <input type="text" class="form-control"  placeholder="Keyword: Name, Tag" > -->
+						<div class="form-group">
+							<div class="input-with-icon">
+								{% render_field category_filter.form.city class="form-control" placeholder="Keyword:Name, Tag" %}
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-4">
+
+						<div class="form-group">
+							<div class="input-with-icon">
+								{% render_field category_filter.form.sub_category class="form-control" placeholder="Keyword:Name, Tag" %}
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-md-2 col-sm-2">
+						<button type="submit" class="btn btn-primary full-width">Filter</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- Company Searrch Filter End -->
+
+		<!-- Jobs By Category Start-->
+		<section class="gray">
+			<div class="container">
+
+				<div class="row">
+					<div class="main-heading">
+						<h2>Browse Jobs By <span>Category</span></h2>
+						<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris aliquip.</p>
+					</div>
+				</div>
+
+				<div class="row">
+					{% for w in category_filter.qs %}
+					<div class="col-md-4 col-sm-6">
+						<div class="popular-jobs-container">
+							<div class="popular-jobs-box">
+								<span class="popular-jobs-status bg-success">hourly</span>
+								<h4 class="flc-rate">{{ w.slug }}/month</h4>
+								<div class="popular-jobs-box">
+									<div class="popular-jobs-box-detail">
+										<h4>{{ w.name }}</h4>
+										<span class="desination">{{ w.category }}</span>
+									</div>
+								</div>
+								<div class="popular-jobs-box-extra">
+									<ul>
+										<li>Exp:- <b>5yrs</b></li>
+										<li>Skill:- <b>N/A</b></li>
+										<li>City:- <b>{{ w.city }}</b></li>
+										<li class="more-skill bg-primary">+3</li>
+									</ul>
+									<p>Have A Good Skill In Hair <br>Cutting.</p>
+								</div>
+							</div>
+							<a href="{% url 'worker_detail' w.slug %}" class="btn btn-popular-jobs bt-1">View Detail</a>
+						</div>
+					</div>
+					{% endfor %}
+
+				</div>
+
+			</div>
+		</section>
+		<!-- Job By Category End-->
+
+		<div class="row">
+			<ul class="pagination">
+				<li><a href="#"><i class="ti-arrow-left"></i></a></li>
+				<li class="active"><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#"><i class="fa fa-ellipsis-h"></i></a></li>
+				<li><a href="#"><i class="ti-arrow-right"></i></a></li>
+			</ul>
+		</div>
+
+	</div>
+</section>
+<!-- ========== Begin: Brows job Grid End ===============  -->
+
+<!-- ============================ Call To Action ================================== -->
+<section class="theme-bg call-to-act-wrap">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="call-to-act">
+					<div class="call-to-act-head">
+						<h3>Want to Become a Success Employers?</h3>
+						<span>We'll help you to grow your career and growth.</span>
+					</div>
+					<a href="#" class="btn btn-call-to-act">SignUp Today</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- ============================ Call To Action End ================================== -->
+
+
+</body>
+
+<!-- Mirrored from codeminifier.com/job-stock-5.4.1/job-stock/browse-jobs-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Sep 2022 13:18:06 GMT -->
+
+</html>{% endblock %}

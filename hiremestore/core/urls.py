@@ -14,6 +14,7 @@ urlpatterns = [
     path('get-sub-category', views.GetSubCategory, name='getsubcategory'),
 
 
+    path('search_category', views.SearchCategory, name='search_category'),
 
 
     path('servies', views.servies, name='servies'),

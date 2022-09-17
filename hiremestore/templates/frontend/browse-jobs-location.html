@@ -49,7 +49,7 @@
 
 		<!--Browse Job In Grid-->
 		<div class="row extra-mrg">
-
+			{% for c in city %}
 			<div class="col-md-3 col-sm-6">
 				<div class="grid-view brows-job-list">
 					<div class="brows-job-company-img">
@@ -57,7 +57,7 @@
 							class="img-responsive" alt="" />
 					</div>
 					<div class="brows-job-position">
-						<h3><a href="job-detail.html">Mumbai</a></h3>
+						<h3><a href="job-detail.html">{{ c.name }}</a></h3>
 						<p><span>Fession City</span></p>
 					</div>
 					<div class="job-position">
@@ -68,132 +68,7 @@
 					<span class="tg-themetag tg-featuretag">Since 2013</span>
 				</div>
 			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="grid-view brows-job-list">
-					<div class="brows-job-company-img">
-						<img src="https://www.mptourism.com/images/point-of-interest/Gwalior%20fort.jpg"
-							class="img-responsive" alt="" />
-					</div>
-					<div class="brows-job-position">
-						<h3><a href="job-detail.html">Gwalior</a></h3>
-						<p><span>Fort City</span></p>
-					</div>
-					<div class="job-position">
-						<span class="job-num">1500 Worker</span>
-					</div>
-
-
-					<span class="tg-themetag tg-featuretag">Since 2012</span>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="grid-view brows-job-list">
-					<div class="brows-job-company-img">
-						<img src="https://st.indiarailinfo.com/kjfdsuiemjvcya24/0/7/1/1/4207711/0/dsc046014053402.jpg"
-							class="img-responsive" alt="" />
-					</div>
-					<div class="brows-job-position">
-						<h3><a href="job-detail.html">Dabra</a></h3>
-						<p><span>Gulzar City</span></p>
-					</div>
-					<div class="job-position">
-						<span class="job-num">150 Worker</span>
-					</div>
-
-
-					<span class="tg-themetag tg-featuretag">Since 2012</span>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="grid-view brows-job-list">
-					<div class="brows-job-company-img">
-						<img src="https://cdn.britannica.com/13/146313-050-DD9AAC27/India-War-Memorial-arch-New-Delhi-Sir.jpg"
-							class="img-responsive" alt="" />
-					</div>
-					<div class="brows-job-position">
-						<h3><a href="job-detail.html">Delhi</a></h3>
-						<p><span>Metro City</span></p>
-					</div>
-					<div class="job-position">
-						<span class="job-num">200 Worker</span>
-					</div>
-
-
-					<span class="tg-themetag tg-featuretag">Since 2012</span>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="grid-view brows-job-list">
-					<div class="brows-job-company-img">
-						<img src="https://www.telegraph.co.uk/content/dam/Travel/Destinations/Asia/India/Mumbai/gateway-of-india-mumbai.jpg?imwidth=680"
-							class="img-responsive" alt="" />
-					</div>
-					<div class="brows-job-position">
-						<h3><a href="job-detail.html">Mumbai</a></h3>
-						<p><span>Fession City</span></p>
-					</div>
-					<div class="job-position">
-						<span class="job-num">210 Worker</span>
-					</div>
-
-
-					<span class="tg-themetag tg-featuretag">Since 2013</span>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="grid-view brows-job-list">
-					<div class="brows-job-company-img">
-						<img src="https://www.mptourism.com/images/point-of-interest/Gwalior%20fort.jpg"
-							class="img-responsive" alt="" />
-					</div>
-					<div class="brows-job-position">
-						<h3><a href="job-detail.html">Gwalior</a></h3>
-						<p><span>Fort City</span></p>
-					</div>
-					<div class="job-position">
-						<span class="job-num">1500 Worker</span>
-					</div>
-
-
-					<span class="tg-themetag tg-featuretag">Since 2012</span>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="grid-view brows-job-list">
-					<div class="brows-job-company-img">
-						<img src="https://st.indiarailinfo.com/kjfdsuiemjvcya24/0/7/1/1/4207711/0/dsc046014053402.jpg"
-							class="img-responsive" alt="" />
-					</div>
-					<div class="brows-job-position">
-						<h3><a href="job-detail.html">Dabra</a></h3>
-						<p><span>Gulzar City</span></p>
-					</div>
-					<div class="job-position">
-						<span class="job-num">150 Worker</span>
-					</div>
-
-
-					<span class="tg-themetag tg-featuretag">Since 2012</span>
-				</div>
-			</div>
-			<div class="col-md-3 col-sm-6">
-				<div class="grid-view brows-job-list">
-					<div class="brows-job-company-img">
-						<img src="https://cdn.britannica.com/13/146313-050-DD9AAC27/India-War-Memorial-arch-New-Delhi-Sir.jpg"
-							class="img-responsive" alt="" />
-					</div>
-					<div class="brows-job-position">
-						<h3><a href="job-detail.html">Delhi</a></h3>
-						<p><span>Metro City</span></p>
-					</div>
-					<div class="job-position">
-						<span class="job-num">200 Worker</span>
-					</div>
-
-
-					<span class="tg-themetag tg-featuretag">Since 2012</span>
-				</div>
-			</div>
+			{% endfor %}
 		</div>
 		<!--/.Browse Job In Grid-->
 

@@ -11,27 +11,37 @@ from django.contrib import messages
 from accounts.models import User
 from django.core import serializers
 from django.http import HttpResponse
-
+from .filters import CategoryFilter
 
 def Global_Data(request):
     city = Cities.objects.filter()[:4]
-    return {'headcity': city}
-
+    category = Category.objects.filter().order_by('-created')[:8]
+    return {'headcity': city, 'headcategory':category}
 
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
     helper = Category.objects.filter(type=2).order_by('-created')[:4]
-    category = Category.objects.filter().order_by('-created')
+    category = Category.objects.filter().order_by('-created')[:8]
     subcategory = SubCategory.objects.filter().order_by('-created')
     data = website_profile.objects.all()
     testimonial = Testimonails.objects.all()
+    user = User_Detail.objects.all()
+    category_Filter = CategoryFilter(request.GET,queryset=user)
+    
     content = {'result': data, 'testimonial': testimonial, 'category': category,
-               'subcategory': subcategory, 'digital': digital, 'helper': helper}
+               'subcategory': subcategory, 'digital': digital, 'helper': helper,'category_filter': category_Filter}
     return render(request, 'frontend/index.html', content)
 
 
+def SearchCategory(request):
+    user = User_Detail.objects.all()
+    category_Filter = CategoryFilter(request.GET,queryset=user)
+    print(request.GET)
+    return render(request, 'frontend/searchcategory.html', {'category_filter': category_Filter})
+
 def Browsebylocation(request):
-    return render(request, 'frontend/browse-jobs-location.html')
+    city = Cities.objects.all()[:8]
+    return render(request, 'frontend/browse-jobs-location.html', {'city': city})
 
 
 def Browsebyskill(request):
@@ -62,17 +72,6 @@ def about(request):
     data = website_profile.objects.all()
     return render(request, 'main/about.html', {'result': data}, )
 
-
-# def servies(request):
-#     if request.GET['category']:
-#         subcategory = SubCategory.objects.filter(cat=request.GET['category']).order_by('-created')[:9]
-#     elif request.GET['category']=="":
-#         subcategory = SubCategory.objects.all().order_by('-created')[:9]
-#     else:
-#         subcategory = SubCategory.objects.all().order_by('-created')[:9]
-#
-#     data = website_profile.objects.all()
-#     return render(request, 'main/sub_category.html', {'result': data, 'subcategory': subcategory}, )
 
 def servies(request):
     data = website_profile.objects.all()
@@ -110,13 +109,6 @@ def worker_detail(request, id):
     return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker, }, )
 
 
-# def update_profile(request, id):
-#     user = User.objects.get(id=id)
-#     category = Category.objects.filter().order_by('-created')
-#     subcategory = SubCategory.objects.filter().order_by('-created')
-#     data = website_profile.objects.all()
-#     return render(request, 'main/update_profile.html', {'result': data, 'data': user, 'category': category, 'subcategory': subcategory})
-
 def update_profile(request, id):
     user = User_Detail.objects.filter(slug=id).first()
     country = Country.objects.filter(id=101)
@@ -134,8 +126,10 @@ def update_profile_update(request, id):
         else:
             worker_data = User_Detail()
             worker_data.user = user
-        worker_data.category = request.POST['category']
-        worker_data.sub_category = request.POST['subcategory']
+        category = Category.objects.filter(request.POST['category'])
+        worker_data.category =category
+        subcategory = SubCategory.objects.filter(request.POST['subcategory'])
+        worker_data.sub_category = subcategory
         worker_data.name = request.POST['name']
         worker_data.email = request.POST['email']
         worker_data.dob = request.POST['dob']

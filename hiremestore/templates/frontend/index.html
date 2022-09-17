@@ -3,6 +3,8 @@
 {% load static %}
 
 {% block content %}
+{% load widget_tweaks %}
+
 <div class="clearfix"></div>
 
 <!-- Main Banner Section Start -->
@@ -26,63 +28,37 @@
 	<div class="container">
 		<div class="full-search-2 eclip-search italian-search hero-search-radius">
 			<div class="hero-search-content">
-
-				<div class="row">
-
-					<!-- <div class="col-lg-4 col-md-4 col-sm-12 small-padd b-r">
-									<div class="form-group">
-										<div class="input-with-icon">
-											<input type="text" class="form-control" placeholder="Job Title or Keywords">
-											<i class="ti-search"></i>
-										</div>
-									</div>
-								</div> -->
-
-					<div class="col-lg-5 col-md-3 col-sm-12 small-padd b-r">
-						<div class="form-group">
-							<div class="input-with-icon">
-								<select id="choose-city" class="form-control">
-									<option>Choose City</option>
-									<option>Chandigarh</option>
-									<option>London</option>
-									<option>England</option>
-									<option>Pratapcity</option>
-									<option>Ukrain</option>
-									<option>Wilangana</option>
-								</select>
-								<i class="ti-location-pin"></i>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="col-lg-5 col-md-3 col-sm-12 small-padd">
-						<div class="form-group">
-							<div class="input-with-icon">
-								<select id="choose-category" class="form-control">
-									<option>Job Category</option>
-									<option>Education & Trainee</option>
-									<option>Sales & Marketing</option>
-									<option>Automotive Jobs</option>
-									<option>Health & Medical</option>
-									<option>Design & Development</option>
-									<option>Book Services</option>
-								</select>
-								<i class="ti-layers"></i>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-2 col-md-2 col-sm-12 small-padd">
-						<div class="form-group">
+				<form action="{% url 'search_category' %}" method="get">
+					<div class="row">
+						<div class="col-lg-5 col-md-3 col-sm-12 small-padd b-r">
 							<div class="form-group">
-								<a href="#" class="btn btn-primary search-btn">Search</a>
+								<div class="input-with-icon">
+									{% render_field category_filter.form.city class="form-control" value="Keyword:Name,Tag" %}
+									<i class="ti-location-pin"></i>
+								</div>
 							</div>
 						</div>
+
+
+						<div class="col-lg-5 col-md-3 col-sm-12 small-padd">
+							<div class="form-group">
+								<div class="input-with-icon">
+									{% render_field category_filter.form.sub_category class="form-control" placeholder="Keyword:Name, Tag" %}
+									<i class="ti-layers"></i>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-2 col-md-2 col-sm-12 small-padd">
+							<div class="form-group">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary search-btn">Search</button>
+								</div>
+							</div>
+						</div>
+
 					</div>
-
-				</div>
-
+				</form>
 			</div>
 		</div>
 	</div>
@@ -101,24 +77,27 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4 col-sm-4">
-				<div class="working-process"><span class="process-img"><img src="{% static 'frontend/assets/img/step-1.png' %}"
-							class="img-responsive" alt="" /><span class="process-num">01</span></span>
+				<div class="working-process"><span class="process-img"><img
+							src="{% static 'frontend/assets/img/step-1.png' %}" class="img-responsive" alt="" /><span
+							class="process-num">01</span></span>
 					<h4>Create An Account</h4>
 					<p>Post a job to tell us about your project. We'll quickly match you with the right
 						freelancers find place best.</p>
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-4">
-				<div class="working-process"><span class="process-img"><img src="{% static 'frontend/assets/img/step-2.png' %}"
-							class="img-responsive" alt="" /><span class="process-num">02</span></span>
+				<div class="working-process"><span class="process-img"><img
+							src="{% static 'frontend/assets/img/step-2.png' %}" class="img-responsive" alt="" /><span
+							class="process-num">02</span></span>
 					<h4>Search Jobs</h4>
 					<p>Post a job to tell us about your project. We'll quickly match you with the right
 						freelancers find place best.</p>
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-4">
-				<div class="working-process"><span class="process-img"><img src="{% static 'frontend/assets/img/step-3.png' %}"
-							class="img-responsive" alt="" /><span class="process-num">03</span></span>
+				<div class="working-process"><span class="process-img"><img
+							src="{% static 'frontend/assets/img/step-3.png' %}" class="img-responsive" alt="" /><span
+							class="process-num">03</span></span>
 					<h4>Save & Apply</h4>
 					<p>Post a job to tell us about your project. We'll quickly match you with the right
 						freelancers find place best.</p>
@@ -167,135 +146,23 @@
 		</div>
 
 		<div class="row">
-
+			{% for cat in category %}
 			<div class="col-md-3 col-sm-6">
 				<div class="category-box" data-aos="fade-up">
 					<div class="category-desc">
 						<div class="category-icon">
-							<img src="{% static 'frontend/assets/img/cat-1.png' %}" class="img-responsive" alt="" />
+							<img src="{{ cat.image.url }}" class="img-responsive" alt="" />
 							<i class="icon-bargraph abs-icon" aria-hidden="true"></i>
 						</div>
 
 						<div class="category-detail category-desc-text">
-							<h4> <a href="browse-jobs-grid.html">Accounting & Finance</a></h4>
+							<h4> <a href="servies/{{cat.slug}}">{{cat.name}}</a></h4>
 							<p>122 Jobs</p>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="category-box" data-aos="fade-up">
-					<div class="category-desc">
-						<div class="category-icon">
-							<img src="{% static 'frontend/assets/img/cat-2.png' %}" class="img-responsive" alt="" />
-							<i class="icon-tools-2 abs-icon" aria-hidden="true"></i>
-						</div>
-
-						<div class="category-detail category-desc-text">
-							<h4> <a href="browse-jobs-grid.html">Automotive Jobs</a></h4>
-							<p>155 Jobs</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="category-box" data-aos="fade-up">
-					<div class="category-desc">
-						<div class="category-icon">
-							<img src="{% static 'frontend/assets/img/cat-3.png' %}" class="img-responsive" alt="" />
-							<i class="icon-briefcase abs-icon" aria-hidden="true"></i>
-						</div>
-
-						<div class="category-detail category-desc-text">
-							<h4> <a href="browse-jobs-grid.html">Business</a></h4>
-							<p>300 Jobs</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="category-box" data-aos="fade-up">
-					<div class="category-desc">
-						<div class="category-icon">
-							<img src="{% static 'frontend/assets/img/cat-4.png' %}" class="img-responsive" alt="" />
-							<i class="icon-edit abs-icon" aria-hidden="true"></i>
-						</div>
-
-						<div class="category-detail category-desc-text">
-							<h4> <a href="browse-jobs-grid.html">Education Training</a></h4>
-							<p>80 Jobs</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="category-box" data-aos="fade-up">
-					<div class="category-desc">
-						<div class="category-icon">
-							<img src="{% static 'frontend/assets/img/cat-5.png' %}" class="img-responsive" alt="" />
-							<i class="icon-heart abs-icon" aria-hidden="true"></i>
-						</div>
-
-						<div class="category-detail category-desc-text">
-							<h4> <a href="browse-jobs-grid.html">Healthcare</a></h4>
-							<p>120 Jobs</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="category-box" data-aos="fade-up">
-					<div class="category-desc">
-						<div class="category-icon">
-							<img src="{% static 'frontend/assets/img/cat-6.png' %}" class="img-responsive" alt="" />
-							<i class="icon-wine abs-icon" aria-hidden="true"></i>
-						</div>
-
-						<div class="category-detail category-desc-text">
-							<h4> <a href="browse-jobs-grid.html">Restaurant & Food</a></h4>
-							<p>78 Jobs</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="category-box" data-aos="fade-up">
-					<div class="category-desc">
-						<div class="category-icon">
-							<img src="{% static 'frontend/assets/img/cat-7.png' %}" class="img-responsive" alt="" />
-							<i class="icon-map abs-icon" aria-hidden="true"></i>
-						</div>
-
-						<div class="category-detail category-desc-text">
-							<h4> <a href="browse-jobs-grid.html">Transportation</a></h4>
-							<p>90 Jobs</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="category-box" data-aos="fade-up">
-					<div class="category-desc">
-						<div class="category-icon">
-							<img src="{% static 'frontend/assets/img/cat-8.png' %}" class="img-responsive" alt="" />
-							<i class="icon-desktop abs-icon" aria-hidden="true"></i>
-						</div>
-
-						<div class="category-detail category-desc-text">
-							<h4> <a href="browse-jobs-grid.html">Telecommunications</a></h4>
-							<p>210 Jobs</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			{% endfor %}
 		</div>
 
 	</div>

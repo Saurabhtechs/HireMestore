@@ -132,8 +132,8 @@ class User_Detail(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
-    category = models.CharField(max_length=30)
-    sub_category = models.CharField(max_length=30)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     dob = models.CharField(max_length=30)
     area = models.CharField(max_length=30)
     city = models.CharField(max_length=30)

@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'core',
     'home',
     'widget_tweaks',
+    'django_filters',
+
 
 ]
 
