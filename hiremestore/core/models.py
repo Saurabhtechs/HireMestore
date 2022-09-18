@@ -132,8 +132,8 @@ class User_Detail(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,null=False)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE,null=False)
     dob = models.CharField(max_length=30)
     area = models.CharField(max_length=30)
     city = models.CharField(max_length=30)
@@ -172,6 +172,7 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+
     class Meta:
         db_table = "tbl_countries"
 

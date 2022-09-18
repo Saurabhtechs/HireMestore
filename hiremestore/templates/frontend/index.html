@@ -30,6 +30,17 @@
 			<div class="hero-search-content">
 				<form action="{% url 'search_category' %}" method="get">
 					<div class="row">
+
+						<div class="col-lg-5 col-md-3 col-sm-12 small-padd">
+							<div class="form-group">
+								<div class="input-with-icon">
+									<label for="">Category </label>
+									{% render_field category_filter.form.category class="form-control" placeholder="Keyword:Name, Tag" %}
+									<i class="ti-layers"></i>
+								</div>
+							</div>
+						</div>
+
 						<div class="col-lg-5 col-md-3 col-sm-12 small-padd b-r">
 							<div class="form-group">
 								<div class="input-with-icon">
@@ -39,15 +50,6 @@
 							</div>
 						</div>
 
-
-						<div class="col-lg-5 col-md-3 col-sm-12 small-padd">
-							<div class="form-group">
-								<div class="input-with-icon">
-									{% render_field category_filter.form.sub_category class="form-control" placeholder="Keyword:Name, Tag" %}
-									<i class="ti-layers"></i>
-								</div>
-							</div>
-						</div>
 
 						<div class="col-lg-2 col-md-2 col-sm-12 small-padd">
 							<div class="form-group">

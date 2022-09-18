@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block content %}
+{% load widget_tweaks %}
+
 <div class="clearfix"></div>
 
 <!-- Title Header Start -->
@@ -49,38 +51,25 @@
 
 		<!--Browse Job In Grid-->
 		<div class="row extra-mrg">
-<<<<<<< HEAD
 			{% for c in city %}
-=======
-            {%for c in city%}
->>>>>>> c65fe3c1112e755f7c79be5a158e8309aee3eb36
 			<div class="col-md-3 col-sm-6">
 				<div class="grid-view brows-job-list">
-					<div class="brows-job-company-img">
+					<!-- <div class="brows-job-company-img">
 						<img src="#"
 							class="img-responsive" alt="" />
-					</div>
+					</div> -->
 					<div class="brows-job-position">
-<<<<<<< HEAD
-						<h3><a href="job-detail.html">{{ c.name }}</a></h3>
-=======
-						<h3><a href="job-detail.html">{{c.name}}</a></h3>
->>>>>>> c65fe3c1112e755f7c79be5a158e8309aee3eb36
+						<h3><a href="{% url 'index' %}browsebylocation/{{c.name}}">{{ c.name }}</a></h3>
 						<p><span>Fession City</span></p>
 					</div>
 					<div class="job-position">
 						<span class="job-num">210 Worker</span>
 					</div>
-
-
 					<span class="tg-themetag tg-featuretag">Since 2013</span>
 				</div>
 			</div>
 			{% endfor %}
-<<<<<<< HEAD
-=======
-			
->>>>>>> c65fe3c1112e755f7c79be5a158e8309aee3eb36
+
 		</div>
 		<!--/.Browse Job In Grid-->
 

@@ -93,12 +93,6 @@ def subcategory(request, id):
 
 def worker(request, id):
     data = website_profile.objects.all()
-
-    worker = User_Detail.objects.filter(sub_category=id)
-    print(worker)
-    return render(request, 'main/worker.html', {'result': data, 'worker': worker}, )
-    subcategory = SubCategory.objects.filter(slug=id).values_list('id', flat=True)
-
     subcategory = SubCategory.objects.filter(
         slug=id).values_list('id', flat=True)
 
@@ -134,9 +128,9 @@ def update_profile_update(request, id):
         else:
             worker_data = User_Detail()
             worker_data.user = user
-        category = Category.objects.filter(request.POST['category'])
+        category = Category.objects.filter(id=request.POST['category'])
         worker_data.category =category
-        subcategory = SubCategory.objects.filter(request.POST['subcategory'])
+        subcategory = SubCategory.objects.filter(id=request.POST['subcategory'])
         worker_data.sub_category = subcategory
         worker_data.name = request.POST['name']
         worker_data.email = request.POST['email']

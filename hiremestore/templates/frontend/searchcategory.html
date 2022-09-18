@@ -27,7 +27,7 @@
 						<!-- <input type="text" class="form-control"  placeholder="Keyword: Name, Tag" > -->
 						<div class="form-group">
 							<div class="input-with-icon">
-								{% render_field category_filter.form.city class="form-control" placeholder="Keyword:Name, Tag" %}
+								{% render_field category_filter.form.city class="form-control"  %}
 							</div>
 						</div>
 					</div>
@@ -35,7 +35,7 @@
 
 						<div class="form-group">
 							<div class="input-with-icon">
-								{% render_field category_filter.form.sub_category class="form-control" placeholder="Keyword:Name, Tag" %}
+								{% render_field category_filter.form.category class="form-control" value='City' %}
 							</div>
 						</div>
 
