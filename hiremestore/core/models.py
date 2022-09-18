@@ -195,4 +195,10 @@ class Cities(models.Model):
 
     class Meta:
         db_table = "tbl_cities"
-   
+
+class SubScribers(models.Model):
+    email = models.EmailField(default="email")
+    created = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email

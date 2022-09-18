@@ -57,13 +57,13 @@
 
           <li class="nav-item">
             <a class="nav-link {% if 'tables' in segment %} active {% endif %}" href="{% url 'userdisplay' %}">
-              <i class="ni ni-single-02 text-default"></i>
+              <i class="ni ni-single-02 text-yellow"></i>
               <span class="nav-link-text">Users</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {% if 'tables' in segment %} active {% endif %}" href="{% url 'subcategorydisplay' %}">
+            <a class="nav-link {% if 'tables' in segment %} active {% endif %}" href="{% url 'subscriberdisplay' %}">
               <i class="ni ni-bullet-list-67 text-default"></i>
               <span class="nav-link-text">Subscribers</span>
             </a>
@@ -73,6 +73,13 @@
             <a class="nav-link {% if 'tables' in segment %} active {% endif %}" href="{% url 'website_view' %}">
               <i class="ni ni-laptop text-default"></i>
               <span class="nav-link-text">Website Profile</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link {% if 'tables' in segment %} active {% endif %}" href="{% url 'contact_list' %}">
+              <i class="ni ni-pin-3 text-default"></i>
+              <span class="nav-link-text">Contact</span>
             </a>
           </li>
           <!-- <li class="nav-item">

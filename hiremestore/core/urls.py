@@ -30,6 +30,8 @@ urlpatterns = [
     path('update_profile_update/<int:id>', views.update_profile_update,name="update_profile_update"),
 
 
+    path('subscriber', views.Subscriber, name='subscriber'),
+
 
 
 

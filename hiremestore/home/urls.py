@@ -31,6 +31,14 @@ urlpatterns = [
 # Category Urls End Here......................................................
 
 
+# Contact Urls Start Here......................................................
+
+    path('contact_list', views.contact_list,name="contact_list"),
+    path('contact_delete/<int:id>', views.contact_listdelete,name="contact_delete"),
+
+# Contact Urls End Here......................................................
+
+
 # Subcategory Urls Start Here......................................................
     path('subcategorydisplay', views.Subategorydisplay,name="subcategorydisplay"),
     path('subcategory_add',views.SubCategoryAdd,name="subcategory_add"),
@@ -49,6 +57,13 @@ urlpatterns = [
 
 
 # User Urls End Here......................................................
+
+# Subscribers Urls Start Here......................................................
+    path('subscriberdisplay', views.SubscriberDisplay,name="subscriberdisplay"),
+    path('subscriber_delete/<int:id>', views.subscriber_listdelete,name="subscriber_delete"),
+
+# Subscribers Urls End Here......................................................
+
 
     path('addcat',views.AddCat,name="addcat"),
     path('addcat/<int:id>',views.category_update,name="addcat"),

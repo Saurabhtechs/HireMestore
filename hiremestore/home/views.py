@@ -221,14 +221,18 @@ def User_Detail_Data(request, id):
 
 def User_Delete(request, id):
     data = User.objects.get(id=id)
-    print(User.is_active)
     data.update()
     return redirect('userdisplay')
 
 
 def contact_list(request):
-    data = Contact.objects.all().order_by('-created')
-    return render(request, 'home/user.html', {'contact_list': data})
+    data = Contact.objects.all()
+    return render(request, 'home/contactdetail.html', {'contact_list': data})
+
+def contact_listdelete(request, id):
+    data = Contact.objects.get(id=id)
+    data.delete()
+    return redirect('contact_list')
 
 # User Crud Operation End Here......................................................
 
@@ -295,5 +299,17 @@ def WebprofileUpdate(request, id):
     return redirect('website_view')
 
 
-
 # Website Profile Crud Operation End Here......................................................
+
+
+# Subscriber Crud Operation Start Here......................................................
+
+def SubscriberDisplay(request):
+    data = SubScribers.objects.all()
+    return render(request,'home/subscriber.html',{'sresult':data})
+
+def subscriber_listdelete(request,id):
+    data = SubScribers.objects.get(id=id)
+    data.delete()
+    return redirect('subscriberdisplay')
+# Subscriber Crud Operation End Here......................................................

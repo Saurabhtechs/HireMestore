@@ -200,6 +200,14 @@ def Browsebyskill(request):
     return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital})
 
 
+def Subscriber(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        subcrib_add = SubScribers.objects.create(email=email)
+        subcrib_add.save()
+    return redirect('index')
+
+
 
 
 
