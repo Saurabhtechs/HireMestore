@@ -10,8 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import User
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from .filters import CategoryFilter
+import json
 
 def Global_Data(request):
     city = Cities.objects.filter()[:4]
@@ -198,6 +199,24 @@ def Browsebylocation(request, id):
 def Browsebyskill(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
     return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital})
+
+def StateList(request):
+    state = States.objects.filter(country=request.GET['country_id'])
+    return render(request, 'frontend/myprofile.html', {'state': state})
+
+def CityList(request):
+    jsondata = Cities.objects.filter(state_id=request.GET['state_id']).values_list('id','name')
+    # jsondata = serializers.serialize('json', data)
+    # print(json.dumps(jsondata))
+    
+    # print(type(json.dumps(jsondata)))
+    jsondict =dict(jsondata)
+    print(jsondict)
+    # for jsondata in data:
+
+    #     print(jsondata)
+    return HttpResponse(jsondict, content_type='application/json')      
+
 
 
 
