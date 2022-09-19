@@ -12,8 +12,6 @@ from accounts.models import User
 from django.core import serializers
 from django.http import HttpResponse
 from .filters import CategoryFilter
-from django.core.paginator import Paginator
-
 
 def Global_Data(request):
     city = Cities.objects.filter()[:4]
@@ -180,13 +178,8 @@ def GetSubCategory(request):
 # ==================================================================================================
 #
 def Browsebylocations(request):
-    city = Cities.objects.all()
-    paginator = Paginator(city, 12)  # Show 25 contacts per page.
-
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    contaxt = {'page_obj': page_obj}
-
+    city = Cities.objects.all()[:10]
+    contaxt = {'city': city}
     return render(request, 'frontend/browse-jobs-location.html', contaxt)
 
 def Browsebylocation(request, id):
@@ -213,8 +206,5 @@ def Subscriber(request):
         subcrib_add = SubScribers.objects.create(email=email)
         subcrib_add.save()
     return redirect('index')
-
-
-
 
 

@@ -54,7 +54,7 @@ def Logincheck(request):
             messages.success(request,"Login Successfull...")
             return redirect('index')
         else:
-            return redirect('login')
+            return redirect('index')
 
 def Logout(request):
     logout(request)
