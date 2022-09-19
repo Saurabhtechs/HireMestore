@@ -30,8 +30,13 @@ urlpatterns = [
     path('update_profile_update/<int:id>', views.update_profile_update,name="update_profile_update"),
 
 
+<<<<<<< HEAD
     path('statelist', views.StateList, name="statelist"),
     path('citylist',views.CityList, name="citylist"),
+=======
+    path('subscriber', views.Subscriber, name='subscriber'),
+
+>>>>>>> 5f8a617a6dace9b121200b82466e63652c728f00
 
 
 

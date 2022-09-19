@@ -51,7 +51,7 @@
 
 		<!--Browse Job In Grid-->
 		<div class="row extra-mrg">
-			{% for c in city %}
+			{% for c in page_obj %}
 			<div class="col-md-3 col-sm-6">
 				<div class="grid-view brows-job-list">
 					<!-- <div class="brows-job-company-img">
@@ -75,13 +75,40 @@
 
 		<div class="row">
 			<ul class="pagination">
-				<li><a href="#"><i class="ti-arrow-left"></i></a></li>
-				<li class="active"><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#"><i class="fa fa-ellipsis-h"></i></a></li>
-				<li><a href="#"><i class="ti-arrow-right"></i></a></li>
+				{% comment %} <span class="step-links">
+					{% if page_obj.has_previous %}
+						<a href="?page=1">&laquo; first</a>
+						<a href="?page={{ page_obj.previous_page_number }}">previous</a>
+					{% endif %}
+			
+					<span class="current">
+						Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+					</span>
+			
+					{% if page_obj.has_next %}
+						<a href="?page={{ page_obj.next_page_number }}">next</a>
+						<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+					{% endif %}
+				</span> {% endcomment %}
+
+				<li>{% if page_obj.has_previous %}
+					{% comment %} <a href="?page=1">&laquo; first</a> {% endcomment %}
+					<a href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+				{% endif %}
+				{% comment %} <i class="ti-arrow-left"></i></a></li> {% endcomment %}
+				
+				<li class=""></a><span class="current">
+					Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+				</span></li>
+				
+				{% comment %} <li><a href="#"><i class="fa fa-ellipsis-h"></i></a></li> {% endcomment %}
+
+				<li>{% if page_obj.has_next %}
+					<a href="?page={{ page_obj.next_page_number }}">next</a>
+					<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+				{% endif %}
+				
+				{% comment %} <i class="ti-arrow-right"></i></a></li> {% endcomment %}
 			</ul>
 		</div>
 

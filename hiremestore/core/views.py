@@ -12,7 +12,12 @@ from accounts.models import User
 from django.core import serializers
 from django.http import HttpResponse,JsonResponse
 from .filters import CategoryFilter
+<<<<<<< HEAD
 import json
+=======
+from django.core.paginator import Paginator
+
+>>>>>>> 5f8a617a6dace9b121200b82466e63652c728f00
 
 def Global_Data(request):
     city = Cities.objects.filter()[:4]
@@ -179,8 +184,13 @@ def GetSubCategory(request):
 # ==================================================================================================
 #
 def Browsebylocations(request):
-    city = Cities.objects.all()[:10]
-    contaxt = {'city': city}
+    city = Cities.objects.all()
+    paginator = Paginator(city, 12)  # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    contaxt = {'page_obj': page_obj}
+
     return render(request, 'frontend/browse-jobs-location.html', contaxt)
 
 def Browsebylocation(request, id):
@@ -217,6 +227,14 @@ def CityList(request):
     #     print(jsondata)
     return HttpResponse(jsondict, content_type='application/json')      
 
+
+
+def Subscriber(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        subcrib_add = SubScribers.objects.create(email=email)
+        subcrib_add.save()
+    return redirect('index')
 
 
 
