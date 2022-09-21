@@ -152,9 +152,27 @@
         <div class="modal-content">
             <div class="modal-body">
                 <form class="form-horizontal" action="{% url 'logincheck' %}" method="post">
+                    
                     {% csrf_token %}
-                    <div class="new-logwrap">
+                    
+                    
+                     
 
+                    <div class="new-logwrap">
+{% comment %} ///////////////////////////////////////////////////////////////////////////// {% endcomment %}
+                        
+{% for msg in messages %}
+<div class="form-group">                           
+                            <div class="input-with-icon">
+                               <h3 style="
+                                text-align: center;
+                                background-color: tomato;
+                                border-radius: 20%;
+                            ">msg</h3>
+                            </div>
+                        </div>
+                        {% endfor %}
+ {% comment %} ///////////////////////////////////////////////////////////////////////////////////////// {% endcomment %}
                         <div class="form-group">
                             <label>Email/Username</label>
                             <div class="input-with-icon">

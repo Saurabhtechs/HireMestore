@@ -10,10 +10,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import User
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from .filters import CategoryFilter
-from django.core.paginator import Paginator
 
+import json
+from django.core.paginator import Paginator
 
 def Global_Data(request):
     city = Cities.objects.filter()[:4]
@@ -186,7 +187,6 @@ def Browsebylocations(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     contaxt = {'page_obj': page_obj}
-
     return render(request, 'frontend/browse-jobs-location.html', contaxt)
 
 def Browsebylocation(request, id):
@@ -206,6 +206,15 @@ def Browsebyskill(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
     return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital})
 
+def StateList(request):
+    state = States.objects.filter(country=request.GET['country_id'])
+    return render(request, 'frontend/myprofile.html', {'state': state})
+
+def CityList(request):
+    jsondata = Cities.objects.filter(state_id=request.GET['state_id']).values_list('id','name')
+    return JsonResponse({"jsondict": list(jsondata)})
+
+
 
 def Subscriber(request):
     if request.method == 'POST':
@@ -213,10 +222,5 @@ def Subscriber(request):
         subcrib_add = SubScribers.objects.create(email=email)
         subcrib_add.save()
     return redirect('index')
-
-
-# ///////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 

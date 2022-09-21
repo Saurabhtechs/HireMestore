@@ -71,7 +71,6 @@ urlpatterns = [
     
 
 
-
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
 

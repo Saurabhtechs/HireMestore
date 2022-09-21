@@ -54,7 +54,8 @@ def Logincheck(request):
             messages.success(request,"Login Successfull...")
             return redirect('index')
         else:
-            return redirect('login')
+            msg = messages.success(request, "something wrong")
+            return msg
 
 def Logout(request):
     logout(request)
@@ -114,38 +115,21 @@ def send_otp(phone_number , otp):
     
 def UserRegister(request):
 
-    # if request.method == "POST":
-    #     username = request.POST['name']
-    #     email = request.POST['email']
-    #     phone_number = request.POST['phone_number']
-    #     password = request.POST['password']
-    #     user = User.objects.create(username=username,email=email,phone_number=phone_number)
-    #     user.set_password(password)
-    #     user.save()
-    #     messages.success(request, "Registration Successfull...")
-    #     return redirect('login')
-    #
-    # else:
-    #
-    #
-    #     data = website_profile.objects.all()
-    #     return render(request, 'frontend/Register.html', {'result': data})
-
     if request.method == 'POST':
         username = request.POST['name']
         email = request.POST['email']
         phone_number = request.POST['phone_number']
         password = request.POST['password']
 
-        check_user = User.objects.filter(email=email).first()
-        check_profile = User.objects.filter(phone_number=phone_number).first()
+        if User.objects.filter(email=email).exists():
+            messages.info(request, 'email Taken')
+            return redirect('register')
 
-        if check_user or check_profile:
-            context = {'message': 'User already exists', 'class': 'danger'}
-            return render(request, 'frontend/register.html', context)
+        if User.objects.filter(phone_number=phone_number).exists():
+            messages.info(request, 'Mobile number Taken')
+            return redirect('register')
 
-        otp = str(random.randint(1000, 9999))
-        user = User(username=username, email=email, phone_number=phone_number, otp=otp)
+        user = User(username=username, email=email, phone_number=phone_number)
         user.set_password(password)
 
         user.save()
