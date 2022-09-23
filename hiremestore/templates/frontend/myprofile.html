@@ -10,47 +10,7 @@
 	<div class="container-fluid">
 		<div class="row">
 
-			<!-- Sidebar Wrap -->
-			<div class="col-lg-3 col-md-4">
-				<div class="side-dashboard">
-
-					<div class="dashboard-avatar">
-
-						<div class="dashboard-avatar-thumb">
-							<img src="assets/img/can-2.png" class="img-avater" alt="" />
-						</div>
-
-						<div class="dashboard-avatar-text">
-							<h4>{{worker.name}}</h4>
-							<span>Zivara Technoloty</span>
-						</div>
-
-					</div>
-
-					<div class="dashboard-menu">
-						<ul>
-							<li><a href="dashboard.html"><i class="ti-dashboard"></i>Dashboard</a></li>
-							<li><a href="post-new-job.html"><i class="ti-ruler-pencil"></i>Post New Page</a></li>
-							<li><a href="all-jobs.html"><i class="ti-briefcase"></i>All Jobs</a></li>
-							<li><a href="applications.html"><i class="ti-user"></i>Applications</a></li>
-							<li><a href="packages.html"><i class="ti-wallet"></i>Packages</a></li>
-							<li><a href="choose-package.html"><i class="ti-cup"></i>Choose Packages</a></li>
-							<li><a href="viewed-resume.html"><i class="ti-flag-alt-2"></i>Viewed Resume</a></li>
-							<li class="active"><a href="myprofile.html"><i class="ti-id-badge"></i>Edit Profile</a></li>
-							<li><a href="login.html"><i class="ti-power-off"></i>Logout</a></li>
-						</ul>
-						<h4>For Candidate</h4>
-						<ul>
-							<li><a href="candidate-dashboard.html"><i class="ti-dashboard"></i>Candidate Dashboard</a>
-							</li>
-							<li><a href="candidate-resume.html"><i class="ti-wallet"></i>My Resume</a></li>
-							<li><a href="applied-jobs.html"><i class="ti-hand-point-right"></i>Applied Jobs</a></li>
-							<li><a href="saved-jobs.html"><i class="ti-heart"></i>Saved Jobs</a></li>
-							<li><a href="alert-jobs.html"><i class="ti-bell"></i>Alert Jobs</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+			{% include 'frontend/frontend_sidnav.html' %}
 
 			<!-- Content Wrap -->
 			<div class="col-lg-9 col-md-8">
@@ -60,7 +20,8 @@
 						<div class="dashboard-caption-header">
 							<h4><i class="ti-id-badge"></i>My Profile</h4>
 						</div>
-
+						<form method="post" action="{% url 'update_profile_update' user.id %}" enctype="multipart/form-data">
+							{% csrf_token %}
 						<div class="dashboard-caption-wrap">
 
 							<!-- row -->
@@ -90,7 +51,7 @@
 									<div class="form-group">
 										<label>Birthday</label>
 										<input type="text" id="birthday" value="{{worker.dob}}" name="dob"
-											data-lang="en" data-large-mode="true" data-min-year="2017"
+											data-lang="en" data-large-mode="true" data-min-year="1990"
 											data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017"
 											data-id="datedropper-0" data-theme="my-style" class="form-control"
 											readonly="">
@@ -107,10 +68,10 @@
 									<div class="form-group">
 										<label>Gender</label>
 										<select id="jb-level" name="gender" class="form-control">
-											<option>Gender</option>
-											<option>Male</option>
-											<option>Female</option>
-											<option>Other</option>
+											<option value="">Gender</option>
+											<option value="Male">Male</option>
+											<option value="Female">Female</option>
+											<option value="Other">Other</option>
 										</select>
 									</div>
 								</div>
@@ -165,7 +126,7 @@
 									<div class="form-group">
 										<label>Country*</label>
 										<select id="jb-level" name="country" class="form-control">
-											<!-- <option>Select Country</option> -->
+											<option value="'">Select Country</option>
 											{% for cou in country %}
 											<option value="{{cou.id}}">{{cou.name}}</option>
 											{% endfor %}
@@ -176,10 +137,10 @@
 									<div class="form-group">
 										<label>State*</label>
 										<select id="jb-level" name="state" class="form-control">
-											<option>Select State</option>
-											{% for cou in state %}
+											<option value="">Select State</option>
+											<!-- {% for cou in state %}
 											<option value="{{cou.id}}">{{cou.name}}</option>
-											{% endfor %}
+											{% endfor %} -->
 										</select>
 									</div>
 								</div>
@@ -187,7 +148,7 @@
 									<div class="form-group">
 										<label>District*</label>
 										<select id="jb-level" name="district" class="form-control">
-											<option>Select District</option>
+											<option value="">Select District</option>
 											<!-- {% for cou in city %}
 														<option value="{{con.id}}">{{cou.name}}</option>
 														{% endfor %} -->
@@ -198,7 +159,7 @@
 									<div class="form-group">
 										<label>City*</label>
 										<select id="jb-level" name="city" class="form-control">
-											<option>Select City</option>
+											<option value="">Select City</option>
 											<!-- {% for cou in city %}
 														<option value="{{con.id}}">{{cou.name}}</option>
 														{% endfor %} -->
@@ -238,7 +199,7 @@
 										<label>Category</label>
 										<select id="jb-level" name="category" class="form-control">
 											<option>Select Category</option>
-											<option>Dabra</option>
+											<!-- <option>Dabra</option> -->
 										</select>
 									</div>
 								</div>
@@ -248,7 +209,6 @@
 										<label>Subcategory</label>
 										<select id="jb-level" name="Subcategory" class="form-control">
 											<option>Select Subcategory</option>
-											<option>Dabra</option>
 										</select>
 									</div>
 								</div>
@@ -283,7 +243,7 @@
 								<div class="col-lg-12 col-md-12 col-sm-12">
 									<div class="form-group">
 										<label>About Info</label>
-										<textarea class="form-control textarea" placeholder="About Company"></textarea>
+										<textarea class="form-control textarea" name="experiance" placeholder="About Company"></textarea>
 									</div>
 								</div>
 								<div class="col-lg-12 col-md-12 col-sm-12">
@@ -312,38 +272,38 @@
 								<div class="col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group">
 										<label>Facebook</label>
-										<input type="text" class="form-control"
+										<input type="text" class="form-control" name="fb"
 											placeholder="Ex. 502, Sector 20 C, Mohali">
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group">
-										<label>Twitter</label>
-										<input type="text" class="form-control">
+										<label>Instagra</label>
+										<input type="text" class="form-control" name="insta">
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group">
 										<label>Google Plus</label>
-										<input type="text" class="form-control">
+										<input type="text" class="form-control" name="google">
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group">
 										<label>Youtube</label>
-										<input type="text" class="form-control">
+										<input type="text" class="form-control" name="yt">
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group">
-										<label>Vimeo</label>
-										<input type="text" class="form-control">
+										<label>website</label>
+										<input type="text" class="form-control" name="website">
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group">
 										<label>Linkedin</label>
-										<input type="text" class="form-control">
+										<input type="text" class="form-control" name="link">
 									</div>
 								</div>
 							</div>
@@ -353,7 +313,7 @@
 								Changes</button>
 
 						</div>
-
+						</form>
 					</div>
 				</div>
 			</div>
@@ -399,6 +359,7 @@
 </script>
 <script>
 	$('select[name=categoryType]').on('change', function () {
+		$('select[name=category]').empty()
 		$type = $(this).val();
 		$.ajax({
 			url: "{% url 'getcategory' %}",
@@ -416,15 +377,15 @@
 	});
 
 	$('select[name=category]').on('change', function () {
+		$('select[name=Subcategory]').empty()
 		$catid = $(this).val();
 		$.ajax({
 			url: "{% url 'getsubcategory' %}",
-			type: 'POST',
-			data: { csrfmiddlewaretoken: '{{ csrf_token }}', id: $catid },
+			type: 'Get',
+			data: { csrfmiddlewaretoken: '{{ csrf_token }}', category_id: $catid },
 			success: function (response) {
-				$("#breeds").attr('disabled', false);
 				$.each(response, function (key, value) {
-					$('select[name=category]').append('<option value=' + key + '>' + value + '</option>');
+					$('select[name=Subcategory]').append('<option value=' + key + '>' + value + '</option>');
 				});
 			}
 		});
@@ -432,29 +393,32 @@
 
 
 	$('body').on('change', 'select[name=country]', function (e) {
-
+		$('select[name=state]').empty()
 		var country_id = $(this).val();
-		alert(country_id);
-		//$("#listdata").LoadingOverlay("show", {background  : "rgba(165, 190, 100, 0.5)"});
 		$.ajax({
 			type: "GET",
 			url: "/statelist",
 			dataType: "JSON",
-			data: { "country_id": country_id },
-			success: function (data) {
-				if (data.status == 'success') {
-					$("select[name=state]").html(data.data);
-
-				}
-				setTimeout(function () { $("#listdata").LoadingOverlay("hide") }, 1000);
+			data: { 
+				"country_id": country_id,
+				csrfmiddlewaretoken: "{{ csrf_token }}",
+			},
+			success: function (jsondict) {
+				$.each(jsondict, function (key, value) {
+					$('select[name=state]')
+						.append($("<option></option>")
+							.attr("value", key)
+							.text(value));
+				});
 			}
 
 		});
+			
 	});
 
 	$('body').on('change', 'select[name=state]', function (e) {
 
-
+		$('select[name=district]').empty()
 		var state_id = $(this).val();
 		$.ajax({
 			type: "Get",
@@ -465,25 +429,20 @@
 				csrfmiddlewaretoken: "{{ csrf_token }}",
 			},
 			success: function (jsondict) {
-				console.log(jsondict);
-				// var selectValues = jsondict; 
-				// console.log(selectValues);
-
-				$.each(jsondict, function (id, name) {
-					$('select[name=district]').append($('<option>', { value: id, text: name }));
-
-					// 	$('select[name=district]')
-					// 		.append($("<option></option>")
-					// 			.attr("value", id)
-					// 			.text(name));
-					});
-					// $("select[name=district]").append('<option value=1>' + jsondict + '</option>');
-					// if(data.status=='success'){
-					//     $("select[name=district]").html(data.data); 
-					//     $("select[name=city]").html(data.data); 
-
-					// }
-				}
+				
+				$.each(jsondict, function (key, value) {
+					$('select[name=district]')
+						.append($("<option></option>")
+							.attr("value", key)
+							.text(value));
+				});
+				$.each(jsondict, function (key, value) {
+					$('select[name=city]')
+						.append($("<option></option>")
+							.attr("value", key)
+							.text(value));
+				});
+			}
 
 		});
 	});

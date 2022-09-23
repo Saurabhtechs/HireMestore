@@ -152,6 +152,8 @@ def UserRegister(request):
 
         worker_data = User_Detail()
         worker_data.name = request.POST['name']
+        worker_data.email = request.POST['email']
+        worker_data.phone = request.POST['phone']
         worker_data.user_id = user.id
         worker_data.save()
         messages.success(request,'Registerd Successfully')

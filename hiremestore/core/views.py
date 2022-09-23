@@ -1,3 +1,4 @@
+from unicodedata import category
 from .models import *
 # Create your views here.
 from django.shortcuts import render, redirect, HttpResponse
@@ -18,7 +19,17 @@ from django.core.paginator import Paginator
 def Global_Data(request):
     city = Cities.objects.filter()[:4]
     category = Category.objects.filter().order_by('-created')[:8]
-    return {'headcity': city, 'headcategory':category}
+    total_category = Category.objects.count()
+    total_user = User.objects.count()
+    total_Worker = User_Detail.objects.count()
+    total_vistitor = User_Detail.objects.count()
+    return {'headcity': city,
+             'headcategory':category,
+             'total_category':total_category,
+             'total_user':total_user,
+             'total_Worker':total_Worker,
+             'total_vistitor':total_Worker
+             }
 
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
@@ -66,12 +77,12 @@ def contact(request):
         return redirect('contact')
 
     data = website_profile.objects.all()
-    return render(request, 'main/contact.html', {'result': data},)
+    return render(request, 'frontend/contact.html', {'result': data},)
 
 
 def about(request):
     data = website_profile.objects.all()
-    return render(request, 'main/about.html', {'result': data}, )
+    return render(request, 'frontend/about.html', {'result': data}, )
 
 
 def servies(request):
@@ -132,22 +143,34 @@ def update_profile_update(request, id):
             worker_data.user = user
         category = Category.objects.filter(id=request.POST['category'])
         worker_data.category =category
-        subcategory = SubCategory.objects.filter(id=request.POST['subcategory'])
+        subcategory = SubCategory.objects.filter(id=request.POST['Subcategory'])
         worker_data.sub_category = subcategory
+        # worker_data.category = request.POST['category']
+        worker_data.sub_category = request.POST['Subcategory']
+        # worker_data.name = request.POST['category']
         worker_data.name = request.POST['name']
         worker_data.email = request.POST['email']
+        worker_data.gender = request.POST['gender']
+        worker_data.lang = request.POST['lang']
         worker_data.dob = request.POST['dob']
-        worker_data.area = request.POST['area']
+        # worker_data.area = request.POST['area']
         worker_data.city = request.POST['city']
         worker_data.district = request.POST['district']
-        worker_data.zip = request.POST['zip']
+        # worker_data.zip = request.POST['zip']
         worker_data.state = request.POST['state']
         worker_data.country = request.POST['country']
-        worker_data.mobile = request.POST['mobile']
-        worker_data.charges = request.POST['rate']
-        worker_data.experiance = request.POST['exp']
-        worker_data.bio = request.POST['bio']
-        worker_data.discription = request.POST['desc']
+        worker_data.phone = request.POST['phone']
+        worker_data.charges = request.POST['charges']
+        worker_data.avilability = request.POST['availability']
+        worker_data.experiance = request.POST['experiance']
+        worker_data.bio = request.POST['headline']
+        worker_data.link = request.POST['link']
+        worker_data.fb = request.POST['fb']
+        worker_data.insta = request.POST['insta']
+        worker_data.google = request.POST['google']
+        worker_data.yt = request.POST['yt']
+        worker_data.website = request.POST['website']
+        # worker_data.discription = request.POST['desc']
         if request.FILES.get('image'):
             worker_data.image = request.FILES.get('image')
 
@@ -166,14 +189,17 @@ def Helper_DashBoard(request):
 
 
 def GetCategory(request):
-    data = Category.objects.filter(type=1)
-    jsondata = serializers.serialize('json', data)
-    return HttpResponse(jsondata, content_type='application/json')
+    print(request)
+    jsondata = Category.objects.filter(type=request.GET['type']).values_list('id','name')
+    return JsonResponse(dict(jsondata))
 
 
 def GetSubCategory(request):
-    data = User_Detail.objects.filter(slug='saurabh-soni').first()
-    return render(request, 'frontend/helper-dashboard.html', {'helper': data})
+    print(request)
+    # data = SubCategory.objects.filter(category_id=request.GET['id']).values_list('id','name')
+    # return render(request, 'frontend/helper-dashboard.html', {'helper': data})
+    jsondata = SubCategory.objects.filter(cat_id=request.GET['category_id']).values_list('id','name')
+    return JsonResponse(dict(jsondata))
 
 
 
@@ -202,12 +228,12 @@ def Browsebyskill(request):
     return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital})
 
 def StateList(request):
-    state = States.objects.filter(country=request.GET['country_id'])
-    return render(request, 'frontend/myprofile.html', {'state': state})
+    jsondata = States.objects.filter(country_id=request.GET['country_id']).values_list('id','name')
+    return JsonResponse(dict(jsondata))
 
 def CityList(request):
     jsondata = Cities.objects.filter(state_id=request.GET['state_id']).values_list('id','name')
-    return JsonResponse({"jsondict": list(jsondata)})
+    return JsonResponse(dict(jsondata))
 
 
 

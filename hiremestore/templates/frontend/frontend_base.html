@@ -3,7 +3,7 @@
 {% load static %}
 
 <head>
-    <title>HIre | Dynamic kro</title>
+    <title>HIre | Dynamic {{request.path}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="{% static 'frontend/assets/plugins/css/plugins.css' %}">
@@ -15,7 +15,11 @@
     <div class="Loader"></div>
     <div class="wrapper">
         <!-- Start Navigation -->
+        {% if request.path == '/' %}
+        {% include 'frontend/home_header.html' %}
+        {% else %}
         {% include 'frontend/header.html' %}
+        {% endif %}
         <!-- End Navigation -->
         <div class="clearfix"></div>
 
