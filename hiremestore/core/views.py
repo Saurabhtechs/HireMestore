@@ -13,6 +13,7 @@ from accounts.models import User
 from django.core import serializers
 from django.http import HttpResponse,JsonResponse
 from .filters import CategoryFilter
+
 import json
 from django.core.paginator import Paginator
 
@@ -206,8 +207,12 @@ def GetSubCategory(request):
 # ==================================================================================================
 #
 def Browsebylocations(request):
-    city = Cities.objects.all()[:10]
-    contaxt = {'city': city}
+    city = Cities.objects.all()
+    paginator = Paginator(city, 12)  # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    contaxt = {'page_obj': page_obj}
     return render(request, 'frontend/browse-jobs-location.html', contaxt)
 
 def Browsebylocation(request, id):

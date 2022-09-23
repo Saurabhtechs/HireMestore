@@ -34,6 +34,22 @@
 					<div id="candidate" class="tab-pane fade in active">
 						<form action="{% url 'register' %}" method="post">
 							{% csrf_token %}
+							{% for msg in messages %}
+							<div class="form-group">
+								
+                          
+                            <div class="input-with-icon">
+                               <h3 style="
+                                text-align: center;
+                                background-color: tomato;
+                                border-radius: 20%;
+                            ">{{msg}}</h3>
+                            </div>
+                        </div>
+                        
+							
+							{% endfor %}
+
 							<div class="form-group">
 								<label>Full Name</label>
 								<div class="input-with-icon">
