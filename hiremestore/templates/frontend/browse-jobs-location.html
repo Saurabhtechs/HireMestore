@@ -54,10 +54,10 @@
 			{% for c in page_obj %}
 			<div class="col-md-3 col-sm-6">
 				<div class="grid-view brows-job-list">
-					<!-- <div class="brows-job-company-img">
-						<img src="#"
+					<div class="brows-job-company-img">
+						<img src="https://www.telegraph.co.uk/content/dam/Travel/Destinations/Asia/India/Mumbai/gateway-of-india-mumbai.jpg?imwidth=680"
 							class="img-responsive" alt="" />
-					</div> -->
+					</div>
 					<div class="brows-job-position">
 						<h3><a href="{% url 'index' %}browsebylocation/{{c.name}}">{{ c.name }}</a></h3>
 						<p><span>Fession City</span></p>
@@ -75,25 +75,27 @@
 
 		<div class="row">
 			<ul class="pagination">
-				
+
 				<li>{% if page_obj.has_previous %}
-					
-					<a href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+
+					<a href="?page={{ page_obj.previous_page_number }}">previous</a>
+				</li>
 				{% endif %}
-				
-				
+
+
 				<li class=""></a><span class="current">
-					Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-				</span></li>
-				
-				
+						Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+					</span></li>
+
+
 
 				<li>{% if page_obj.has_next %}
 					<a href="?page={{ page_obj.next_page_number }}">next</a>
-					<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+					<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+				</li>
 				{% endif %}
-				
-				
+
+
 			</ul>
 		</div>
 
