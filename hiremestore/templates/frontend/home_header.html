@@ -16,10 +16,26 @@
                     <a href="/">Home</a>
                 </li>
                 <li class="dropdown">
-                    <a href="{% url 'about' %}">About</a>
+                    <a href="{% url 'browsebylocations' %}" target="_blank" class="dropdown-toggle"
+                        data-toggle="dropdown">Jobs By Location</a>
+                    <ul class="dropdown-menu animated fadeOutUp">
+                        {% for c in headcity %}
+                        <li><a href="{% url 'index' %}browsebylocation/{{c.name}}">{{c.name}}</a></li>
+                        {% endfor %}
+                        <li><a target="_blank" href="{% url 'browsebylocations' %}">View More</a></li>
+                    </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="{% url 'contact' %}">ContactUs</a>
+                    <a href="{% url 'browsebyskill' %}" target="_blank" class="dropdown-toggle"
+                        data-toggle="dropdown">Jobs
+                        By Skills</a>
+                    <ul class="dropdown-menu animated fadeOutUp">
+                        {% for headcat in headcategory %}
+                        <li><a href="servies/{{headcat.slug}}">{{ headcat.name}}</a></li>
+                        {% endfor %}
+                        <li><a target="_blank" href="{% url 'browsebyskill' %}">View More</a></li>
+
+                    </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
@@ -47,9 +63,9 @@
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </li>
-                
+
                 {% else %}
-                <li><a href="javascript:void(0)"  data-toggle="modal" data-target="#signup"><i class="fa fa-pencil"
+                <li><a href="javascript:void(0)" data-toggle="modal" data-target="#signup"><i class="fa fa-pencil"
                             aria-hidden="true"></i>SignUp</a></li>
                 {% endif %}
                 <li class="left-br"><a href="javascript:void(0)" data-toggle="modal" data-target="#signup"
