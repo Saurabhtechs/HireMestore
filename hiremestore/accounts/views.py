@@ -108,7 +108,6 @@ def send_otp(phone_number , otp):
 
     response = requests.request("POST", url, data=payload, headers=headers)
 
-    print(response.text)
 
 
 
@@ -137,7 +136,7 @@ def UserRegister(request):
         worker_data = User_Detail()
         worker_data.name = request.POST['name']
         worker_data.email = request.POST['email']
-        worker_data.phone = request.POST['phone']
+        worker_data.phone = request.POST['phone_number']
         worker_data.user_id = user.id
         worker_data.save()
         messages.success(request,'Registerd Successfully')
@@ -157,8 +156,6 @@ def otp(request):
         if otp == profile.otp:
             return redirect('index')
         else:
-            print('Wrong')
-
             context = {'message': 'Wrong OTP', 'class': 'danger', 'phone_number': phone_number}
             return render(request, 'otp.html', context)
 

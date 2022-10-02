@@ -21,11 +21,24 @@
 		<!-- Company Searrch Filter Start -->
 		<div class="row extra-mrg">
 			<div class="wrap-search-filter">
-				<form>
-					<div class="col-md-4 col-sm-4">
+				<form >
+					<!-- <div class="col-md-4 col-sm-4">
 						<input type="text" class="form-control" placeholder="Keyword: Name, Tag">
+						{% render_field category_filter.form.city class="form-control" value="Keyword:Name,Tag" %}
+					
+					</div> -->
+					<div class="row">
+						<div class="col-lg-5 col-md-3 col-sm-12 small-padd b-r">
+							<div class="form-group">
+								<div class="input-with-icon">
+									{% render_field category_filter.form.citytext class="form-control" value="" %}
+									<i class="ti-location-pin"></i>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-md-3 col-sm-3">
+					
+					<!-- <div class="col-md-3 col-sm-3">
 						<input type="text" class="form-control" placeholder="Location: City, State, Zip">
 					</div>
 					<div class="col-md-3 col-sm-3">
@@ -40,10 +53,10 @@
 							<option value="7">Architecture</option>
 						</select>
 
-					</div>
-					<div class="col-md-2 col-sm-2">
+					</div> -->
+					<!-- <div class="col-md-2 col-sm-2">
 						<button type="submit" class="btn btn-primary full-width">Filter</button>
-					</div>
+					</div> -->
 				</form>
 			</div>
 		</div>
