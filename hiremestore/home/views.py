@@ -55,7 +55,6 @@ def pages(request):
 
 def Categorydisplay(request):
     data = category.objects.all()
-    print('Category data', data)
     return render(request, 'home/category.html', {'categoryresult': data})
 
 
@@ -92,6 +91,8 @@ def CategoryEdit(request, id):
 
 def CategoryUpdate(request, id):
     category_done = Category.objects.get(id=id)
+    if request.POST['type']:
+        category_done.type = request.POST['type']
     if request.POST['name']:
         category_done.name = request.POST['name']
     if request.POST['title']:
@@ -148,7 +149,6 @@ def SubCategoryUpdate(request, id):
     subcategory_done = SubCategory.objects.get(id=id)
     if request.POST['category']:
         cat_id = request.POST['category']
-        print(cat_id)
         category = Category.objects.get(id=cat_id)
         subcategory_done.cat = category
     if request.POST['name']:
@@ -179,7 +179,6 @@ def AddCat(request):
             return redirect('categorydisplay')
         else:
             messages.info(request, 'fill valid data')
-            print('Data Not Upload')
     form = CategoryForm()
     context = {'form': form}
 
@@ -189,7 +188,6 @@ def AddCat(request):
 def category_update(request, id):
 
     data = Category.objects.get(id=id)
-    print(data)
     if request.method == 'POST':
 
         form = CategoryForm(request.POST, request.FILES, instance=data)
@@ -212,7 +210,6 @@ def User_Detail_Data(request, id):
     # data = User.objects.get(id=id)
     # if User_Detail.objects.filter(user_id=data).exists():
     #     detail_data = User_Detail.objects.get(user_id=data)
-    #     print('detatils', detail_data)
     #     return render(request, 'home/user_profile.html', {'user_detail_result': detail_data, 'userdata': data})
     # else:
     #     return redirect('userdisplay')

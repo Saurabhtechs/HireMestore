@@ -1,7 +1,7 @@
-from unicodedata import category
+# from unicodedata import category
 from .models import *
 # Create your views here.
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -10,12 +10,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from accounts.models import User
-from django.core import serializers
-from django.http import HttpResponse,JsonResponse
+from django.http import JsonResponse
 from .filters import CategoryFilter
-
-import json
 from django.core.paginator import Paginator
+import datetime
+
 
 def Global_Data(request):
     city = Cities.objects.filter()[:4]
@@ -25,41 +24,40 @@ def Global_Data(request):
     total_Worker = User_Detail.objects.count()
     total_vistitor = User_Detail.objects.count()
     return {'headcity': city,
-             'headcategory':category,
-             'total_category':total_category,
-             'total_user':total_user,
-             'total_Worker':total_Worker,
-             'total_vistitor':total_Worker
-             }
+            'headcategory': category,
+            'total_category': total_category,
+            'total_user': total_user,
+            'total_Worker': total_Worker,
+            'total_vistitor': total_Worker
+            }
+
 
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
     helper = Category.objects.filter(type=2).order_by('-created')[:4]
     category = Category.objects.filter().order_by('-created')[:8]
     subcategory = SubCategory.objects.filter().order_by('-created')
+    total_Worker = User_Detail.objects.filter(category=5).count()
+    print('total_Worker',total_Worker)
     data = website_profile.objects.all()
     testimonial = Testimonails.objects.all()
     user = User_Detail.objects.all()
-    category_Filter = CategoryFilter(request.GET,queryset=user)
-    
+    category_Filter = CategoryFilter(request.GET, queryset=user)
+
     content = {'result': data, 'testimonial': testimonial, 'category': category,
-               'subcategory': subcategory, 'digital': digital, 'helper': helper,'category_filter': category_Filter}
+               'subcategory': subcategory, 'digital': digital, 'helper': helper, 'category_filter': category_Filter}
     return render(request, 'frontend/index.html', content)
 
 
 def SearchCategory(request):
     user = User_Detail.objects.all()
-    category_Filter = CategoryFilter(request.GET,queryset=user)
-    print(request.GET)
+    category_Filter = CategoryFilter(request.GET, queryset=user)
     return render(request, 'frontend/searchcategory.html', {'category_filter': category_Filter})
+
 
 def Browsebylocation(request):
     city = Cities.objects.all()[:8]
     return render(request, 'frontend/browse-jobs-location.html', {'city': city})
-
-
-
-
 
 
 def contact(request):
@@ -110,19 +108,17 @@ def worker(request, id):
     subcategory = SubCategory.objects.filter(
         slug=id).values_list('id', flat=True)
 
-    print(subcategory)
     cate = list(subcategory)
     get = cate[0]
     worker = User_Detail.objects.filter(sub_category=get)
     return render(request, 'frontend/helper.html', {'result': data, 'worker': worker}, )
 
 
-
-
 def worker_detail(request, id):
     data = website_profile.objects.all()
-    worker = User_Detail.objects.filter(slug=id).first()
-    return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker, }, )
+    worker = User_Detail.objects.get(slug=id)
+    worker_gallery = User_Gallery.objects.filter(user=worker)
+    return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker,'worker_gallery':worker_gallery }, )
 
 
 def update_profile(request, id):
@@ -142,28 +138,40 @@ def update_profile_update(request, id):
         else:
             worker_data = User_Detail()
             worker_data.user = user
-        category = Category.objects.filter(id=request.POST['category'])
-        worker_data.category =category
-        subcategory = SubCategory.objects.filter(id=request.POST['Subcategory'])
+        if request.POST['category']:
+            category = Category.objects.get(id=request.POST['category'])
+        else:
+            category = Category.objects.filter(id=request.POST['category']).first()
+        worker_data.category = category
+        if request.POST['Subcategory']:
+            subcategory = SubCategory.objects.get(id=request.POST['Subcategory'])
+        else:
+            subcategory = SubCategory.objects.filter(id=request.POST['Subcategory']).first()
+
         worker_data.sub_category = subcategory
-        # worker_data.category = request.POST['category']
-        worker_data.sub_category = request.POST['Subcategory']
-        # worker_data.name = request.POST['category']
         worker_data.name = request.POST['name']
         worker_data.email = request.POST['email']
         worker_data.gender = request.POST['gender']
-        worker_data.lang = request.POST['lang']
-        worker_data.dob = request.POST['dob']
-        # worker_data.area = request.POST['area']
-        worker_data.city = request.POST['city']
-        worker_data.district = request.POST['district']
+        # lang = []
+        # for i in request.POST.getlist('lang'):
+        #     lang.append(i)
+        worker_data.lang = request.POST.getlist('lang')
+        # worker_data.skill = request.POST['skill']
+        dob = datetime.datetime.strptime(request.POST['dob'], "%d/%m/%Y").strftime("%Y-%m-%d")
+        worker_data.dob = dob
+        city = Cities.objects.get(id=request.POST['city'])
+        worker_data.city = city.name
+        district = Cities.objects.get(id=request.POST['district'])
+        worker_data.district = district.name
         # worker_data.zip = request.POST['zip']
-        worker_data.state = request.POST['state']
-        worker_data.country = request.POST['country']
+        state = States.objects.filter(id=request.POST['state']).first()
+        worker_data.state = state.name
+        country = Country.objects.filter(id=request.POST['country']).first()
+        worker_data.country = country.name
         worker_data.phone = request.POST['phone']
         worker_data.charges = request.POST['charges']
-        worker_data.avilability = request.POST['availability']
-        worker_data.experiance = request.POST['experiance']
+        worker_data.skill = request.POST['availability']
+        worker_data.experiance = request.POST['exp']
         worker_data.bio = request.POST['headline']
         worker_data.link = request.POST['link']
         worker_data.fb = request.POST['fb']
@@ -171,18 +179,20 @@ def update_profile_update(request, id):
         worker_data.google = request.POST['google']
         worker_data.yt = request.POST['yt']
         worker_data.website = request.POST['website']
-        # worker_data.discription = request.POST['desc']
+        worker_data.discription = request.POST['discription']
         if request.FILES.get('image'):
             worker_data.image = request.FILES.get('image')
-
         worker_data.save()
 
+        print(worker_data)
+        for gallery in request.FILES.getlist('gallery'):
+            gallery_data = User_Gallery.objects.create(user=worker_data, gallery=gallery)
+            gallery_data.save()
         messages.success(request, 'Data Updated...')
         return redirect('index')
 
     else:
         return redirect('update_profile')
-
 
 def Helper_DashBoard(request):
     data = User_Detail.objects.filter(slug='saurabh-soni').first()
@@ -190,18 +200,17 @@ def Helper_DashBoard(request):
 
 
 def GetCategory(request):
-    print(request)
-    jsondata = Category.objects.filter(type=request.GET['type']).values_list('id','name')
+    jsondata = Category.objects.filter(
+        type=request.GET['type']).values_list('id', 'name')
     return JsonResponse(dict(jsondata))
 
 
 def GetSubCategory(request):
-    print(request)
     # data = SubCategory.objects.filter(category_id=request.GET['id']).values_list('id','name')
     # return render(request, 'frontend/helper-dashboard.html', {'helper': data})
-    jsondata = SubCategory.objects.filter(cat_id=request.GET['category_id']).values_list('id','name')
+    jsondata = SubCategory.objects.filter(
+        cat_id=request.GET['category_id']).values_list('id', 'name')
     return JsonResponse(dict(jsondata))
-
 
 
 # ==================================================================================================
@@ -215,16 +224,16 @@ def Browsebylocations(request):
     contaxt = {'page_obj': page_obj}
     return render(request, 'frontend/browse-jobs-location.html', contaxt)
 
+
 def Browsebylocation(request, id):
 
     city_data = Cities.objects.filter(name=id)
     cat = Cities.objects.filter(name=id).values_list('name', flat=True)
     cate = list(cat)
     get = cate[0]
-    print(get)
     worker = User_Detail.objects.filter(
         city=get)[:10]
-    context = {'worker': worker , 'city_data': city_data}
+    context = {'worker': worker, 'city_data': city_data}
     return render(request, 'frontend/worker.html', context)
 
 
@@ -232,14 +241,17 @@ def Browsebyskill(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
     return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital})
 
+
 def StateList(request):
-    jsondata = States.objects.filter(country_id=request.GET['country_id']).values_list('id','name')
+    jsondata = States.objects.filter(
+        country_id=request.GET['country_id']).values_list('id', 'name')
     return JsonResponse(dict(jsondata))
+
 
 def CityList(request):
-    jsondata = Cities.objects.filter(state_id=request.GET['state_id']).values_list('id','name')
+    jsondata = Cities.objects.filter(
+        state_id=request.GET['state_id']).values_list('id', 'name')
     return JsonResponse(dict(jsondata))
-
 
 
 def Subscriber(request):
@@ -248,5 +260,3 @@ def Subscriber(request):
         subcrib_add = SubScribers.objects.create(email=email)
         subcrib_add.save()
     return redirect('index')
-
-
