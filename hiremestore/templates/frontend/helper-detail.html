@@ -145,11 +145,11 @@
 				<div class="apply-job-detail">
 					<h5>Gallery</h5>
 					<div class="photo-gallery">
-						<div class="container">
+						<div class=" ">
 							<div class="row photos">
 								{% for workerimg in worker_gallery %}
 								<div class="col-sm-6 col-md-4 col-lg-3 item"><a href="{{ workerimg.gallery.url }}"
-										data-lightbox="photos"><img class="img-fluid"
+										data-lightbox="photos"><img class="img-fluid" style="width: 100%;"
 											src="{{ workerimg.gallery.url }}"></a>
 								</div>
 								{% endfor %}
@@ -204,7 +204,8 @@
 									</div>
 								</div> -->
 				</div>
-				<a href="#" class="btn btn-sidebar bt-1 bg-success">Apply For This</a>
+				<a href="javascript:void(0)"  data-toggle="modal" data-target="#ApplyForBook" class="btn btn-sidebar bt-1 bg-success">Apply For This</a>
+				 
 			</div>
 
 			<!-- Share This Job -->
@@ -236,7 +237,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 
-				<div class="call-to-act">
+				<div class="call-to-act">sig
 					<div class="call-to-act-head">
 						<h3>Want to Become a Success Employers?</h3>
 						<span>We'll help you to grow your career and growth.</span>
@@ -248,10 +249,100 @@
 		</div>
 	</div>
 </section>
+<!-- Signin Window Code -->
+<div class="modal fade" id="ApplyForBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+				<form action="{% url 'enquiry_submit' %}" method="post">
+					{% csrf_token %}
+					{% for msg in messages %}
+					<div class="form-group">
+						<div class="register-account text-center" style="background: rgb(183 17 123 / 10%);color: #11b719;border-color: rgba(17,183,25,0.1);font-weight: 700;">
+							<span class="theme-cl number">"{{msg}}"</span> 
+						</div>
+				  
+					
+				</div>
+				
+					
+					{% endfor %}
+					<input type="hidden" class="form-control" value="{{ worker.id }}" name="user_id" required>
+					<div class="form-group register">
+						<label>Full Name</label>
+						<div class="input-with-icon">
+							<input type="text" class="form-control" placeholder="Enter Your Username" name="name" required>
+							<i class="theme-cl ti-user"></i>
+						</div>
+					</div>
+
+					<div class="form-group register">
+						<label>Email</label>
+						<div class="input-with-icon">
+							<input type="email" class="form-control" placeholder="Enter Your Email" name="email" required>
+							<i class="theme-cl ti-email"></i>
+						</div>
+					</div>
+					<div class="form-group register">
+						<label>Mobile</label>
+						<div class="input-with-icon">
+							<input type="number" class="form-control" placeholder="Enter Your Mobile" name="mobile" required>
+							<i class="theme-cl ti-email"></i>
+						</div>
+					</div>
+
+					<div class="form-group register">
+						<label>City</label>
+						<div class="input-with-icon">
+							<input type="text" class="form-control" placeholder="Enter Your City" name="city" required>
+							<i class="theme-cl ti-lock"></i>
+						</div>
+					</div>
+					<div class="form-group register">
+						<label>Message</label>
+						<div class="input-with-icon">
+							<input type="text" class="form-control" placeholder="Enter Your Message" name="message" required>
+							<i class="theme-cl ti-lock"></i>
+						</div>
+					</div>
+					<div class="form-group otp" style="display:none">
+						<div class="register-account text-center" style="background: rgba(17,183,25,0.1);color: #11b719;border-color: rgba(17,183,25,0.1);font-weight: 700;">
+							Your Otp Send Successfully on "<span class="theme-cl number">"93939666"</span> "
+						</div>
+						<label>Verify OTP</label>
+						<div class="input-with-icon">
+							<input type="number" class="form-control" placeholder="Enter OTP Send to your mobile no" name="otp" required>
+							<i class="theme-cl ti-lock"></i>
+						</div>
+					</div>
+
+					<div class="form-groups otp" style="display: none;">
+						<button  type="submit" class="btn btn-primary theme-bg full-width">Request to Book</button>
+					</div>
+					<div class="form-groups register" >
+						<button id="otp" class="btn btn-primary theme-bg full-width">Request to Book</button>
+					</div>
+				</form>
+				
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Signin Window -->
 {% endblock %}
 <!-- ============================ Call To Action End ================================== -->
 {% block javascripts %}
 <!-- Gallery -->
+<script>
+
+	$('#otp').on('click', function () {
+		$('.otp').show();
+		$('.register').hide();
+		$number = $('input[name="phone_number"]').val();
+		$('.number').html($number);
+		
+	});
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>

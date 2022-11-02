@@ -53,6 +53,9 @@
               {% for subcategorydata in subcategoryresult %}
               <tr>
                 <th scope="row">
+                  {% for msg in messages %}
+                  {{msg}}
+                  {% endfor %}
                   <div class="media align-items-center">
                     <a href="#" class="avatar rounded-circle mr-3">
                       <img alt="Image placeholder" src="{{subcategorydata.image.url}}">

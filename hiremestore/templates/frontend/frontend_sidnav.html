@@ -6,12 +6,13 @@
         <div class="dashboard-avatar">
 
             <div class="dashboard-avatar-thumb">
-                <img src="{% static 'frontend/assets/img/can-5.jpg' %}" class="img-avater" alt="" />
+                <img src="{{user.user_detail.image.url}}" class="img-avater" alt="" />
             </div>
 
             <div class="dashboard-avatar-text">
                 <h4>{{user.username}}</h4>
-                <span>Barbar</span>
+                <span>{{user.user_detail.category}}</span><br>
+                <span>{{user.user_detail.sub_category}}</span>
             </div>
 
         </div>
@@ -19,6 +20,7 @@
         <div class="dashboard-menu">
             <ul>
                 <li><a href="{% url 'helper_dashBoard' %}"><i class="ti-dashboard"></i>Dashboard</a></li>
+                <li><a href="{% url 'enquired_list' %}"><i class="ti-dashboard"></i>Enquired</a></li>
                 <li><a href="{% url 'update_profile' user.user_detail.slug %}"><i class="ti-flag-alt-2"></i>Viewed Resume</a></li>
                 <li><a href="{% url 'update_profile' user.user_detail.slug %}"><i class="ti-id-badge"></i>Edit Profile</a></li>
                 <li><a href="{% url 'logout' %}"><i class="ti-power-off"></i>Logout</a></li>

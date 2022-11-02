@@ -119,6 +119,11 @@ def UserRegister(request):
         email = request.POST['email']
         phone_number = request.POST['phone_number']
         password = request.POST['password']
+        # otp = request.POST['otp']
+        # print(otp)
+        # if otp != '123456':
+        #     messages.info(request, 'otp is invalid')
+        #     return redirect('register')
 
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email Taken')

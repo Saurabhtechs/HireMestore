@@ -121,6 +121,19 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
+class Enquiry(models.Model):
+
+    name = models.CharField(max_length=30)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.EmailField()
+    city = models.CharField(max_length=75)
+    phone = models.IntegerField(unique=True)
+    message = models.TextField()
+    created_at = models.DateField()
+
+    def __str__(self):
+        return self.name
+
 
 class User_Detail(models.Model):
 
@@ -180,31 +193,30 @@ class Website_Gallery(models.Model):
 
 
 class Country(models.Model):
-    sortname = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
+    sortname= models.CharField(max_length=100)
+    name= models.CharField(max_length=100)
 
-    def _str_(self):
-        return self.sortname
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = "tbl_countries"
 
-
 class States(models.Model):
-    name = models.CharField(max_length=100)
+    name= models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
-
-    def _str_(self):
+    
+    def __str__(self):
         return self.name
     class Meta:
         db_table = "tbl_states"
-
+   
 
 class Cities(models.Model):
-    name = models.CharField(max_length=100)
+    name= models.CharField(max_length=100)
     state = models.ForeignKey(States, on_delete=models.CASCADE)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
     class Meta:

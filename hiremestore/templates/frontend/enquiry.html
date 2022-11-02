@@ -1,0 +1,124 @@
+{% extends 'frontend/frontend_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="clearfix"></div>
+
+<!-- General Detail Start -->
+<section class="dashboard-wrap">
+	<div class="container-fluid">
+		<div class="row">
+
+			{% include 'frontend/frontend_sidnav.html' %}
+
+			<!-- Content Wrap -->
+            <div class="col-lg-9 col-md-8">
+                <div class="dashboard-body">
+                    <div class="dashboard-caption">
+                        
+                        <div class="dashboard-caption-header">
+                            <h4><i class="ti-briefcase"></i>Enquired</h4>
+                        </div>
+                        
+                        <div class="dashboard-caption-wrap">
+                            
+                            <!-- row -->
+                            <div class="row">
+                                
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Search Name">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <select id="jb-filter" class="form-control">
+                                            <option>Choose Job Status</option>
+                                            <option>All Jobs</option>
+                                            <option>Approved Jobs</option>
+                                            <option>Expire Jobs</option>
+                                            <option>Pending Payment</option>
+                                            <option>Rejected Jobs</option>
+                                            <option>Draft Jobs</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <select id="application-status" class="form-control">
+                                            <option>Status</option>
+                                            <option>Approved</option>
+                                            <option>Pending</option>
+                                            <option>Rejected</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- row -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Date</th>
+                                      <th scope="col">Name</th>
+                                      <th scope="col">Contact</th>
+                                      <th scope="col">Download CV</th>
+                                      <th scope="col">Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                     {% for data in Enquiry_data %}
+                                    <tr>
+                                        <td>{{data.created_at}}</td>
+                                      <th scope="row"><a href="#">{{data.name}}</a></th>
+                                      <td>{{data.phone}}</td>
+                                       
+                                      <td>
+                                        <div class="job-buttons">
+                                            <a href="#" class="btn btn-gary manage-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download Resume"><i class="ti-download"></i></a>
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <div class="job-buttons">
+                                            <a href="#" class="btn btn-cancel manage-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove"><i class="ti-close"></i></a>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    {% endfor %}
+                                  </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+		</div>
+	</div>
+</section>
+<!-- General Detail End -->
+
+<!-- ============================ Call To Action ================================== -->
+<section class="theme-bg call-to-act-wrap">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="call-to-act">
+					<div class="call-to-act-head">
+						<h3>Want to Become a Success Employers?</h3>
+						<span>We'll help you to grow your career and growth.</span>
+					</div>
+					<a href="#" class="btn btn-call-to-act">SignUp Today</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- ============================ Call To Action End ================================== -->
+{% endblock %}}
