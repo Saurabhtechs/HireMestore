@@ -21,7 +21,13 @@ subcategory = apps.get_model('core', 'SubCategory')
 
 
 def index(request):
-    context = {'segment': 'index'}
+    category = Category.objects.count()
+    subcategory = SubCategory.objects.count()
+    total_Worker = User_Detail.objects.count()
+    context = {'segment': 'index',
+                'category': category,
+                'subcategory': subcategory,
+                'total_Worker': total_Worker}
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -70,18 +76,19 @@ def CategoryAdd(request):
 
 
 def CategorySave(request):
-    if request.method == "POST":
-        name = request.POST['name']
-        title = request.POST['title']
-        image = request.FILES.get('image')
-        type = request.POST['type']
-        category_done = Category.objects.create(
-            name=name, title=title, image=image, type=type)
-        category_done.save()
-        return redirect('categorydisplay')
-
-    else:
-        return redirect('category_add')
+    try:
+        if request.method == "POST":
+            name = request.POST['name']
+            title = request.POST['title']
+            image = request.FILES.get('image')
+            type = request.POST['type']
+            category_done = Category.objects.create(
+                name=name, title=title, image=image, type=type)
+            category_done.save()
+            return redirect('categorydisplay')
+    except Exception as e:
+        messages.info(request,e)
+        return render(request, 'home/category_add.html')
 
 
 def CategoryEdit(request, id):

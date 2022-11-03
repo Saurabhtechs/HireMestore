@@ -6,6 +6,8 @@ urlpatterns = [
 
     path('', views.index, name='index'),
     path('contact', views.contact, name='contact'),
+    path('enquired_list', views.enquiry, name='enquired_list'),
+    path('enquiry_submit', views.enquiry_submit, name='enquiry_submit'),
     path('about', views.about, name='about'),
     path('browsebylocations', views.Browsebylocations, name='browsebylocations'),
     path('browsebylocation/<str:id>', views.Browsebylocation, name='browsebylocation'),

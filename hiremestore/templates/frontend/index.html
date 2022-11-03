@@ -107,7 +107,38 @@
 		</div>
 	</div>
 </section>
+<section class="gray">
+	<div class="container">
 
+		<div class="row">
+			<div class="main-heading">
+				<h2>Top Category of <span>Technical </span>Helper</h2>
+				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris aliquip.</p>
+			</div>
+		</div>
+
+		<div class="row">
+			{% for cat in digital %}
+			<div class="col-md-3 col-sm-6">
+				<div class="category-box" data-aos="fade-up">
+					<div class="category-desc">
+						<div class="category-icon">
+							<img src="{{ cat.image.url }}" class="img-responsive" alt="" />
+							<i class="icon-bargraph abs-icon" aria-hidden="true"></i>
+						</div>
+
+						<div class="category-detail category-desc-text">
+							<h4> <a href="servies/{{cat.slug}}">{{cat.name}}</a></h4>
+							<p>4 Subcategories</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+	</div>
+</section>
 <!-- ========= start Call To Action section =========== -->
 <div class="clearfix"></div>
 <section class="call-to-act">
@@ -118,7 +149,7 @@
 				<h2>We Are Expert In Web design and development</h2>
 				<h3>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
 					laudantium, totam rem aperiam, eaque ipsa quae ab illo</h3>
-				<a href="#" class="btn bat-call-to-act">Hire Us</a>
+				<a href="javascript:void(0)"  data-toggle="modal" data-target="#signup" class="btn bat-call-to-act">Hire Us</a>
 			</div>
 		</div>
 
@@ -127,7 +158,8 @@
 				<h2>We Are Expert In Web design and development</h2>
 				<h3>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
 					laudantium, totam rem aperiam, eaque ipsa quae ab illo</h3>
-				<a href="#" class="btn bat-call-to-act">Join Us</a>
+				<a href="javascript:void(0)"  data-toggle="modal" data-target="#signup" class="btn bat-call-to-act">Join Us</a>
+				
 			</div>
 		</div>
 
@@ -135,19 +167,20 @@
 </section>
 <!-- =========== Call To Action section End ============= -->
 
-<!-- Jobs By Category Start-->
-<section class="gray">
+ 
+<!-- Work Process Counter Section Start -->
+<section class="wp-process">
 	<div class="container">
 
 		<div class="row">
 			<div class="main-heading">
-				<h2>Browse Jobs By <span>Category</span></h2>
-				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris aliquip.</p>
+				<h2>Top Category of <span>Non-Technical </span>Helper</h2>
+				<p>Best Labour Helper.</p>
 			</div>
 		</div>
-
+		
 		<div class="row">
-			{% for cat in category %}
+			{% for cat in helper %}
 			<div class="col-md-3 col-sm-6">
 				<div class="category-box" data-aos="fade-up">
 					<div class="category-desc">
@@ -155,7 +188,7 @@
 							<img src="{{ cat.image.url }}" class="img-responsive" alt="" />
 							<i class="icon-bargraph abs-icon" aria-hidden="true"></i>
 						</div>
-
+		
 						<div class="category-detail category-desc-text">
 							<h4> <a href="servies/{{cat.slug}}">{{cat.name}}</a></h4>
 							
@@ -167,104 +200,6 @@
 				</div>
 			</div>
 			{% endfor %}
-		</div>
-
-	</div>
-</section>
-<!-- Job By Category End-->
-
-<!-- Work Process Counter Section Start -->
-<section class="wp-process">
-	<div class="container">
-
-		<div class="row">
-			<div class="col-md-12 col-sm-12">
-				<div class="main-heading">
-					<p>Most View Jobs</p>
-					<h2>Hot & Featured <span>Jobs</span></h2>
-				</div>
-			</div>
-		</div>
-		<!--/row-->
-
-		<div class="row">
-			<!-- Single Freelancer & Premium job -->
-			<div class="col-md-4 col-sm-4">
-				<div class="popular-jobs-container">
-					<div class="popular-jobs-box">
-						<span class="popular-jobs-status bg-success">hourly</span>
-						<h4 class="flc-rate">$17/hr</h4>
-						<div class="popular-jobs-box">
-							<div class="popular-jobs-box-detail">
-								<h4>Google Inc</h4>
-								<span class="desination">Software Designer</span>
-							</div>
-						</div>
-						<div class="popular-jobs-box-extra">
-							<ul>
-								<li>Php</li>
-								<li>Android</li>
-								<li>Html</li>
-								<li class="more-skill bg-primary">+3</li>
-							</ul>
-							<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-						</div>
-					</div>
-					<a href="job-detail-2.html" class="btn btn-popular-jobs bt-1">View Detail</a>
-				</div>
-			</div>
-
-			<!-- Single Freelancer & Premium job -->
-			<div class="col-md-4 col-sm-4">
-				<div class="popular-jobs-container">
-					<div class="popular-jobs-box">
-						<span class="popular-jobs-status bg-warning">Monthly</span>
-						<h4 class="flc-rate">$570/Mo</h4>
-						<div class="popular-jobs-box">
-							<div class="popular-jobs-box-detail">
-								<h4>Duff Beer</h4>
-								<span class="desination">Marketting</span>
-							</div>
-						</div>
-						<div class="popular-jobs-box-extra">
-							<ul>
-								<li>Php</li>
-								<li>Android</li>
-								<li>Html</li>
-								<li class="more-skill bg-primary">+3</li>
-							</ul>
-							<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-						</div>
-					</div>
-					<a href="job-detail-2.html" class="btn btn-popular-jobs bt-1">View Detail</a>
-				</div>
-			</div>
-
-			<!-- Single Freelancer & Premium job -->
-			<div class="col-md-4 col-sm-4">
-				<div class="popular-jobs-container">
-					<div class="popular-jobs-box">
-						<span class="popular-jobs-status bg-info">Weekly</span>
-						<h4 class="flc-rate">$200/We</h4>
-						<div class="popular-jobs-box">
-							<div class="popular-jobs-box-detail">
-								<h4>Cyberdyne Systems</h4>
-								<span class="desination">Human Resource</span>
-							</div>
-						</div>
-						<div class="popular-jobs-box-extra">
-							<ul>
-								<li>Php</li>
-								<li>Android</li>
-								<li>Html</li>
-								<li class="more-skill bg-primary">+3</li>
-							</ul>
-							<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
-						</div>
-					</div>
-					<a href="job-detail-2.html" class="btn btn-popular-jobs bt-1">View Detail</a>
-				</div>
-			</div>
 		</div>
 
 		<!-- More -->
@@ -290,7 +225,7 @@
 						<h3>Want to Become a Success Employers?</h3>
 						<span>We'll help you to grow your career and growth.</span>
 					</div>
-					<a href="#" class="btn btn-call-to-act">SignUp Today</a>
+					<a href="{% url 'register' %}" class="btn btn-call-to-act">SignUp Today</a>
 				</div>
 
 			</div>

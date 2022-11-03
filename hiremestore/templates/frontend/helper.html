@@ -9,7 +9,7 @@
 <section class="inner-header-page">
 	<div class="container">
 
-		<h2>122 Helper Found</h2>
+		<h2>{{worker_count}} Helper Found</h2>
 		<p>The top freelancing website trusted by over 5 million businesses.</p>
 
 	</div>
@@ -60,22 +60,22 @@
 			<div class="col-md-4 col-sm-6">
 				<div class="popular-jobs-container">
 					<div class="popular-jobs-box">
-						<span class="popular-jobs-status bg-success">hourly</span>
-						<h4 class="flc-rate">{{ w.slug }}/month</h4>
+						<span class="popular-jobs-status bg-success">{{w.skill}}</span>
+						<h4 class="flc-rate">₹ {{ w.charges }}/Day</h4>
 						<div class="popular-jobs-box">
 							<div class="popular-jobs-box-detail">
 								<h4>{{ w.name }}</h4>
-								<span class="desination">Barbar</span>
+								<span class="desination">{{ w.sub_category }}</span>
 							</div>
 						</div>
 						<div class="popular-jobs-box-extra">
 							<ul>
-								<li>Exp:- <b>5yrs</b></li>
+								<li>Exp:- <b>{{ w.experiance }} Month</b></li>
 								<li>Skill:- <b>N/A</b></li>
-								<li>City:- <b>Dabra</b></li>
+								<li>City:- <b>{{ w.city }}</b></li>
 								<li class="more-skill bg-primary">+3</li>
 							</ul>
-							<p>Have A Good Skill In Hair <br>Cutting.</p>
+							<p style="width: 70%;margin: auto;">{{ w.bio }}</p>
 						</div>
 					</div>
 					<a href="{% url 'worker_detail' w.slug %}" class="btn btn-popular-jobs bt-1">View Detail</a>

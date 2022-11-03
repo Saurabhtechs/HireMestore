@@ -19,7 +19,7 @@ import datetime
 
 
 def Global_Data(request):
-    city = Cities.objects.filter()[:4]
+    city = Cities.objects.filter(name='Dabra')[:4]
     category = Category.objects.filter().order_by('-created')[:8]
     total_category = Category.objects.count()
     total_user = User.objects.count()
@@ -73,6 +73,25 @@ def Browsebylocation(request):  # type: ignore
     return render(request, 'frontend/browse-jobs-location.html', {'city': city})
 
 
+def enquiry_submit(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        user_id = request.POST['user_id']
+        mobile = request.POST['mobile']
+        message = request.POST['message']
+        city = request.POST['city']
+
+        enquiry = Enquiry.objects.create(
+            name=name, email=email, user_id=user_id, phone=mobile, message=message,city=city,)
+        enquiry.save()
+
+        messages.info('Message is send')
+        return redirect('worker_detail')
+
+    data = website_profile.objects.all()
+    return render(request, 'frontend/worker_detail.html', {'result': data},)
+
 def contact(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -91,6 +110,11 @@ def contact(request):
     data = website_profile.objects.all()
     return render(request, 'frontend/contact.html', {'result': data},)
 
+
+def enquiry(request):
+    Enquiry_data = Enquiry.objects.filter()
+    data = website_profile.objects.all()
+    return render(request, 'frontend/enquiry.html', {'result': data,'Enquiry_data': Enquiry_data}, )
 
 def about(request):
     data = website_profile.objects.all()
@@ -124,7 +148,8 @@ def worker(request, id):
     cate = list(subcategory)
     get = cate[0]
     worker = User_Detail.objects.filter(sub_category=get)
-    return render(request, 'frontend/helper.html', {'result': data, 'worker': worker}, )
+    worker_count = User_Detail.objects.filter(sub_category=get).count()
+    return render(request, 'frontend/helper.html', {'result': data, 'worker': worker, 'worker_count': worker_count}, )
 
 
 def worker_detail(request, id):
@@ -214,8 +239,9 @@ def update_profile_update(request, id):
 
 
 def Helper_DashBoard(request):
+    total_enquiry = Enquiry.objects.filter().count()
     data = User_Detail.objects.filter(slug='saurabh-soni').first()
-    return render(request, 'frontend/helper-dashboard.html', {'helper': data})
+    return render(request, 'frontend/helper-dashboard.html', {'helper': data,'total_enquiry': total_enquiry})
 
 
 def GetCategory(request):
@@ -252,8 +278,9 @@ def Browsebylocation(request, id):
     get = cate[0]
     worker = User_Detail.objects.filter(
         city=get)[:10]
-    context = {'worker': worker, 'city_data': city_data}
-    return render(request, 'frontend/worker.html', context)
+    worker_count = User_Detail.objects.filter(city=get).count()
+    context = {'worker': worker, 'city_data': city_data,'worker_count': worker_count}
+    return render(request, 'frontend/helper.html', context)
 
 
 def Browsebyskill(request):

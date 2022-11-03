@@ -53,6 +53,9 @@
               <div class="pl-lg-4">
                 <div class="row">
                   <div class="col-md-12">
+                    {% for msg in messages %}
+                    {{msg}}
+                    {% endfor %}
                     <div class="form-group">
                       <label class="form-control-label" for="input-address">Category Type</label>
                       <select class="form-control" name="type">

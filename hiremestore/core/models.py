@@ -121,6 +121,19 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
+class Enquiry(models.Model):
+
+    name = models.CharField(max_length=30)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.EmailField()
+    city = models.CharField(max_length=75)
+    phone = models.IntegerField(unique=True)
+    message = models.TextField()
+    created_at = models.DateField()
+
+    def __str__(self):
+        return self.name
+
 
 class User_Detail(models.Model):
 
