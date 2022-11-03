@@ -1,6 +1,8 @@
 # from unicodedata import category
 from .models import *
 # Create your views here.
+from django.db.models import Count
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -34,18 +36,29 @@ def Global_Data(request):
 
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
+    data = list(digital)
+    print(data)
+    d = []
+    for i in data:
+        print(i)
+        subcategory = SubCategory.objects.filter(cat=i).count()
+        print(subcategory)
+        d.append(subcategory)
+    print(d)
     helper = Category.objects.filter(type=2).order_by('-created')[:4]
     category = Category.objects.filter().order_by('-created')[:8]
-    subcategory = SubCategory.objects.filter().order_by('-created')
+    data0 = SubCategory.objects.filter().order_by('-created')
+    # subcategory = SubCategory.objects.filter(cat=data[0]).subcategory.count()
+    # subcategory= SubCategory.objects.filter(cat=i).annotate(count=Count('id')).order_by('id')
+    # print(subcategory)
     total_Worker = User_Detail.objects.filter(category=5).count()
-    print('total_Worker',total_Worker)
     data = website_profile.objects.all()
     testimonial = Testimonails.objects.all()
     user = User_Detail.objects.all()
     category_Filter = CategoryFilter(request.GET, queryset=user)
 
     content = {'result': data, 'testimonial': testimonial, 'category': category,
-               'subcategory': subcategory, 'digital': digital, 'helper': helper, 'category_filter': category_Filter}
+               'subcategory': d, 'digital': digital, 'helper': helper, 'data0': data0, 'category_filter': category_Filter}
     return render(request, 'frontend/index.html', content)
 
 
@@ -55,7 +68,7 @@ def SearchCategory(request):
     return render(request, 'frontend/searchcategory.html', {'category_filter': category_Filter})
 
 
-def Browsebylocation(request):
+def Browsebylocation(request):  # type: ignore
     city = Cities.objects.all()[:8]
     return render(request, 'frontend/browse-jobs-location.html', {'city': city})
 
@@ -72,7 +85,7 @@ def contact(request):
             name=name, email=email, subject=subject, mobile=mobile, message=message,)
         contact.save()
 
-        messages.info('Message is send')
+        messages.info(request, 'Message is send')
         return redirect('contact')
 
     data = website_profile.objects.all()
@@ -118,7 +131,7 @@ def worker_detail(request, id):
     data = website_profile.objects.all()
     worker = User_Detail.objects.get(slug=id)
     worker_gallery = User_Gallery.objects.filter(user=worker)
-    return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker,'worker_gallery':worker_gallery }, )
+    return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker, 'worker_gallery': worker_gallery}, )
 
 
 def update_profile(request, id):
@@ -141,12 +154,15 @@ def update_profile_update(request, id):
         if request.POST['category']:
             category = Category.objects.get(id=request.POST['category'])
         else:
-            category = Category.objects.filter(id=request.POST['category']).first()
+            category = Category.objects.filter(
+                id=request.POST['category']).first()
         worker_data.category = category
         if request.POST['Subcategory']:
-            subcategory = SubCategory.objects.get(id=request.POST['Subcategory'])
+            subcategory = SubCategory.objects.get(
+                id=request.POST['Subcategory'])
         else:
-            subcategory = SubCategory.objects.filter(id=request.POST['Subcategory']).first()
+            subcategory = SubCategory.objects.filter(
+                id=request.POST['Subcategory']).first()
 
         worker_data.sub_category = subcategory
         worker_data.name = request.POST['name']
@@ -157,42 +173,45 @@ def update_profile_update(request, id):
         #     lang.append(i)
         worker_data.lang = request.POST.getlist('lang')
         # worker_data.skill = request.POST['skill']
-        dob = datetime.datetime.strptime(request.POST['dob'], "%d/%m/%Y").strftime("%Y-%m-%d")
-        worker_data.dob = dob
+        dob = datetime.datetime.strptime(
+            request.POST['dob'], "%d/%m/%Y").strftime("%Y-%m-%d")
+        worker_data.dob = dob  # type: ignore
         city = Cities.objects.get(id=request.POST['city'])
         worker_data.city = city.name
         district = Cities.objects.get(id=request.POST['district'])
         worker_data.district = district.name
         # worker_data.zip = request.POST['zip']
         state = States.objects.filter(id=request.POST['state']).first()
-        worker_data.state = state.name
+        worker_data.state = state.name  # type: ignore
         country = Country.objects.filter(id=request.POST['country']).first()
-        worker_data.country = country.name
+        worker_data.country = country.name  # type: ignore
         worker_data.phone = request.POST['phone']
         worker_data.charges = request.POST['charges']
         worker_data.skill = request.POST['availability']
         worker_data.experiance = request.POST['exp']
         worker_data.bio = request.POST['headline']
-        worker_data.link = request.POST['link']
-        worker_data.fb = request.POST['fb']
-        worker_data.insta = request.POST['insta']
-        worker_data.google = request.POST['google']
-        worker_data.yt = request.POST['yt']
-        worker_data.website = request.POST['website']
+        worker_data.link = request.POST['link']  # type: ignore
+        worker_data.fb = request.POST['fb']  # type: ignore
+        worker_data.insta = request.POST['insta']  # type: ignore
+        worker_data.google = request.POST['google']  # type: ignore
+        worker_data.yt = request.POST['yt']  # type: ignore
+        worker_data.website = request.POST['website']  # type: ignore
         worker_data.discription = request.POST['discription']
-        if request.FILES.get('image'):
+        if request.FILES.get('imazge'):
             worker_data.image = request.FILES.get('image')
         worker_data.save()
 
         print(worker_data)
         for gallery in request.FILES.getlist('gallery'):
-            gallery_data = User_Gallery.objects.create(user=worker_data, gallery=gallery)
+            gallery_data = User_Gallery.objects.create(
+                user=worker_data, gallery=gallery)
             gallery_data.save()
         messages.success(request, 'Data Updated...')
         return redirect('index')
 
     else:
         return redirect('update_profile')
+
 
 def Helper_DashBoard(request):
     data = User_Detail.objects.filter(slug='saurabh-soni').first()
