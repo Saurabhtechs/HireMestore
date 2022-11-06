@@ -34,7 +34,8 @@
 						<div class="col-lg-5 col-md-3 col-sm-12 small-padd">
 							<div class="form-group">
 								<div class="input-with-icon">
-									{% render_field category_filter.form.category class="form-control" placeholder="Keyword:Name, Tag" %}
+									{% render_field category_filter.form.category class="form-control"
+									placeholder="Keyword:Name, Tag" %}
 									<i class="ti-layers"></i>
 								</div>
 							</div>
@@ -43,7 +44,8 @@
 						<div class="col-lg-5 col-md-3 col-sm-12 small-padd b-r">
 							<div class="form-group">
 								<div class="input-with-icon">
-									{% render_field category_filter.form.city class="form-control" value="Keyword:Name,Tag" %}
+									{% render_field category_filter.form.city class="form-control"
+									value="Keyword:Name,Tag" %}
 									<i class="ti-location-pin"></i>
 								</div>
 							</div>
@@ -149,7 +151,8 @@
 				<h2>We Are Expert In Web design and development</h2>
 				<h3>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
 					laudantium, totam rem aperiam, eaque ipsa quae ab illo</h3>
-				<a href="javascript:void(0)"  data-toggle="modal" data-target="#signup" class="btn bat-call-to-act">Hire Us</a>
+				<a href="javascript:void(0)" data-toggle="modal" data-target="#signup" class="btn bat-call-to-act">Hire
+					Us</a>
 			</div>
 		</div>
 
@@ -158,8 +161,9 @@
 				<h2>We Are Expert In Web design and development</h2>
 				<h3>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
 					laudantium, totam rem aperiam, eaque ipsa quae ab illo</h3>
-				<a href="javascript:void(0)"  data-toggle="modal" data-target="#signup" class="btn bat-call-to-act">Join Us</a>
-				
+				<a href="javascript:void(0)" data-toggle="modal" data-target="#signup" class="btn bat-call-to-act">Join
+					Us</a>
+
 			</div>
 		</div>
 
@@ -167,7 +171,7 @@
 </section>
 <!-- =========== Call To Action section End ============= -->
 
- 
+
 <!-- Work Process Counter Section Start -->
 <section class="wp-process">
 	<div class="container">
@@ -178,7 +182,7 @@
 				<p>Best Labour Helper.</p>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			{% for cat in helper %}
 			<div class="col-md-3 col-sm-6">
@@ -188,12 +192,11 @@
 							<img src="{{ cat.image.url }}" class="img-responsive" alt="" />
 							<i class="icon-bargraph abs-icon" aria-hidden="true"></i>
 						</div>
-		
+
 						<div class="category-detail category-desc-text">
 							<h4> <a href="servies/{{cat.slug}}">{{cat.name}}</a></h4>
-							
+
 							<p>{{subcategory}}</p>
-							<!-- {% for d in sz
 
 						</div>
 					</div>

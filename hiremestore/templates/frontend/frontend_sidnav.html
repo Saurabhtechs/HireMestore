@@ -4,11 +4,15 @@
     <div class="side-dashboard">
 
         <div class="dashboard-avatar">
-
+            {% if user.image.url %}
             <div class="dashboard-avatar-thumb">
                 <img src="{{user.user_detail.image.url}}" class="img-avater" alt="" />
             </div>
-
+            {% else %}
+            <div class="dashboard-avatar-thumb">
+                <img src="{% static 'frontend/assets/img/can-5.jpg' %}" class="img-avater" alt="" />
+            </div>
+            {% endif %}
             <div class="dashboard-avatar-text">
                 <h4>{{user.username}}</h4>
                 <span>{{user.user_detail.category}}</span><br>
@@ -21,8 +25,10 @@
             <ul>
                 <li><a href="{% url 'helper_dashBoard' %}"><i class="ti-dashboard"></i>Dashboard</a></li>
                 <li><a href="{% url 'enquired_list' %}"><i class="ti-dashboard"></i>Enquired</a></li>
-                <li><a href="{% url 'update_profile' user.user_detail.slug %}"><i class="ti-flag-alt-2"></i>Viewed Resume</a></li>
-                <li><a href="{% url 'update_profile' user.user_detail.slug %}"><i class="ti-id-badge"></i>Edit Profile</a></li>
+                <li><a href="{% url 'update_profile' user.user_detail.slug %}"><i class="ti-flag-alt-2"></i>Viewed
+                        Resume</a></li>
+                <li><a href="{% url 'update_profile' user.user_detail.slug %}"><i class="ti-id-badge"></i>Edit
+                        Profile</a></li>
                 <li><a href="{% url 'logout' %}"><i class="ti-power-off"></i>Logout</a></li>
             </ul>
         </div>

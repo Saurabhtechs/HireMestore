@@ -86,7 +86,7 @@ def enquiry_submit(request):
             name=name, email=email, user_id=user_id, phone=mobile, message=message,city=city,)
         enquiry.save()
 
-        messages.info('Message is send')
+        messages.info(request,'Message is send')
         return redirect('worker_detail')
 
     data = website_profile.objects.all()
