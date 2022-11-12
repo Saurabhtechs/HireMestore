@@ -176,12 +176,14 @@ def update_profile_update(request, id):
         else:
             worker_data = User_Detail()
             worker_data.user = user
+            
         if request.POST['category']:
             category = Category.objects.get(id=request.POST['category'])
         else:
             category = Category.objects.filter(
                 id=request.POST['category']).first()
         worker_data.category = category
+
         if request.POST['Subcategory']:
             subcategory = SubCategory.objects.get(
                 id=request.POST['Subcategory'])
@@ -222,7 +224,7 @@ def update_profile_update(request, id):
         worker_data.yt = request.POST['yt']  # type: ignore
         worker_data.website = request.POST['website']  # type: ignore
         worker_data.discription = request.POST['discription']
-        if request.FILES.get('imazge'):
+        if request.FILES.get('image'):
             worker_data.image = request.FILES.get('image')
         worker_data.save()
 

@@ -51,7 +51,6 @@
                         data-toggle="dropdown"><img src="{% static 'frontend/assets/img/can-5.jpg' %}"
                             style="width: 100%;max-height: 40px;max-width: 40px;border-radius: 50%;">{{user.username}}</a>
                     <ul class="dropdown-menu animated fadeOutUp">
-                        <!-- update_profile/{{user.user_detail.slug}} -->
                         <li><a href="{% url 'update_profile' user.user_detail.slug %}">My Profile</a></li>
                         <li><a href="{% url 'helper_dashBoard' %}">Dashboard</a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
@@ -61,9 +60,7 @@
                 <li class="dropdown" style="white-space: nowrap;">
                     <a href="update_profile/{{user.user_detail.slug}}" target="_blank" class="dropdown-toggle"
                         data-toggle="dropdown">
-                        <!-- <img src="{% static 'frontend/assets/img/can-5.jpg' %}"
-                            style="width: 100%;max-height: 40px;max-width: 40px;border-radius: 50%;"> -->
-                        {% if user.image.url %}
+                        {% if user.user_detail.image %}
                         <img src="{{user.user_detail.image.url}}"
                             style="width: 100%;max-height: 40px;max-width: 40px;border-radius: 50%;">
                         {% else %}
