@@ -195,9 +195,7 @@ def update_profile_update(request, id):
         worker_data.name = request.POST['name']
         worker_data.email = request.POST['email']
         worker_data.gender = request.POST['gender']
-        # lang = []
-        # for i in request.POST.getlist('lang'):
-        #     lang.append(i)
+
         worker_data.lang = request.POST.getlist('lang')
         # worker_data.skill = request.POST['skill']
         dob = datetime.datetime.strptime(
