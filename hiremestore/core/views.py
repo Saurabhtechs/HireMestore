@@ -83,14 +83,15 @@ def enquiry_submit(request):
         city = request.POST['city']
 
         enquiry = Enquiry.objects.create(
-            name=name, email=email, user_id=user_id, phone=mobile, message=message,city=city,)
+            name=name, email=email, user_id=user_id, phone=mobile, message=message, city=city,)
         enquiry.save()
 
-        messages.info(request,'Message is send')
+        messages.info(request, 'Message is send')
         return redirect('worker_detail')
 
     data = website_profile.objects.all()
     return render(request, 'frontend/worker_detail.html', {'result': data},)
+
 
 def contact(request):
     if request.method == 'POST':
@@ -114,7 +115,8 @@ def contact(request):
 def enquiry(request):
     Enquiry_data = Enquiry.objects.filter()
     data = website_profile.objects.all()
-    return render(request, 'frontend/enquiry.html', {'result': data,'Enquiry_data': Enquiry_data}, )
+    return render(request, 'frontend/enquiry.html', {'result': data, 'Enquiry_data': Enquiry_data}, )
+
 
 def about(request):
     data = website_profile.objects.all()
@@ -176,7 +178,7 @@ def update_profile_update(request, id):
         else:
             worker_data = User_Detail()
             worker_data.user = user
-            
+
         if request.POST['category']:
             category = Category.objects.get(id=request.POST['category'])
         else:
@@ -184,14 +186,16 @@ def update_profile_update(request, id):
                 id=request.POST['category']).first()
         worker_data.category = category
 
-        if request.POST['Subcategory']:
+        if request.POST.getlist('Subcategory'):
+            print(request.POST.getlist('Subcategory'))
             subcategory = SubCategory.objects.get(
                 id=request.POST['Subcategory'])
+            worker_data.sub_category = subcategory
+
         else:
             subcategory = SubCategory.objects.filter(
                 id=request.POST['Subcategory']).first()
 
-        worker_data.sub_category = subcategory
         worker_data.name = request.POST['name']
         worker_data.email = request.POST['email']
         worker_data.gender = request.POST['gender']
@@ -225,6 +229,7 @@ def update_profile_update(request, id):
         if request.FILES.get('image'):
             worker_data.image = request.FILES.get('image')
         worker_data.save()
+        worker_data.save_m2m()
 
         # print(worker_data)
         for gallery in request.FILES.getlist('gallery'):
@@ -241,7 +246,7 @@ def update_profile_update(request, id):
 def Helper_DashBoard(request):
     total_enquiry = Enquiry.objects.filter().count()
     data = User_Detail.objects.filter(slug='saurabh-soni').first()
-    return render(request, 'frontend/helper-dashboard.html', {'helper': data,'total_enquiry': total_enquiry})
+    return render(request, 'frontend/helper-dashboard.html', {'helper': data, 'total_enquiry': total_enquiry})
 
 
 def GetCategory(request):
@@ -279,7 +284,8 @@ def Browsebylocation(request, id):
     worker = User_Detail.objects.filter(
         city=get)[:10]
     worker_count = User_Detail.objects.filter(city=get).count()
-    context = {'worker': worker, 'city_data': city_data,'worker_count': worker_count}
+    context = {'worker': worker, 'city_data': city_data,
+               'worker_count': worker_count}
     return render(request, 'frontend/helper.html', context)
 
 
