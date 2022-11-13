@@ -37,14 +37,14 @@ def Global_Data(request):
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
     data = list(digital)
-    print(data)
+    # print(data)
     d = []
     for i in data:
-        print(i)
+        # print(i)
         subcategory = SubCategory.objects.filter(cat=i).count()
-        print(subcategory)
+        # print(subcategory)
         d.append(subcategory)
-    print(d)
+    # print(d)
     helper = Category.objects.filter(type=2).order_by('-created')[:4]
     category = Category.objects.filter().order_by('-created')[:8]
     data0 = SubCategory.objects.filter().order_by('-created')
@@ -201,7 +201,7 @@ def update_profile_update(request, id):
         worker_data.lang = request.POST.getlist('lang')
         # worker_data.skill = request.POST['skill']
         dob = datetime.datetime.strptime(
-            request.POST['dob'], "%d/%m/%Y").strftime("%Y-%m-%d")
+            request.POST['dob'], "%m/%d/%Y").strftime("%Y-%m-%d")
         worker_data.dob = dob  # type: ignore
         city = Cities.objects.get(id=request.POST['city'])
         worker_data.city = city.name
@@ -228,7 +228,7 @@ def update_profile_update(request, id):
             worker_data.image = request.FILES.get('image')
         worker_data.save()
 
-        print(worker_data)
+        # print(worker_data)
         for gallery in request.FILES.getlist('gallery'):
             gallery_data = User_Gallery.objects.create(
                 user=worker_data, gallery=gallery)
