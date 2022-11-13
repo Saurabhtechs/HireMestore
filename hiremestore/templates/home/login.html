@@ -19,12 +19,12 @@
           <div class="btn-wrapper text-center">
             <a href="#" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon"><img
-                  src="{% static 'adminstatic/static/img/icons/common/github.svg' %}"></span>
+                  src="{% static 'adminstatic/assets/img/icons/common/github.svg' %}"></span>
               <span class="btn-inner--text">Github</span>
             </a>
             <a href="#" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon"><img
-                  src="{% static 'adminstatic/static/img/icons/common/google.svg' %}"></span>
+                  src="{% static 'adminstatic/assets/img/icons/common/google.svg' %}"></span>
               <span class="btn-inner--text">Google</span>
             </a>
           </div>
@@ -34,24 +34,13 @@
           <div class="text-center text-muted mb-4">
             <small>Or sign in with credentials</small>
           </div>
-          <form action="{% url 'logincheck' %}" method="post" enctype="multipart/form-data">
+          <form action="{% url 'adminlogincheck' %}" method="post">
             {% csrf_token %}
             <div class="form-group mb-3">
               <div class="input-group input-group-merge input-group-alternative">
                 <div class="input-group-prepend">
 
-                  <span class="input-group-text"><i class="ni ni-mobile-83"></i></span>
-
                   <span class="input-group-text"><i class="fa fa-mobile"></i></span>
-
-                  <span class="input-group-text"><i class="fa fa-mobile"></i></span>
-
-                  <span class="input-group-text"><i class="fa fa-mobile"></i></span>
-
-                  <span class="input-group-text"><i class="fa fa-mobile"></i></span>
-
-                  <span class="input-group-text"><i class="fa fa-mobile"></i></span>
-
                 </div>
                 <input class="form-control" placeholder="Mobile Number" type="text" name="phone_number">
               </div>

@@ -1,44 +1,21 @@
+from django.contrib.auth import authenticate, login
+from django.conf import settings
+import http.client
+import random
+from django.contrib import messages
+from core.models import *
 from email import message
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from .models import User
 from django.apps import apps
-from django.contrib.auth import authenticate,login, logout
-website_profile = apps.get_model('core', 'website_profile','User_Detail')  # type: ignore
-from  core.models import *
-
-
-from django.contrib import messages
-
-import random
-import http.client
-
-from django.conf import settings
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from core.models import *
 
 # Create your views here.
-
-
-def AdminLogin(request):
-    # data = website_profile.objects.all()
-    return render(request, 'home/login.html')
 
 def Login(request):
     data = website_profile.objects.all()
     return render(request, 'main/login.html', {'result': data})
-
-def AdminLogincheck(request):
-    if request.method == 'POST':
-        phone_number = request.POST.get('phone_number')
-        password = request.POST.get('password')
-
-        user = authenticate(phone_number=phone_number, password=password)
-            
-        if user:
-            # if user.is_active:
-            login(request, user)
-            return redirect('/admin')
-        else:
-            return redirect('login')
 
 
 def Logincheck(request):
@@ -47,11 +24,11 @@ def Logincheck(request):
         password = request.POST['password']
 
         user = authenticate(phone_number=phone_number, password=password)
-            
+
         if user:
             # if user.is_active:
             login(request, user)
-            messages.success(request,"Login Successfull...")
+            messages.success(request, "Login Successfull...")
             return redirect('index')
         else:
             messages.success(request, "something wrong")
@@ -60,14 +37,13 @@ def Logincheck(request):
 
 def Logout(request):
     logout(request)
-    messages.success(request,"Logout Successfull...")
+    messages.success(request, "Logout Successfull...")
     return redirect('index')
+
 
 def Register(request):
     data = website_profile.objects.all()
-    return render(request,'frontend/register.html',{'result':data})
-
-
+    return render(request, 'frontend/register.html', {'result': data})
 
 
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -84,7 +60,7 @@ def Register(request):
 #     print(data)
 #     return None
 
-def send_otp(phone_number , otp):
+def send_otp(phone_number, otp):
     # print("FUNCTION CALLED")
     # conn = http.client.HTTPSConnection("api.msg91.com")
     # authkey = settings.AUTH_KEY
@@ -110,9 +86,6 @@ def send_otp(phone_number , otp):
     response = requests.request("POST", url, data=payload, headers=headers)
 
 
-
-
-    
 def UserRegister(request):
 
     if request.method == 'POST':
@@ -129,7 +102,7 @@ def UserRegister(request):
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email Taken')
             return redirect('register')
-        
+
         if User.objects.filter(username=username).exists():
             messages.info(request, 'Username Allready Taken')
             return redirect('register')
@@ -149,7 +122,7 @@ def UserRegister(request):
         worker_data.phone = request.POST['phone_number']
         worker_data.user_id = user.id  # type: ignore
         worker_data.save()
-        messages.success(request,'Registerd Successfully')
+        messages.success(request, 'Registerd Successfully')
         # send_otp(phone_number, otp)
         # request.session['phone_number'] = phone_number
         # return redirect('index')
@@ -163,13 +136,11 @@ def otp(request):
         otp = request.POST.get('otp')
         profile = User.objects.filter(phone_number=phone_number).first()
 
-        if otp == profile.otp: # type: ignore
+        if otp == profile.otp:  # type: ignore
             return redirect('index')
         else:
-            context = {'message': 'Wrong OTP', 'class': 'danger', 'phone_number': phone_number}
+            context = {'message': 'Wrong OTP',
+                       'class': 'danger', 'phone_number': phone_number}
             return render(request, 'otp.html', context)
 
     return render(request, 'main/otp.html', context)
-
-
-

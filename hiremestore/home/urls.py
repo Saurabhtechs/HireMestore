@@ -8,8 +8,18 @@ from . import views
 
 urlpatterns = [
 
+#Admin Login Panel ............................................................................. Start..
+    path('', views.AdminLogin, name='admin'),
+    path('adminlogincheck', views.AdminLogincheck, name='adminlogincheck'),
+
+
+#Admin Login Panel ............................................................................. End..
+
+
     # The home page
-    path('', views.index, name='home'),
+    path('dashboard', views.index, name='dashboard'),
+
+    
     path('website_view', views.Website_view,name="website_view"),
     path('webprofile_add',views.WebprofileAdd,name="webprofile_add"),
     path('webprofile_save',views.Webprofilesave,name="webprofile_save"),

@@ -37,14 +37,14 @@ def Global_Data(request):
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
     data = list(digital)
-    print(data)
+    # print(data)
     d = []
     for i in data:
         # print(i)
         subcategory = SubCategory.objects.filter(cat=i).count()
         # print(subcategory)
         d.append(subcategory)
-    print(d)
+    # print(d)
     helper = Category.objects.filter(type=2).order_by('-created')[:4]
     category = Category.objects.filter().order_by('-created')[:8]
     data0 = SubCategory.objects.filter().order_by('-created')
@@ -179,12 +179,14 @@ def update_profile_update(request, id):
         else:
             worker_data = User_Detail()
             worker_data.user = user
+            
         if request.POST['category']:
             category = Category.objects.get(id=request.POST['category'])
         else:
             category = Category.objects.filter(
                 id=request.POST['category']).first()
         worker_data.category = category
+
         if request.POST['Subcategory']:
             subcategory = SubCategory.objects.get(
                 id=request.POST['Subcategory'])
@@ -196,13 +198,11 @@ def update_profile_update(request, id):
         worker_data.name = request.POST['name']
         worker_data.email = request.POST['email']
         worker_data.gender = request.POST['gender']
-        # lang = []
-        # for i in request.POST.getlist('lang'):
-        #     lang.append(i)
+
         worker_data.lang = request.POST.getlist('lang')
         # worker_data.skill = request.POST['skill']
         dob = datetime.datetime.strptime(
-            request.POST['dob'], "%d/%m/%Y").strftime("%Y-%m-%d")
+            request.POST['dob'], "%m/%d/%Y").strftime("%Y-%m-%d")
         worker_data.dob = dob  # type: ignore
         city = Cities.objects.get(id=request.POST['city'])
         worker_data.city = city.name
@@ -225,11 +225,11 @@ def update_profile_update(request, id):
         worker_data.yt = request.POST['yt']  # type: ignore
         worker_data.website = request.POST['website']  # type: ignore
         worker_data.discription = request.POST['discription']
-        if request.FILES.get('imazge'):
+        if request.FILES.get('image'):
             worker_data.image = request.FILES.get('image')
         worker_data.save()
 
-        print(worker_data)
+        # print(worker_data)
         for gallery in request.FILES.getlist('gallery'):
             gallery_data = User_Gallery.objects.create(
                 user=worker_data, gallery=gallery)

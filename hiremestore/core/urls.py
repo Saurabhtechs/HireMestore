@@ -17,14 +17,11 @@ urlpatterns = [
     path('get-category', views.GetCategory, name='getcategory'),
     path('get-sub-category', views.GetSubCategory, name='getsubcategory'),
 
-
     path('search_category', views.SearchCategory, name='search_category'),
-
 
     path('servies', views.servies, name='servies'),
     path('servies/<str:id>', views.subcategory, name='subcategory'),
     path('servies/?servies=<str:id>', views.subcategory, name='subcategory'),
-
 
     path('worker/<str:id>', views.worker, name='worker'),
     path('worker_detail/<str:id>', views.worker_detail, name='worker_detail'),

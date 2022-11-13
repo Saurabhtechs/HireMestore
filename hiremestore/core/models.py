@@ -39,7 +39,7 @@ class Category(models.Model):
     type = models.IntegerField(default=1)
     feature = models.IntegerField(default=1)
     # slug = models.SlugField(max_length=100)
-    slug = AutoSlugField(populate_from='name')
+    slug = AutoSlugField(populate_from='name')  # type: ignore
 
     created = models.DateTimeField(auto_now_add=True)
 
@@ -57,7 +57,7 @@ class SubCategory(models.Model):
     description = models.CharField(max_length=100)
     feature = models.IntegerField(default=1)
     # slug = models.SlugField()
-    slug = AutoSlugField(populate_from='name')
+    slug = AutoSlugField(populate_from='name')  # type: ignore
     created = models.DateTimeField(auto_now_add=True)
 
     # def save(self, *args, **kwargs):
@@ -136,8 +136,7 @@ class User_Detail(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    sub_category = models.ForeignKey(
-        SubCategory, on_delete=models.CASCADE, null=True)
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True)
     email = models.EmailField(max_length=30, null=True)
     phone = models.CharField(max_length=30, null=True)
     dob = models.DateField(max_length=30,null=True)
@@ -158,7 +157,7 @@ class User_Detail(models.Model):
     bio = models.TextField()
     discription = models.TextField()
     message = models.TextField()
-    slug = AutoSlugField(populate_from='name')
+    slug = AutoSlugField(populate_from='name')  # type: ignore
 
     class Meta:
         ordering = ('user',)
@@ -168,7 +167,7 @@ class User_Detail(models.Model):
 
     def calculate_age(self):
         import datetime
-        return int((datetime.date.today() - self.dob).days / 365.25)
+        return int((datetime.date.today() - self.dob).days / 365.25)  # type: ignore
     age = property(calculate_age)
 
 
