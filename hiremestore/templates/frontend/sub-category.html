@@ -55,11 +55,11 @@
 					{% for d in subcategory%}
 					<div class="col-md-3 col-sm-6 small-padding">
 						<div class="job-feature">
-							<div class="feature-icon"><i class="fa fa-desktop"></i></div>
+							<div class="feature-icon"><i class="fa fa-users"></i></div>
 							<div class="feature-caption">
 								<h4><a href="{% url 'worker' d.slug %}">{{ d.name}}</a></h4>
-								<h5>{{ d.name }}</h5>
-								<p>{{ d.discription }}</p>
+								<!-- <h5>{{ d.name }}</h5> -->
+								<p>{{ d.description }}</p>
 							</div>
 						</div>
 					</div>

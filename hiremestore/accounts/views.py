@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 from .models import User
 from django.apps import apps
 from django.contrib.auth import authenticate,login, logout
-website_profile = apps.get_model('core', 'website_profile','User_Detail')
+website_profile = apps.get_model('core', 'website_profile','User_Detail')  # type: ignore
 from  core.models import *
 
 
@@ -54,8 +54,9 @@ def Logincheck(request):
             messages.success(request,"Login Successfull...")
             return redirect('index')
         else:
-            msg = messages.success(request, "something wrong")
-            return msg
+            messages.success(request, "something wrong")
+            return redirect('index')
+
 
 def Logout(request):
     logout(request)
@@ -108,7 +109,6 @@ def send_otp(phone_number , otp):
 
     response = requests.request("POST", url, data=payload, headers=headers)
 
-    print(response.text)
 
 
 
@@ -120,9 +120,18 @@ def UserRegister(request):
         email = request.POST['email']
         phone_number = request.POST['phone_number']
         password = request.POST['password']
+        # otp = request.POST['otp']
+        # print(otp)
+        # if otp != '123456':
+        #     messages.info(request, 'otp is invalid')
+        #     return redirect('register')
 
         if User.objects.filter(email=email).exists():
             messages.info(request, 'email Taken')
+            return redirect('register')
+        
+        if User.objects.filter(username=username).exists():
+            messages.info(request, 'Username Allready Taken')
             return redirect('register')
 
         if User.objects.filter(phone_number=phone_number).exists():
@@ -137,8 +146,8 @@ def UserRegister(request):
         worker_data = User_Detail()
         worker_data.name = request.POST['name']
         worker_data.email = request.POST['email']
-        worker_data.phone = request.POST['phone']
-        worker_data.user_id = user.id
+        worker_data.phone = request.POST['phone_number']
+        worker_data.user_id = user.id  # type: ignore
         worker_data.save()
         messages.success(request,'Registerd Successfully')
         # send_otp(phone_number, otp)
@@ -154,11 +163,9 @@ def otp(request):
         otp = request.POST.get('otp')
         profile = User.objects.filter(phone_number=phone_number).first()
 
-        if otp == profile.otp:
+        if otp == profile.otp: # type: ignore
             return redirect('index')
         else:
-            print('Wrong')
-
             context = {'message': 'Wrong OTP', 'class': 'danger', 'phone_number': phone_number}
             return render(request, 'otp.html', context)
 

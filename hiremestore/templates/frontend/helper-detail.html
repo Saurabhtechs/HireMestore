@@ -57,11 +57,11 @@
 
 		<div class="col-md-8">
 			<div class="left-side-container">
-				<div class="freelance-image"><a href="company-detail.html"><img src="{{worker.image.url}}"
-							class="img-responsive" alt=""></a></div>
+				<div class="freelance-image"><a href="{{worker.image.url}}" target="_blank"><img
+							src="{{worker.image.url}}" class="img-responsive" alt=""></a></div>
 				<div class="header-details">
 					<h4>{{worker.name}}</h4>
-					<p>Barbar</p>
+					<p>{{worker.sub_category}}</p>
 					<ul>
 						<li><a href="single-company-profile.html"><i class="fa fa-user"></i>70 Clints</a></li>
 						<li>
@@ -73,7 +73,7 @@
 								<span class="fa fa-star-half fill"></span>
 							</div>
 						</li>
-						<li><img class="flag" src="assets/img/gb.svg" alt=""> Gwalior,M.P.</li>
+						<li><img class="flag" src="{% static 'frontend/assets/img/gb.svg' %}" alt=""> Gwalior,M.P.</li>
 						<li>
 							<div class="verified-action">Verified</div>
 						</li>
@@ -85,9 +85,9 @@
 		<div class="col-md-4 bl-1 br-gary">
 			<div class="right-side-detail">
 				<ul>
-					<li><span class="detail-info">Availability</span>Full Time</li>
-					<li><span class="detail-info">Experience</span>5 Year</li>
-					<li><span class="detail-info">Age</span>22+ Year</li>
+					<li><span class="detail-info">Availability</span>{{ worker.skill }}</li>
+					<li><span class="detail-info">experience</span>{{ worker.experiance }} Year</li>
+					<li><span class="detail-info">Age</span>{{ worker.age }}+ Year</li>
 				</ul>
 				<ul class="social-info">
 					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -112,75 +112,47 @@
 			<div class="container-detail-box">
 
 				<div class="apply-job-header">
-					<h4>Barbar ,Hair Styler</h4>
-					<a href="company-detail.html" class="cl-success"><span><i class="fa fa-building"></i>Rajshree
-							Saloon</span></a>
-					<span><i class="fa fa-map-marker"></i>Gwalior (M.P.)</span>
+					<h4>{{ worker.category }} ,{{ worker.sub_category }}</h4>
+					<!-- <a href="company-detail.html" class="cl-success"><span><i class="fa fa-building"></i>Rajshree
+							Saloon</span></a> -->
+					<span><i class="fa fa-map-marker"></i>{{ worker.city}} ({{ worker.state}})</span>
 				</div>
 
 				<div class="apply-job-detail">
-					<p>Different people get haircuts for different reasons. Talking to you about what a client
-						doesn’t
-						like about their current cut can help guide you to make any necessary corrections.
-						Likewise,
-						if you have a specific hairstyle in mind you should be upfront and detailed about your
-						expectations so that your client can make the appropriate choices. The reasoning and
-						motivation behind wanting a change in hairstyle can help inform the method and tool
-						choices. That is why it is important to be a hairstylist that can communicate openly
-						with clients. And, the best way to prepare for a career in hair cutting is to attend a
-						hair school near you. Let’s take a more in depth look at the three main reasons people
-						seek out a new haircut.</p>
+					<p>{{worker.discription}}</p>
 				</div>
 
-				<div class="apply-job-detail">
+				<!-- <div class="apply-job-detail">
 					<h5>Skills</h5>
 					<ul class="skills">
 						<li>Layering</li>
 						<li>Thinning</li>
 						<li>Blunting</li>
 					</ul>
-				</div>
+				</div> -->
 
 				<div class="apply-job-detail">
 					<h5>Key Points</h5>
 					<ul class="job-requirements">
-						<li><span>Availability</span> Hourly</li>
+						<li><span>Availability</span> {{ worker.skill }}</li>
 						<li><span>Education</span> Graduate</li>
-						<li><span>Age</span> 25+</li>
-						<li><span>Experience</span> Intermidiate (3 - 5Year)</li>
-						<li><span>Language</span> English, Hindi</li>
+						<li><span>Age</span> {{ worker.age }}+ Year</li>
+						<li><span>Experience</span> {{ worker.experiance}}</li>
+						<li><span>Language</span> {{ worker.lang }}</li>
 					</ul>
 				</div>
 
 				<div class="apply-job-detail">
 					<h5>Gallery</h5>
 					<div class="photo-gallery">
-						<div class="container">
+						<div class=" ">
 							<div class="row photos">
-								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
-										href="{% static 'frontend/assets/img/com-1.jpg' %}" data-lightbox="photos"><img
-											class="img-fluid" src="{% static 'frontend/assets/img/com-1.jpg' %}"></a>
+								{% for workerimg in worker_gallery %}
+								<div class="col-sm-6 col-md-4 col-lg-3 item"><a href="{{ workerimg.gallery.url }}"
+										data-lightbox="photos"><img class="img-fluid" style="width: 100%;"
+											src="{{ workerimg.gallery.url }}"></a>
 								</div>
-								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
-										href="{% static 'frontend/assets/img/com-2.jpg' %}" data-lightbox="photos"><img
-											class="img-fluid" src="{% static 'frontend/assets/img/com-2.jpg' %}"></a>
-								</div>
-								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
-										href="{% static 'frontend/assets/img/com-3.jpg' %}" data-lightbox="photos"><img
-											class="img-fluid" src="{% static 'frontend/assets/img/com-3.jpg' %}"></a>
-								</div>
-								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
-										href="{% static 'frontend/assets/img/com-4.jpg' %}" data-lightbox="photos"><img
-											class="img-fluid" src="{% static 'frontend/assets/img/com-4.jpg' %}"></a>
-								</div>
-								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
-										href="{% static 'frontend/assets/img/com-5.jpg' %}" data-lightbox="photos"><img
-											class="img-fluid" src="{% static 'frontend/assets/img/com-5.jpg' %}"></a>
-								</div>
-								<div class="col-sm-6 col-md-4 col-lg-3 item"><a
-										href="{% static 'frontend/assets/img/com-6.jpg' %}" data-lightbox="photos"><img
-											class="img-fluid" src="{% static 'frontend/assets/img/com-6.jpg' %}"></a>
-								</div>
+								{% endfor %}
 							</div>
 						</div>
 					</div>
@@ -232,7 +204,8 @@
 									</div>
 								</div> -->
 				</div>
-				<a href="#" class="btn btn-sidebar bt-1 bg-success">Apply For This</a>
+				<a href="javascript:void(0)"  data-toggle="modal" data-target="#ApplyForBook" class="btn btn-sidebar bt-1 bg-success">Apply For This</a>
+				 
 			</div>
 
 			<!-- Share This Job -->
@@ -264,7 +237,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 
-				<div class="call-to-act">
+				<div class="call-to-act">sig
 					<div class="call-to-act-head">
 						<h3>Want to Become a Success Employers?</h3>
 						<span>We'll help you to grow your career and growth.</span>
@@ -276,10 +249,100 @@
 		</div>
 	</div>
 </section>
+<!-- Signin Window Code -->
+<div class="modal fade" id="ApplyForBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+				<form action="{% url 'enquiry_submit' %}" method="post">
+					{% csrf_token %}
+					{% for msg in messages %}
+					<div class="form-group">
+						<div class="register-account text-center" style="background: rgb(183 17 123 / 10%);color: #11b719;border-color: rgba(17,183,25,0.1);font-weight: 700;">
+							<span class="theme-cl number">"{{msg}}"</span> 
+						</div>
+				  
+					
+				</div>
+				
+					
+					{% endfor %}
+					<input type="hidden" class="form-control" value="{{ worker.id }}" name="user_id" required>
+					<div class="form-group register">
+						<label>Full Name</label>
+						<div class="input-with-icon">
+							<input type="text" class="form-control" placeholder="Enter Your Username" name="name" required>
+							<i class="theme-cl ti-user"></i>
+						</div>
+					</div>
+
+					<div class="form-group register">
+						<label>Email</label>
+						<div class="input-with-icon">
+							<input type="email" class="form-control" placeholder="Enter Your Email" name="email" required>
+							<i class="theme-cl ti-email"></i>
+						</div>
+					</div>
+					<div class="form-group register">
+						<label>Mobile</label>
+						<div class="input-with-icon">
+							<input type="number" class="form-control" placeholder="Enter Your Mobile" name="mobile" required>
+							<i class="theme-cl ti-email"></i>
+						</div>
+					</div>
+
+					<div class="form-group register">
+						<label>City</label>
+						<div class="input-with-icon">
+							<input type="text" class="form-control" placeholder="Enter Your City" name="city" required>
+							<i class="theme-cl ti-lock"></i>
+						</div>
+					</div>
+					<div class="form-group register">
+						<label>Message</label>
+						<div class="input-with-icon">
+							<input type="text" class="form-control" placeholder="Enter Your Message" name="message" required>
+							<i class="theme-cl ti-lock"></i>
+						</div>
+					</div>
+					<div class="form-group otp" style="display:none">
+						<div class="register-account text-center" style="background: rgba(17,183,25,0.1);color: #11b719;border-color: rgba(17,183,25,0.1);font-weight: 700;">
+							Your Otp Send Successfully on "<span class="theme-cl number">"93939666"</span> "
+						</div>
+						<label>Verify OTP</label>
+						<div class="input-with-icon">
+							<input type="number" class="form-control" placeholder="Enter OTP Send to your mobile no" name="otp" required>
+							<i class="theme-cl ti-lock"></i>
+						</div>
+					</div>
+
+					<div class="form-groups otp" style="display: none;">
+						<button  type="submit" class="btn btn-primary theme-bg full-width">Request to Book</button>
+					</div>
+					<div class="form-groups register" >
+						<button id="otp" class="btn btn-primary theme-bg full-width">Request to Book</button>
+					</div>
+				</form>
+				
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Signin Window -->
 {% endblock %}
 <!-- ============================ Call To Action End ================================== -->
 {% block javascripts %}
 <!-- Gallery -->
+<script>
+
+	$('#otp').on('click', function () {
+		$('.otp').show();
+		$('.register').hide();
+		$number = $('input[name="phone_number"]').val();
+		$('.number').html($number);
+		
+	});
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>

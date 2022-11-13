@@ -19,5 +19,5 @@ class User(AbstractUser):
     role = models.CharField(max_length=200)
 
     USERNAME_FIELD = 'phone_number'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
     objects = UserManager()

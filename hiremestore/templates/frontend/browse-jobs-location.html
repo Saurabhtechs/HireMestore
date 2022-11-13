@@ -21,11 +21,24 @@
 		<!-- Company Searrch Filter Start -->
 		<div class="row extra-mrg">
 			<div class="wrap-search-filter">
-				<form>
-					<div class="col-md-4 col-sm-4">
+				<form >
+					<!-- <div class="col-md-4 col-sm-4">
 						<input type="text" class="form-control" placeholder="Keyword: Name, Tag">
+						{% render_field category_filter.form.city class="form-control" value="Keyword:Name,Tag" %}
+					
+					</div> -->
+					<div class="row">
+						<div class="col-lg-5 col-md-3 col-sm-12 small-padd b-r">
+							<div class="form-group">
+								<div class="input-with-icon">
+									{% render_field category_filter.form.citytext class="form-control" value="Keyword:Name,Tag" %}
+									<i class="ti-location-pin"></i>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-md-3 col-sm-3">
+					
+					<!-- <div class="col-md-3 col-sm-3">
 						<input type="text" class="form-control" placeholder="Location: City, State, Zip">
 					</div>
 					<div class="col-md-3 col-sm-3">
@@ -40,10 +53,10 @@
 							<option value="7">Architecture</option>
 						</select>
 
-					</div>
-					<div class="col-md-2 col-sm-2">
+					</div> -->
+					<!-- <div class="col-md-2 col-sm-2">
 						<button type="submit" class="btn btn-primary full-width">Filter</button>
-					</div>
+					</div> -->
 				</form>
 			</div>
 		</div>
@@ -54,10 +67,10 @@
 			{% for c in page_obj %}
 			<div class="col-md-3 col-sm-6">
 				<div class="grid-view brows-job-list">
-					<!-- <div class="brows-job-company-img">
-						<img src="#"
+					<div class="brows-job-company-img">
+						<img src="https://www.telegraph.co.uk/content/dam/Travel/Destinations/Asia/India/Mumbai/gateway-of-india-mumbai.jpg?imwidth=680"
 							class="img-responsive" alt="" />
-					</div> -->
+					</div>
 					<div class="brows-job-position">
 						<h3><a href="{% url 'index' %}browsebylocation/{{c.name}}">{{ c.name }}</a></h3>
 						<p><span>Fession City</span></p>
@@ -75,25 +88,27 @@
 
 		<div class="row">
 			<ul class="pagination">
-				
+
 				<li>{% if page_obj.has_previous %}
-					
-					<a href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+
+					<a href="?page={{ page_obj.previous_page_number }}">previous</a>
+				</li>
 				{% endif %}
-				
-				
+
+
 				<li class=""></a><span class="current">
-					Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-				</span></li>
-				
-				
+						Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+					</span></li>
+
+
 
 				<li>{% if page_obj.has_next %}
 					<a href="?page={{ page_obj.next_page_number }}">next</a>
-					<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+					<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+				</li>
 				{% endif %}
-				
-				
+
+
 			</ul>
 		</div>
 

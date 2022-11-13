@@ -8,7 +8,6 @@ from autoslug import AutoSlugField
 # Create your models here.
 
 
-
 class website_profile(models.Model):
     logo = models.ImageField(upload_to='img', max_length=250)
     mobile_number = models.CharField(max_length=15)
@@ -28,16 +27,14 @@ class website_profile(models.Model):
 # class PostImage(models.Model):
 #     post = models.ForeignKey(website_profile, default=None, on_delete=models.CASCADE)
 #     images = models.FileField(upload_to = 'images/')
- 
+
 #     def __str__(self):
 #         return self.post.title
 
 
-
-
 class Category(models.Model):
     image = models.ImageField(upload_to='img', max_length=250)
-    name = models.CharField(max_length=30 ,unique=True)
+    name = models.CharField(max_length=30, unique=True)
     title = models.CharField(max_length=50)
     type = models.IntegerField(default=1)
     feature = models.IntegerField(default=1)
@@ -46,12 +43,8 @@ class Category(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
 
-    # def save(self, *args, **kwargs):
-    #     if not self.id:
-    #         # Newly created object, so set slug
-    #         self.slug = slugify(self.name)
 
-    #         super(Category, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return self.name
@@ -74,14 +67,13 @@ class SubCategory(models.Model):
 
     #         super(SubCategory, self).save(*args, **kwargs)
 
-
     def __str__(self):
         return self.name
 
 
 class Testimonails(models.Model):
     profile = models.ImageField(upload_to='img', max_length=250)
-    name = models.CharField(max_length=30 , unique=True)
+    name = models.CharField(max_length=30, unique=True)
     about = models.CharField(max_length=50)
     review = models.CharField(max_length=200)
 
@@ -96,9 +88,6 @@ class Testimonails(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
 
 
 class About(models.Model):
@@ -128,14 +117,36 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
+class Enquiry(models.Model):
+
+    name = models.CharField(max_length=30)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.EmailField()
+    city = models.CharField(max_length=75)
+    phone = models.IntegerField(unique=True)
+    message = models.TextField()
+    created_at = models.DateField()
+
+    def __str__(self):
+        return self.name
+
+
 class User_Detail(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,null=False)
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE,null=False)
-    dob = models.CharField(max_length=30)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    sub_category = models.ForeignKey(
+        SubCategory, on_delete=models.CASCADE, null=True)
+    email = models.EmailField(max_length=30, null=True)
+    phone = models.CharField(max_length=30, null=True)
+    dob = models.DateField(max_length=30,null=True)
+    # dob = models.CharField(max_length=30)
+    lang = models.CharField(max_length=30)
+    skill = models.CharField(max_length=30)
+    gender = models.CharField(max_length=30)
     area = models.CharField(max_length=30)
+    # city = models.ForeignKey('tbl_cities', on_delete=models.CASCADE, null=True)
     city = models.CharField(max_length=30)
     zip = models.CharField(max_length=30)
     district = models.CharField(max_length=30)
@@ -143,14 +154,23 @@ class User_Detail(models.Model):
     country = models.CharField(max_length=30)
     experiance = models.CharField(max_length=30)
     charges = models.CharField(max_length=30)
-    image = models.ImageField(upload_to='img',null=True)
+    image = models.ImageField(upload_to='img', null=True)
     bio = models.TextField()
     discription = models.TextField()
     message = models.TextField()
     slug = AutoSlugField(populate_from='name')
 
-    def __str__(self):
-        return self.name
+    class Meta:
+        ordering = ('user',)
+
+    def __unicode__(self):
+        return self.user
+
+    def calculate_age(self):
+        import datetime
+        return int((datetime.date.today() - self.dob).days / 365.25)
+    age = property(calculate_age)
+
 
 class User_Gallery(models.Model):
     user = models.ForeignKey(User_Detail, on_delete=models.CASCADE)
@@ -159,12 +179,14 @@ class User_Gallery(models.Model):
     def __str__(self):
         return self.user
 
+
 class Website_Gallery(models.Model):
     web = models.ForeignKey(website_profile, on_delete=models.CASCADE)
     gallery = models.FileField(upload_to='gallery')
 
     def __str__(self):
         return self.web
+
 
 class Country(models.Model):
     sortname= models.CharField(max_length=100)

@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block content %}
+{% load widget_tweaks %}
+
 <!-- End Navigation -->
 <div class="clearfix"></div>
 
@@ -20,9 +22,11 @@
 		<!-- Company Searrch Filter Start -->
 		<div class="row extra-mrg">
 			<div class="wrap-search-filter">
-				<form>
+				<form action="{% url 'search_category' %}" method="get">
 					<div class="col-md-4 col-sm-4">
-						<input type="text" class="form-control" placeholder="Keyword: Name, Tag">
+						{% render_field category_filter.form.category class="form-control" placeholder="Keyword:Name, Tag" %}
+						
+						<!-- <input type="text" class="form-control" placeholder="Keyword: Name, Tag"> -->
 					</div>
 					<div class="col-md-3 col-sm-3">
 						<input type="text" class="form-control" placeholder="Location: City, State, Zip">
