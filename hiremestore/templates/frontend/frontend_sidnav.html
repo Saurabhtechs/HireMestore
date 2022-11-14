@@ -25,9 +25,9 @@
             <ul>
                 <li><a href="{% url 'helper_dashBoard' %}"><i class="ti-dashboard"></i>Dashboard</a></li>
                 <li><a href="{% url 'enquired_list' %}"><i class="ti-dashboard"></i>Enquired</a></li>
-                <li><a href="{% url 'update_profile' user.user_detail.slug %}"><i class="ti-flag-alt-2"></i>Viewed
+                <li><a href="update_profile/{{user.user_detail.slug}}"><i class="ti-flag-alt-2"></i>Viewed
                         Resume</a></li>
-                <li><a href="{% url 'update_profile' user.user_detail.slug %}"><i class="ti-id-badge"></i>Edit
+                <li><a href="update_profile/{{user.user_detail.slug}}"><i class="ti-id-badge"></i>Edit
                         Profile</a></li>
                 <li><a href="{% url 'logout' %}"><i class="ti-power-off"></i>Logout</a></li>
             </ul>
