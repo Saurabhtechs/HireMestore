@@ -57,7 +57,7 @@
                 </li>
                 {% elif user.is_authenticated %}
                 <li class="dropdown" style="white-space: nowrap;">
-                    <a href="update_profile/{{user.user_detail.slug}}" target="_blank" class="dropdown-toggle"
+                    <a href="{% url 'update_profile' {{user.user_detail.slug}} %}" target="_blank" class="dropdown-toggle"
                         data-toggle="dropdown">
                         {% if user.user_detail.image %}
                         <img src="{{user.user_detail.image.url}}"
@@ -70,7 +70,7 @@
                     </a>
                     <ul class="dropdown-menu animated fadeOutUp">
                         <!-- update_profile/{{user.user_detail.slug}} -->
-                        <li><a href="update_profile/{{user.user_detail.slug}}">My Profile</a></li>
+                        <li><a href="{% url 'update_profile' {{user.user_detail.slug}} %}">My Profile</a></li>
 
                         <li><a href="{% url 'helper_dashBoard' %}">Dashboard</a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
