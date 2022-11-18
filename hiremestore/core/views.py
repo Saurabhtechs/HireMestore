@@ -18,6 +18,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 import datetime
 import re
+import pprint
 def getValue(request, key):
     html = "<html><body>It is now %s.</body></html>"
     print(html)
@@ -162,10 +163,25 @@ def worker(request, id):
 
     cate = list(subcategory)
     get = cate[0]
-    print(cate)
+    data = []
+
+    worker = User_Detail.objects.all().values_list('multiple_subcategory_id',flat=True)
+    print(worker)
+    # for workers in worker:
+    #     intlist = workers
+    l = re.findall(r'\d+', worker)
+    for i in l:
+        g = int(i)
+        data.append(g)
+        
+    print(data)
+    
+    
+    mul_subcategory = User_Detail.objects.filter(multiple_subcategory_id=data)
+
     worker = User_Detail.objects.filter(sub_category=get)
-    worker_count = User_Detail.objects.filter(multiple_subcategory_id=get).count()
-    return render(request, 'frontend/helper.html', {'result': data, 'worker': worker, 'worker_count': worker_count}, )
+    worker_count = User_Detail.objects.filter(sub_category=get).count()
+    return render(request, 'frontend/helper.html', {'result': data, 'worker': mul_subcategory, 'worker_count': worker_count}, )
 
 
 def worker_detail(request, id):
@@ -213,16 +229,6 @@ def update_profile_update(request, id):
         worker_data.category = category
         print(request.POST.getlist('Subcategory'))
         worker_data.multiple_subcategory_id = request.POST.getlist('Subcategory[]')
-
-        # if request.POST.getlist('Subcategory'):
-        #     print(request.POST.getlist('Subcategory'))
-        #     subcategory = SubCategory.objects.get(
-        #         id=request.POST['Subcategory'])
-        #     worker_data.sub_category = subcategory
-
-        # else:
-        #     subcategory = SubCategory.objects.filter(
-        #         id=request.POST['Subcategory']).first()
 
         worker_data.name = request.POST['name']
         # worker_data.multi_subcat = request.POST['Subcategory']

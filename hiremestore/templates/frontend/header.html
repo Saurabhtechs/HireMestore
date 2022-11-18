@@ -17,7 +17,7 @@
                         data-toggle="dropdown">Jobs By Location</a>
                     <ul class="dropdown-menu animated fadeOutUp">
                         {% for c in headcity %}
-                        <li><a href="{% url 'index' %}browsebylocation/{{c.name}}">{{c.name}}</a></li>
+                        <li><a href="{% url 'browsebylocation' c.name %}">{{c.name}}</a></li>
                         {% endfor %}
                         <li><a target="_blank" href="{% url 'browsebylocations' %}">View More</a></li>
                     </ul>
@@ -28,7 +28,7 @@
                         By Skills</a>
                     <ul class="dropdown-menu animated fadeOutUp">
                         {% for headcat in headcategory %}
-                        <li><a href="servies/{{headcat.slug}}">{{ headcat.name}}</a></li>
+                        <li><a href="{% url 'servicesubcategorystr' headcat.slug %}">{{ headcat.name}}</a></li>
                         {% endfor %}
                         <li><a target="_blank" href="{% url 'browsebyskill' %}">View More</a></li>
 
@@ -69,7 +69,6 @@
                         {{user.username}}
                     </a>
                     <ul class="dropdown-menu animated fadeOutUp">
-                        <!-- update_profile/{{user.user_detail.slug}} -->
                         <li><a href="{% url 'update_profile' user.user_detail.slug %}">My Profile</a></li>
 
                         <li><a href="{% url 'helper_dashBoard' %}">Dashboard</a></li>
