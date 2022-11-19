@@ -16,6 +16,7 @@ from django.http import JsonResponse
 from .filters import CategoryFilter
 from django.core.paginator import Paginator
 import datetime
+from .forms import *
 
 
 def Global_Data(request):
@@ -169,7 +170,9 @@ def update_profile(request, id):
     country = Country.objects.filter(id=101)
     city = Cities.objects.all()
     state = States.objects.all()
-    return render(request, 'frontend/myprofile.html', {'worker': user, 'country': country, 'city': city, 'state': state})
+    # form = CategoryForm()
+
+    return render(request, 'frontend/myprofile.html', {'worker': user, 'country': country, 'city': city, 'state': state, })
 
 
 def update_profile_update(request, id):
@@ -198,6 +201,16 @@ def update_profile_update(request, id):
         else:
             subcategory = SubCategory.objects.filter(
                 id=request.POST['Subcategory']).first()
+
+        # ///////////////////////////////////////////////////
+
+        # form = CategoryForm(request.POST)
+        # if form.is_valid():
+        #
+        #     form.save()
+
+        # ///////////////////////////////////////////////////
+
 
         worker_data.name = request.POST['name']
         worker_data.email = request.POST['email']
