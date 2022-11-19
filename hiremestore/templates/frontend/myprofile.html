@@ -218,7 +218,7 @@
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
 											<label>Subcategory</label>
-											<select id="jb-level" name="Subcategory" class="form-control" multiple>
+											<select id="Subcategory" name="Subcategory[]" class="form-control" multiple>
 												<option>Select Subcategory</option>
 											</select>
 										</div>
@@ -387,7 +387,7 @@
 	});
 
 	$('select[name=category]').on('change', function () {
-		$('select[name=Subcategory]').empty()
+		$('#Subcategory').empty()
 		$catid = $(this).val();
 		$.ajax({
 			url: "{% url 'getsubcategory' %}",
@@ -395,7 +395,7 @@
 			data: { csrfmiddlewaretoken: '{{ csrf_token }}', category_id: $catid },
 			success: function (response) {
 				$.each(response, function (key, value) {
-					$('select[name=Subcategory]').append('<option value=' + key + '>' + value + '</option>');
+					$('#Subcategory').append('<option value=' + key + '>' + value + '</option>');
 				});
 			}
 		});

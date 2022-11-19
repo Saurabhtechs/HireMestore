@@ -15,8 +15,17 @@ from accounts.models import User
 from django.http import JsonResponse
 from .filters import CategoryFilter
 from django.core.paginator import Paginator
+from django.http import HttpResponse
 import datetime
+
 from .forms import *
+
+import re
+import pprint
+def getValue(request, key):
+    html = "<html><body>It is now %s.</body></html>"
+    print(html)
+    return HttpResponse(html)
 
 
 def Global_Data(request):
@@ -37,6 +46,14 @@ def Global_Data(request):
 
 def index(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
+    # data = list(digital)
+    # print(data)
+    # d = []
+    # for i in data:
+    #     print(i)
+    #     subcategory = SubCategory.objects.filter(cat=i).count()
+    #     print(subcategory)
+    #     d.append(subcategory)
     data = list(digital)
     # print(data)
     d = []
@@ -59,10 +76,14 @@ def index(request):
     testimonial = Testimonails.objects.all()
     user = User_Detail.objects.all()
     category_Filter = CategoryFilter(request.GET, queryset=user)
-
+# 'subcategory': d, 
     content = {'result': data, 'testimonial': testimonial, 'category': category,
+
                'subcategory': d, 'digital': digital, 'helper': helper,
-               'data0': data0, 'category_filter': category_Filter , }
+               'data0': data0, 'category_filter': category_Filter ,
+
+               'digital': digital, 'helper': helper, 'data0': data0, 'category_filter': category_Filter}
+
     return render(request, 'frontend/index.html', content)
 
 
@@ -153,16 +174,41 @@ def worker(request, id):
 
     cate = list(subcategory)
     get = cate[0]
+    data = []
+
+    worker = None
+
+    l = re.findall(r'\d+', worker)
+    for i in l:
+        g = int(i)
+        data.append(g)
+
+
+    print(data)
+    mul_subcategory = User_Detail.objects.filter(multiple_subcategory_id=data)
+
     worker = User_Detail.objects.filter(sub_category=get)
     worker_count = User_Detail.objects.filter(sub_category=get).count()
-    return render(request, 'frontend/helper.html', {'result': data, 'worker': worker, 'worker_count': worker_count}, )
+    return render(request, 'frontend/helper.html', {'result': data, 'worker': mul_subcategory, 'worker_count': worker_count}, )
 
 
 def worker_detail(request, id):
     data = website_profile.objects.all()
     worker = User_Detail.objects.get(slug=id)
+    intlist = worker.multiple_subcategory_id
+ 
+    l = re.findall(r'\d+', intlist)
+    data = []
+    for i in l:
+        g = int(i)
+        data.append(g)
+    
+    print(data)
+    
+    
+    mul_subcategory = SubCategory.objects.filter(pk__in=data)
     worker_gallery = User_Gallery.objects.filter(user=worker)
-    return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker, 'worker_gallery': worker_gallery}, )
+    return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker, 'worker_gallery': worker_gallery,'mul_subcategory':mul_subcategory}, )
 
 
 def update_profile(request, id):
@@ -177,6 +223,12 @@ def update_profile(request, id):
 
 def update_profile_update(request, id):
     if request.method == "POST":
+
+
+
+
+
+
         user = User.objects.get(id=id)
         worker_data = User_Detail.objects.filter(user=user).first()
         if worker_data:
@@ -191,28 +243,17 @@ def update_profile_update(request, id):
             category = Category.objects.filter(
                 id=request.POST['category']).first()
         worker_data.category = category
-
-        if request.POST.getlist('Subcategory'):
-            print(request.POST.getlist('Subcategory'))
-            subcategory = SubCategory.objects.get(
-                id=request.POST['Subcategory'])
-            worker_data.sub_category = subcategory
-
-        else:
-            subcategory = SubCategory.objects.filter(
-                id=request.POST['Subcategory']).first()
+        print(request.POST.getlist('Subcategory'))
+        worker_data.multiple_subcategory_id = request.POST.getlist('Subcategory[]')
 
         # ///////////////////////////////////////////////////
 
-        # form = CategoryForm(request.POST)
-        # if form.is_valid():
-        #
-        #     form.save()
 
         # ///////////////////////////////////////////////////
 
 
         worker_data.name = request.POST['name']
+        # worker_data.multi_subcat = request.POST['Subcategory']
         worker_data.email = request.POST['email']
         worker_data.gender = request.POST['gender']
 
@@ -244,8 +285,11 @@ def update_profile_update(request, id):
         worker_data.discription = request.POST['discription']
         if request.FILES.get('image'):
             worker_data.image = request.FILES.get('image')
+
         worker_data.save()
-        worker_data.save_m2m()
+
+
+
 
         # print(worker_data)
         for gallery in request.FILES.getlist('gallery'):

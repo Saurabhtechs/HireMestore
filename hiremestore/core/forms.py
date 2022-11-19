@@ -1,10 +1,10 @@
 from django import forms
 from .models import User_Detail,SubCategory
 
-class CategoryForm(forms.ModelForm):
-    class Meta:
-        model = User_Detail
-        fields =  ('category','sub_category')
+# class CategoryForm(forms.ModelForm):
+#     class Meta:
+#         model = User_Detail
+#         fields = ('tags',)
 
     # sub_category = forms.ModelMultipleChoiceField(queryset=SubCategory.objects.all(),
     #     widget=forms.CheckboxSelectMultiple)

@@ -130,13 +130,20 @@ class Enquiry(models.Model):
     def __str__(self):
         return self.name
 
+class This(models.Model):
+    tags = models.CharField(max_length=250 , blank=True)
 
 class User_Detail(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    sub_category = models.ManyToManyField(SubCategory, related_name="subcategory")
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True)
+    tag = models.ManyToManyField(This, related_name="tag")
+
+
+    multiple_subcategory_id = models.CharField(max_length=255)
+
     email = models.EmailField(max_length=30, null=True)
     phone = models.CharField(max_length=30, null=True)
     dob = models.DateField(max_length=30,null=True)
@@ -156,6 +163,8 @@ class User_Detail(models.Model):
     bio = models.TextField()
     discription = models.TextField()
     message = models.TextField()
+
+
     slug = AutoSlugField(populate_from='name')  # type: ignore
 
     class Meta:
