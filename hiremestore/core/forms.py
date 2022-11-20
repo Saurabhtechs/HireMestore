@@ -6,8 +6,8 @@ class CategoryForm(forms.ModelForm):
         model = User_Detail
         fields = ('sub_category',)
 
-    # sub_category = forms.ModelMultipleChoiceField(queryset=SubCategory.objects.all(),
-    #     widget=forms.CheckboxSelectMultiple)
+    sub_category = forms.ModelMultipleChoiceField(queryset=SubCategory.objects.all(),
+        widget=forms.CheckboxSelectMultiple)
 
 
 

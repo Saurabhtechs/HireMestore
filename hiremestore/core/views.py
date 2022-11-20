@@ -22,6 +22,8 @@ from .forms import *
 
 import re
 import pprint
+
+
 def getValue(request, key):
     html = "<html><body>It is now %s.</body></html>"
     print(html)
@@ -70,17 +72,16 @@ def index(request):
     # subcategory= SubCategory.objects.filter(cat=i).annotate(count=Count('id')).order_by('id')
     # print(subcategory)
 
-
     total_Worker = User_Detail.objects.filter(category=5).count()
     data = website_profile.objects.all()
     testimonial = Testimonails.objects.all()
     user = User_Detail.objects.all()
     category_Filter = CategoryFilter(request.GET, queryset=user)
-# 'subcategory': d, 
+# 'subcategory': d,
     content = {'result': data, 'testimonial': testimonial, 'category': category,
 
                'subcategory': d, 'digital': digital, 'helper': helper,
-               'data0': data0, 'category_filter': category_Filter ,
+               'data0': data0, 'category_filter': category_Filter,
 
                'digital': digital, 'helper': helper, 'data0': data0, 'category_filter': category_Filter}
 
@@ -93,7 +94,7 @@ def SearchCategory(request):
     paginator = Paginator(user, 4)  # Show 25 contacts per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'frontend/searchcategory.html', {'category_filter': category_Filter,'page_obj': page_obj})
+    return render(request, 'frontend/searchcategory.html', {'category_filter': category_Filter, 'page_obj': page_obj})
 
 
 def Browsebylocation(request):  # type: ignore
@@ -169,7 +170,7 @@ def subcategory(request, id):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {'subcategory': subcategory,
-               'result': data, 'Category_data': Category_data,'page_obj': page_obj }
+               'result': data, 'Category_data': Category_data, 'page_obj': page_obj}
     return render(request, 'frontend/sub-category.html', context)
 
 
@@ -180,41 +181,18 @@ def worker(request, id):
 
     cate = list(subcategory)
     get = cate[0]
-    data = []
-
-    worker = None
-
-    l = re.findall(r'\d+', worker)
-    for i in l:
-        g = int(i)
-        data.append(g)
-
-
-    print(data)
-    mul_subcategory = User_Detail.objects.filter(multiple_subcategory_id=data)
 
     worker = User_Detail.objects.filter(sub_category=get)
     worker_count = User_Detail.objects.filter(sub_category=get).count()
-    return render(request, 'frontend/helper.html', {'result': data, 'worker': mul_subcategory, 'worker_count': worker_count}, )
+    return render(request, 'frontend/helper.html', {'result': data, 'worker': worker, 'worker_count': worker_count}, )
 
 
 def worker_detail(request, id):
     data = website_profile.objects.all()
     worker = User_Detail.objects.get(slug=id)
-    intlist = worker.multiple_subcategory_id
- 
-    l = re.findall(r'\d+', intlist)
-    data = []
-    for i in l:
-        g = int(i)
-        data.append(g)
-    
-    print(data)
-    
-    
-    mul_subcategory = SubCategory.objects.filter(pk__in=data)
+
     worker_gallery = User_Gallery.objects.filter(user=worker)
-    return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker, 'worker_gallery': worker_gallery,'mul_subcategory':mul_subcategory}, )
+    return render(request, 'frontend/helper-detail.html', {'result': data, 'worker': worker, 'worker_gallery': worker_gallery}, )
 
 
 def update_profile(request, id):
@@ -222,17 +200,15 @@ def update_profile(request, id):
     country = Country.objects.filter(id=101)
     city = Cities.objects.all()
     state = States.objects.all()
-    worker_data = User_Detail.objects.filter(user = request.user).first()
+    worker_data = User_Detail.objects.filter(user=request.user).first()
     form = CategoryForm(instance=worker_data)
 
-    return render(request, 'frontend/myprofile.html', {'worker': user, 'country': country, 'city': city, 'state': state,'form':form })
+    return render(request, 'frontend/myprofile.html', {'worker': user, 'country': country, 'city': city, 'state': state, 'form': form})
 
 
 def update_profile_update(request, id):
 
     if request.method == "POST":
-
-
 
         user = User.objects.get(id=id)
         worker_data = User_Detail.objects.filter(user=user).first()
@@ -248,8 +224,7 @@ def update_profile_update(request, id):
             category = Category.objects.filter(
                 id=request.POST['category']).first()
         worker_data.category = category
-        print(request.POST.getlist('Subcategory'))
-        worker_data.multiple_subcategory_id = request.POST.getlist('Subcategory[]')
+        # print(request.POST.getlist('Subcategory'))
 
         worker_data = CategoryForm(request.POST, instance=worker_data)
         if worker_data.is_valid():
@@ -290,10 +265,7 @@ def update_profile_update(request, id):
             worker_data.image = request.FILES.get('image')
 
         worker_data.save()
-
-
-
-
+        # worker_data.save_m2m()
         # print(worker_data)
         for gallery in request.FILES.getlist('gallery'):
             gallery_data = User_Gallery.objects.create(
@@ -358,7 +330,7 @@ def Browsebyskill(request):
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital,'page_obj': page_obj})
+    return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital, 'page_obj': page_obj})
 
 
 def StateList(request):

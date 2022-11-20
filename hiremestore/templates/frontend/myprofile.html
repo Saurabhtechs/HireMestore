@@ -71,8 +71,8 @@
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
 											<label>Headlines*</label>
-											<input type="text" name="headline" class="form-control" value="{{ worker.bio }}"
-												placeholder="Enter Headlines">
+											<input type="text" name="headline" class="form-control"
+												value="{{ worker.bio }}" placeholder="Enter Headlines">
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-12">
@@ -215,20 +215,20 @@
 										</div>
 									</div>
 
-									<div class="col-lg-6 col-md-6 col-sm-12">
+									<!-- <div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
 											<label>Subcategory</label>
 
-                                        {% render_field form.sub_category class="form-control" %}
+											{% render_field form.sub_category class="form-control" %}
 
 										</div>
-									</div>
+									</div> -->
 
 
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
 											<label>Subcategory</label>
-											<select id="Subcategory" name="Subcategory[]" class="form-control" multiple>
+											<select id="id_sub_category" name="sub_category" class="form-control" multiple>
 												<option>Select Subcategory</option>
 											</select>
 										</div>
@@ -236,15 +236,15 @@
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
 											<label>Work Experience(In Months)</label>
-											<input type="text" name="exp" class="form-control" value="{{worker.experiance}}"
-												placeholder="Enter Work Experience">
+											<input type="text" name="exp" class="form-control"
+												value="{{worker.experiance}}" placeholder="Enter Work Experience">
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
 											<label>Work Charges(Per Day)</label>
-											<input type="text" name="charges" class="form-control" value="{{worker.charges}}"
-												placeholder="Enter Work Charges">
+											<input type="text" name="charges" class="form-control"
+												value="{{worker.charges}}" placeholder="Enter Work Charges">
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-12">
@@ -264,7 +264,7 @@
 									<div class="col-lg-12 col-md-12 col-sm-12">
 										<div class="form-group">
 											<label>About Info</label>
-											<textarea class="form-control textarea" name="discription" 
+											<textarea class="form-control textarea" name="discription"
 												placeholder="About Company">{{worker.discription}}</textarea>
 										</div>
 									</div>
@@ -316,7 +316,8 @@
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
 											<label>website</label>
-											<input type="text" class="form-control" name="website" value="{{worker.fb}}">
+											<input type="text" class="form-control" name="website"
+												value="{{worker.fb}}">
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-12">
@@ -397,7 +398,7 @@
 	});
 
 	$('select[name=category]').on('change', function () {
-		$('#Subcategory').empty()
+		$('#id_sub_category').empty()
 		$catid = $(this).val();
 		$.ajax({
 			url: "{% url 'getsubcategory' %}",
@@ -405,7 +406,7 @@
 			data: { csrfmiddlewaretoken: '{{ csrf_token }}', category_id: $catid },
 			success: function (response) {
 				$.each(response, function (key, value) {
-					$('#Subcategory').append('<option value=' + key + '>' + value + '</option>');
+					$('#id_sub_category').append('<option value=' + key + '>' + value + '</option>');
 				});
 			}
 		});

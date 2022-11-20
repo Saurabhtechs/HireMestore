@@ -146,7 +146,6 @@ class User_Detail(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     sub_category = models.ManyToManyField(SubCategory,related_name="subcategory",null=True)
     sub = models.ManyToManyField(Sub_data, related_name="Sub_data")
-
     email = models.EmailField(max_length=30, null=True)
     phone = models.CharField(max_length=30, null=True)
     dob = models.DateField(max_length=30,null=True)
@@ -181,6 +180,9 @@ class User_Detail(models.Model):
         return int((datetime.date.today() - self.dob).days / 365.25)  # type: ignore
     age = property(calculate_age)
 
+    def Subcategory_name(self):
+        return ', '.join([a.name for a in self.sub_category.all()])
+    
 
 
 class User_Gallery(models.Model):

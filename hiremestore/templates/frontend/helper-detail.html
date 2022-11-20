@@ -61,10 +61,7 @@
 							src="{{worker.image.url}}" class="img-responsive" alt=""></a></div>
 				<div class="header-details">
 					<h4>{{worker.name}}</h4>
-					<p>{{ worker.category }} ,
-						{% for subl in mul_subcategory %}
-						{{subl.name}},
-						{% endfor %}</p>
+					<p>{{ worker.category }} ,{{ worker.Subcategory_name }}</p>
 					<ul>
 						<li><a href="single-company-profile.html"><i class="fa fa-user"></i>70 Clints</a></li>
 						<li>
@@ -115,10 +112,8 @@
 			<div class="container-detail-box">
 
 				<div class="apply-job-header">
-					<h4>{{ worker.category }} ,
-						{% for subl in mul_subcategory %}
-						{{subl.name}},
-						{% endfor %}
+					<h4>{{ worker.category }} ,{{ worker.Subcategory_name }}
+
 					</h4>
 					<!-- <a href="company-detail.html" class="cl-success"><span><i class="fa fa-building"></i>Rajshree
 							Saloon</span></a> -->
@@ -211,8 +206,9 @@
 									</div>
 								</div> -->
 				</div>
-				<a href="javascript:void(0)"  data-toggle="modal" data-target="#ApplyForBook" class="btn btn-sidebar bt-1 bg-success">Apply For This</a>
-				 
+				<a href="javascript:void(0)" data-toggle="modal" data-target="#ApplyForBook"
+					class="btn btn-sidebar bt-1 bg-success">Apply For This</a>
+
 			</div>
 
 			<!-- Share This Job -->
@@ -257,28 +253,31 @@
 	</div>
 </section>
 <!-- Signin Window Code -->
-<div class="modal fade" id="ApplyForBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
+<div class="modal fade" id="ApplyForBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
 				<form action="{% url 'enquiry_submit' %}" method="post">
 					{% csrf_token %}
 					{% for msg in messages %}
 					<div class="form-group">
-						<div class="register-account text-center" style="background: rgb(183 17 123 / 10%);color: #11b719;border-color: rgba(17,183,25,0.1);font-weight: 700;">
-							<span class="theme-cl number">"{{msg}}"</span> 
+						<div class="register-account text-center"
+							style="background: rgb(183 17 123 / 10%);color: #11b719;border-color: rgba(17,183,25,0.1);font-weight: 700;">
+							<span class="theme-cl number">"{{msg}}"</span>
 						</div>
-				  
-					
-				</div>
-				
-					
+
+
+					</div>
+
+
 					{% endfor %}
 					<input type="hidden" class="form-control" value="{{ worker.id }}" name="user_id" required>
 					<div class="form-group register">
 						<label>Full Name</label>
 						<div class="input-with-icon">
-							<input type="text" class="form-control" placeholder="Enter Your Username" name="name" required>
+							<input type="text" class="form-control" placeholder="Enter Your Username" name="name"
+								required>
 							<i class="theme-cl ti-user"></i>
 						</div>
 					</div>
@@ -286,14 +285,16 @@
 					<div class="form-group register">
 						<label>Email</label>
 						<div class="input-with-icon">
-							<input type="email" class="form-control" placeholder="Enter Your Email" name="email" required>
+							<input type="email" class="form-control" placeholder="Enter Your Email" name="email"
+								required>
 							<i class="theme-cl ti-email"></i>
 						</div>
 					</div>
 					<div class="form-group register">
 						<label>Mobile</label>
 						<div class="input-with-icon">
-							<input type="number" class="form-control" placeholder="Enter Your Mobile" name="mobile" required>
+							<input type="number" class="form-control" placeholder="Enter Your Mobile" name="mobile"
+								required>
 							<i class="theme-cl ti-email"></i>
 						</div>
 					</div>
@@ -308,32 +309,35 @@
 					<div class="form-group register">
 						<label>Message</label>
 						<div class="input-with-icon">
-							<input type="text" class="form-control" placeholder="Enter Your Message" name="message" required>
+							<input type="text" class="form-control" placeholder="Enter Your Message" name="message"
+								required>
 							<i class="theme-cl ti-lock"></i>
 						</div>
 					</div>
 					<div class="form-group otp" style="display:none">
-						<div class="register-account text-center" style="background: rgba(17,183,25,0.1);color: #11b719;border-color: rgba(17,183,25,0.1);font-weight: 700;">
+						<div class="register-account text-center"
+							style="background: rgba(17,183,25,0.1);color: #11b719;border-color: rgba(17,183,25,0.1);font-weight: 700;">
 							Your Otp Send Successfully on "<span class="theme-cl number">"93939666"</span> "
 						</div>
 						<label>Verify OTP</label>
 						<div class="input-with-icon">
-							<input type="number" class="form-control" placeholder="Enter OTP Send to your mobile no" name="otp" required>
+							<input type="number" class="form-control" placeholder="Enter OTP Send to your mobile no"
+								name="otp" required>
 							<i class="theme-cl ti-lock"></i>
 						</div>
 					</div>
 
 					<div class="form-groups otp" style="display: none;">
-						<button  type="submit" class="btn btn-primary theme-bg full-width">Request to Book</button>
+						<button type="submit" class="btn btn-primary theme-bg full-width">Request to Book</button>
 					</div>
-					<div class="form-groups register" >
+					<div class="form-groups register">
 						<button id="otp" class="btn btn-primary theme-bg full-width">Request to Book</button>
 					</div>
 				</form>
-				
-            </div>
-        </div>
-    </div>
+
+			</div>
+		</div>
+	</div>
 </div>
 <!-- End Signin Window -->
 {% endblock %}
@@ -347,7 +351,7 @@
 		$('.register').hide();
 		$number = $('input[name="phone_number"]').val();
 		$('.number').html($number);
-		
+
 	});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
