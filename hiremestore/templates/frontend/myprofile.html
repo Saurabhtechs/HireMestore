@@ -1,7 +1,7 @@
 {% extends 'frontend/frontend_base.html' %}
 
 {% load static %}
-
+{% load widget_tweaks %}
 {% block content %}
 
 <head>
@@ -194,7 +194,7 @@
 									</div>
 								</div>
 
-                                 {{ form }}
+
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">
@@ -214,6 +214,16 @@
 											</select>
 										</div>
 									</div>
+
+									<div class="col-lg-6 col-md-6 col-sm-12">
+										<div class="form-group">
+											<label>Subcategory</label>
+
+                                        {% render_field form.sub_category class="form-control" %}
+
+										</div>
+									</div>
+
 
 									<div class="col-lg-6 col-md-6 col-sm-12">
 										<div class="form-group">

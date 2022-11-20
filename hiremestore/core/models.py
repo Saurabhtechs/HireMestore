@@ -1,4 +1,4 @@
-from distutils.command.upload import upload
+
 from email.policy import default
 from django.db import models
 from accounts.models import User
@@ -6,7 +6,11 @@ from PIL import Image
 from autoslug import AutoSlugField
 
 # Create your models here.
-
+class Sub_data(models.Model):
+    tags = models.CharField(max_length=250, blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.tags
 
 class website_profile(models.Model):
     logo = models.ImageField(upload_to='img', max_length=250)
@@ -71,6 +75,7 @@ class SubCategory(models.Model):
         return self.name
 
 
+
 class Testimonails(models.Model):
     profile = models.ImageField(upload_to='img', max_length=250)
     name = models.CharField(max_length=30, unique=True)
@@ -130,19 +135,17 @@ class Enquiry(models.Model):
     def __str__(self):
         return self.name
 
-class This(models.Model):
-    tags = models.CharField(max_length=250 , blank=True)
+
+
+
 
 class User_Detail(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True)
-    tag = models.ManyToManyField(This, related_name="tag")
-
-
-    multiple_subcategory_id = models.CharField(max_length=255)
+    sub_category = models.ManyToManyField(SubCategory,related_name="subcategory",null=True)
+    sub = models.ManyToManyField(Sub_data, related_name="Sub_data")
 
     email = models.EmailField(max_length=30, null=True)
     phone = models.CharField(max_length=30, null=True)
@@ -177,6 +180,7 @@ class User_Detail(models.Model):
         import datetime
         return int((datetime.date.today() - self.dob).days / 365.25)  # type: ignore
     age = property(calculate_age)
+
 
 
 class User_Gallery(models.Model):

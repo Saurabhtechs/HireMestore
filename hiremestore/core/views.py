@@ -216,16 +216,15 @@ def update_profile(request, id):
     country = Country.objects.filter(id=101)
     city = Cities.objects.all()
     state = States.objects.all()
-    # form = CategoryForm()
+    worker_data = User_Detail.objects.filter(user = request.user).first()
+    form = CategoryForm(instance=worker_data)
 
-    return render(request, 'frontend/myprofile.html', {'worker': user, 'country': country, 'city': city, 'state': state, })
+    return render(request, 'frontend/myprofile.html', {'worker': user, 'country': country, 'city': city, 'state': state,'form':form })
 
 
 def update_profile_update(request, id):
+
     if request.method == "POST":
-
-
-
 
 
 
@@ -246,11 +245,9 @@ def update_profile_update(request, id):
         print(request.POST.getlist('Subcategory'))
         worker_data.multiple_subcategory_id = request.POST.getlist('Subcategory[]')
 
-        # ///////////////////////////////////////////////////
-
-
-        # ///////////////////////////////////////////////////
-
+        worker_data = CategoryForm(request.POST, instance=worker_data)
+        if worker_data.is_valid():
+            worker_data.save()
 
         worker_data.name = request.POST['name']
         # worker_data.multi_subcat = request.POST['Subcategory']
