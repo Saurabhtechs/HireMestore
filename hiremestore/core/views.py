@@ -79,7 +79,10 @@ def index(request):
 def SearchCategory(request):
     user = User_Detail.objects.all()
     category_Filter = CategoryFilter(request.GET, queryset=user)
-    return render(request, 'frontend/searchcategory.html', {'category_filter': category_Filter})
+    paginator = Paginator(user, 4)  # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'frontend/searchcategory.html', {'category_filter': category_Filter,'page_obj': page_obj})
 
 
 def Browsebylocation(request):  # type: ignore
@@ -151,8 +154,11 @@ def subcategory(request, id):
     get = cate[0]
     subcategory = SubCategory.objects.filter(
         cat_id=get).order_by('-created')[:10]
+    paginator = Paginator(subcategory, 4)  # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {'subcategory': subcategory,
-               'result': data, 'Category_data': Category_data, }
+               'result': data, 'Category_data': Category_data,'page_obj': page_obj }
     return render(request, 'frontend/sub-category.html', context)
 
 
@@ -325,7 +331,11 @@ def Browsebylocation(request, id):
 
 def Browsebyskill(request):
     digital = Category.objects.filter(type=1).order_by('-created')[:8]
-    return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital})
+    paginator = Paginator(digital, 12)  # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'frontend/browse-jobs-skill.html', {'digital': digital,'page_obj': page_obj})
 
 
 def StateList(request):
