@@ -96,13 +96,27 @@
 
 		<div class="row">
 			<ul class="pagination">
-				<li><a href="#"><i class="ti-arrow-left"></i></a></li>
-				<li class="active"><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#"><i class="fa fa-ellipsis-h"></i></a></li>
-				<li><a href="#"><i class="ti-arrow-right"></i></a></li>
+
+				<li>{% if page_obj.has_previous %}
+
+					<a href="?page={{ page_obj.previous_page_number }}">previous</a>
+				</li>
+				{% endif %}
+
+
+				<li class=""></a><span class="current">
+						Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+					</span></li>
+
+
+
+				<li>{% if page_obj.has_next %}
+					<a href="?page={{ page_obj.next_page_number }}">next</a>
+					<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+				</li>
+				{% endif %}
+
+
 			</ul>
 		</div>
 
