@@ -226,51 +226,94 @@ def update_profile_update(request, id):
         worker_data.category = category
         # print(request.POST.getlist('Subcategory'))
 
-        worker_data = CategoryForm(request.POST, instance=worker_data)
-        if worker_data.is_valid():
-            worker_data.save()
+       
 
-        worker_data.name = request.POST['name']
+        if request.POST['name']:
+            worker_data.name = request.POST['name']
         # worker_data.multi_subcat = request.POST['Subcategory']
-        worker_data.email = request.POST['email']
-        worker_data.gender = request.POST['gender']
+        if request.POST['email']:
+            worker_data.email = request.POST['email']
 
-        worker_data.lang = request.POST.getlist('lang')
+        if request.POST['gender']:
+            worker_data.gender = request.POST['gender']
+
+        if request.POST.getlist('lang'):
+            worker_data.lang = request.POST.getlist('lang')
         # worker_data.skill = request.POST['skill']
-        dob = datetime.datetime.strptime(
-            request.POST['dob'], "%m/%d/%Y").strftime("%Y-%m-%d")
-        worker_data.dob = dob  # type: ignore
-        city = Cities.objects.get(id=request.POST['city'])
-        worker_data.city = city.name
-        district = Cities.objects.get(id=request.POST['district'])
-        worker_data.district = district.name
+
+        if request.POST['dob']:
+            dob = datetime.datetime.strptime(
+                request.POST['dob'], "%m/%d/%Y").strftime("%Y-%m-%d")
+            worker_data.dob = dob
+
+        if request.POST['city']:
+            city = Cities.objects.filter(id=request.POST['city']).first()
+            worker_data.city = city.name
+
+        if request.POST['district']:
+            district = Cities.objects.filter(id=request.POST['district']).first()
+            worker_data.district = district.name
         # worker_data.zip = request.POST['zip']
-        state = States.objects.filter(id=request.POST['state']).first()
-        worker_data.state = state.name  # type: ignore
-        country = Country.objects.filter(id=request.POST['country']).first()
-        worker_data.country = country.name  # type: ignore
-        worker_data.phone = request.POST['phone']
-        worker_data.charges = request.POST['charges']
-        worker_data.skill = request.POST['availability']
-        worker_data.experiance = request.POST['exp']
-        worker_data.bio = request.POST['headline']
-        worker_data.link = request.POST['link']  # type: ignore
-        worker_data.fb = request.POST['fb']  # type: ignore
-        worker_data.insta = request.POST['insta']  # type: ignore
-        worker_data.google = request.POST['google']  # type: ignore
-        worker_data.yt = request.POST['yt']  # type: ignore
-        worker_data.website = request.POST['website']  # type: ignore
-        worker_data.discription = request.POST['discription']
+
+        if request.POST['state']:
+            state = States.objects.filter(id=request.POST['state']).first()
+            worker_data.state = state.name  # type: ignore
+
+        if request.POST['country']:
+            country = Country.objects.filter(id=request.POST['country']).first()
+            worker_data.country = country.name  # type: ignore
+
+        if request.POST['phone']:
+            worker_data.phone = request.POST['phone']
+
+        if request.POST['charges']:
+            worker_data.charges = request.POST['charges']
+
+        if request.POST['availability']:
+            worker_data.skill = request.POST['availability']
+
+        if request.POST['exp']:
+            worker_data.experiance = request.POST['exp']
+
+        if request.POST['headline']:
+            worker_data.bio = request.POST['headline']
+
+        if request.POST['link']:
+            worker_data.link = request.POST['link']  # type: ignore
+
+        if request.POST['fb']:
+            worker_data.fb = request.POST['fb']  # type: ignore
+
+        if request.POST['insta']:
+            worker_data.insta = request.POST['insta']  # type: ignore
+
+        if request.POST['google']:
+            worker_data.google = request.POST['google']  # type: ignore
+
+        if request.POST['yt']:
+            worker_data.yt = request.POST['yt']  # type: ignore
+
+        if request.POST['website']:
+            worker_data.website = request.POST['website']  # type: ignore
+
+        if request.POST['discription']:
+            worker_data.discription = request.POST['discription']
+
         if request.FILES.get('image'):
             worker_data.image = request.FILES.get('image')
 
+        # worker_data.save()
+        worker_data = CategoryForm(request.POST, instance=worker_data)
+        # if worker_data.is_valid():
+
         worker_data.save()
-        # worker_data.save_m2m()
-        # print(worker_data)
-        for gallery in request.FILES.getlist('gallery'):
-            gallery_data = User_Gallery.objects.create(
-                user=worker_data, gallery=gallery)
-            gallery_data.save()
+
+        if request.FILES.getlist('gallery'):
+            for gallery in request.FILES.getlist('gallery'):
+                gallery_data = User_Gallery.objects.create(
+                    user=worker_data, gallery=gallery)
+                gallery_data.save()
+
         messages.success(request, 'Data Updated...')
         return redirect('index')
 
