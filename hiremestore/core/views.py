@@ -302,8 +302,6 @@ def update_profile_update(request, id):
         if request.FILES.get('image'):
             worker_data.image = request.FILES.get('image')
 
-        # worker_data.save()
-        worker_data = CategoryForm(request.POST, instance=worker_data)
         # if worker_data.is_valid():
 
         worker_data.save()
@@ -313,6 +311,11 @@ def update_profile_update(request, id):
                 gallery_data = User_Gallery.objects.create(
                     user=worker_data, gallery=gallery)
                 gallery_data.save()
+                
+        
+        worker_data = CategoryForm(request.POST, instance=worker_data)
+        worker_data.save()
+
 
         messages.success(request, 'Data Updated...')
         return redirect('index')
